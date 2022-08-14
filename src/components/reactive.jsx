@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-
 // import logo from './astro.svg'
 import logo from './astro.svg?raw'
 
