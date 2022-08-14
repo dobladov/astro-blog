@@ -1,0 +1,15 @@
+## Requirements
+- [x] RSS
+- [x] Use MDX with React
+- [x] Static files
+- [x] Sitemap
+- [x] Open data tags
+- [x] Import svg inline
+- [x] Code highlight
+- [x] Reset CSS
+- [x] Tags directory and link to individual
+- [x] Headings
+- [x] Robots.txt
+- [x] 404 page
+- [ ] Optimize images
+- [ ] Dark theme

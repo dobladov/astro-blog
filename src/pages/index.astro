@@ -1,0 +1,27 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+---
+
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header title={SITE_TITLE} />
+		<main>
+			<h2>Hello!</h2>
+			<p>Something to say</p>
+
+			<p>My name is Daniel, originally from Spain, I'm a Web Developer currently based in Berlin 🇩🇪, with true passion for Open-source and building better platforms.</p>
+
+			<p>From time to time I <a target="_blank" href="https://github.com/dobladov/">develop</a> some <a href="/projects">projects</a> or <a href="/blog">write</a> about them.</p>
+
+			<p>Say Hi! <a target="_blank" href="mailto:	danieldoblado@gmail.com">danieldoblado@gmail.com</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>

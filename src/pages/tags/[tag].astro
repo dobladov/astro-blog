@@ -1,0 +1,38 @@
+---
+export async function getStaticPaths({ }) {
+    const posts = (await Astro.glob('../blog/**/*.{md,mdx}')).sort(
+    (a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+        
+    let tags = {};
+    posts.forEach(post => {
+        if (post.frontmatter.tags) {
+            post.frontmatter.tags.forEach((tag) => {
+                if (tags[tag]) {
+                    tags[tag].push({post})
+                } else {
+                    tags[tag] = [{post}]
+                }
+            })
+        }
+    })
+    
+
+    return Object.entries(tags).map(([tag, posts]) => {
+        return {
+        params: { tag },
+        props: { posts },
+        }
+    })
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<h2>#{tag}</h2> 
+
+<ul>
+    {posts.map(({post}) => (
+        <li><a href={post.url}>{post.frontmatter.title}</a></li>
+    ))}
+</ul>

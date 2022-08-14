@@ -1,0 +1,30 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../config';
+---
+
+<header>
+	<h1>
+		{SITE_TITLE}
+	</h1>
+	<nav>
+		<HeaderLink href="/">Home</HeaderLink>
+		<HeaderLink href="/blog">Articles</HeaderLink>
+		<HeaderLink href="/projects">Projects</HeaderLink>
+		<HeaderLink href="https://twitter.com/danieldobla" target="_blank">Twitter</HeaderLink>
+		<HeaderLink href="https://github.com/dobladov" target="_blank">GitHub</HeaderLink>
+		<HeaderLink href="https://codepen.com/dobladov" target="_blank">CodePen</HeaderLink>
+		<HeaderLink href="https://observablehq.com/@dobladov" target="_blank">Observable</HeaderLink>
+		<HeaderLink href="https://stackoverflow.com/users/2498992/daniel-doblado" target="_blank">StackOverflow</HeaderLink>
+		<HeaderLink href="/public.pgp" target="_blank">GPG Key</HeaderLink>
+		<HeaderLink href="/rss.xml">RSS</HeaderLink>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0em 0 2em;
+	}
+	h2 {
+		margin: 0.5em 0;
+	}
+</style>

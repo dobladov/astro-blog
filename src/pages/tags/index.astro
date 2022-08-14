@@ -1,0 +1,22 @@
+---
+const posts = (await Astro.glob('../blog/**/*.{md,mdx}')).sort(
+(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+    
+const tags = new Set();
+posts.forEach(post => {
+    if (post.frontmatter.tags) {
+        post.frontmatter.tags.forEach((tag) => {
+            tags.add(tag);
+        })
+    }
+})
+---
+
+<h2>Tags</h2>
+
+<ul>
+    {[...tags].map((tag) => (
+        <li><a href={`/tags/${tag}`}>#{tag}</a></li>
+    ))}
+</ul>
+
