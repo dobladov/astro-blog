@@ -35,6 +35,8 @@ import ThemeToggle from '#astro/components/ThemeToggle.astro';
 		align-items: center;
 		justify-content: space-between;
 		flex-direction: column;
+		gap: 1.5rem;
+		align-items: stretch;
 	}
 
 	@media screen and (min-width: 468px) {
@@ -44,10 +46,12 @@ import ThemeToggle from '#astro/components/ThemeToggle.astro';
 		
 	}
 
-	nav a {
-		padding: 0.5em;
+	.internal-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: center;
+    	align-items: center;
 	}
-	nav a.active {
-		color: var(--accent);
-	}
+
 </style>
