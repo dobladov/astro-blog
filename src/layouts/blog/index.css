@@ -80,11 +80,18 @@ aside a {
     text-overflow: ellipsis;
     display: block;
     text-decoration: none;
+    transition: transform .2s ease-in-out;
+    transform-origin: left;
+}
+
+aside a:hover {
+    font-weight: bold;
+    transform: scale(1.2);
 }
 
 img {
     max-width: 100%;
-    transition: transform 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 /* img:hover {
