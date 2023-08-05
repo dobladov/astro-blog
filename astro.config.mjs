@@ -1,10 +1,20 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
+import { defineConfig } from 'astro/config'
+import mdx from '@astrojs/mdx'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
-import sitemap from '@astrojs/sitemap';
+import sitemap from '@astrojs/sitemap'
+import { remarkReadingTime } from './utils/remark-reading-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
-});
+  experimental: {
+    viewTransitions: true,
+    assets: true
+  },
+  markdown: {
+    rehypePlugins: [remarkReadingTime, rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'append' }]]
+  },
+  site: 'https://dobla.do',
+  integrations: [mdx(), sitemap()]
+})

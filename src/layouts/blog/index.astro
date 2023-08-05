@@ -1,0 +1,141 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '#astro/components/FormattedDate.astro';
+import Share from '#astro/components/Share.astro';
+import Main from '#astro/layouts/main/index.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title,
+    description,
+    pubDate,
+    updatedDate,
+    headings,
+    minutesRead,
+    tags,
+    words,
+} = Astro.props;
+import './index.css';
+
+const validHeadings = headings && headings.filter((heading) => heading.depth === 2);
+---
+
+
+<Main
+    title={title}
+    description={description}
+>
+    <a tabindex="1" class="toArticle" href="#article">To the article</a>
+    <article id="article">
+        <!-- <div class="hero-image">
+            {heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+        </div> -->
+        <div class="prose">
+
+            <script>
+                // Open metadata when clicking
+                const metadata = document.getElementById('metadata')
+                const metadataLink = document.getElementById('metadataLink')
+                metadataLink.addEventListener('click', () => {
+                    metadata.setAttribute('open', '')
+                })
+            </script>
+
+            <header>
+                <h1 id="title">{title}</h1>
+                <div class="date">
+                    {minutesRead} — <FormattedDate date={pubDate} />
+                    {
+                        updatedDate && (
+                            <div class="last-updated-on">
+                                Last updated on <FormattedDate date={updatedDate} />
+                            </div>
+                        )
+                    }
+                </div>
+            </header>
+
+            
+            {validHeadings && (validHeadings.length >= 1) &&
+                <aside>
+                    <ul>
+                        <li>
+                            <a title="Navigate to the start of the article" href="#title">Start</a>
+                        </li>
+                        {validHeadings.map((heading) => (
+                            <li>
+                                <a href={`#${heading.slug}`}>{heading.text}</a>
+                            </li>
+                        ))}
+                        <li>
+                            <a id="metadataLink" title="Navigate to the end of the article" href="#metadata">Metadata</a>
+                        </li>
+                    </ul>
+                </aside>
+            }
+
+            <p class="description">
+                {description}
+            </p>
+            
+            <slot />
+
+
+            <details class="details">
+                <summary>Metadata</summary>
+                <div id="metadata">
+                    <!-- TODO: Better format -->
+                    <span>posted on {pubDate} </span>
+                    
+   
+                   <span>{minutesRead}</span>
+                    
+                    <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+
+                    {
+                        tags &&
+                        <div class="tags">
+                            {tags.map((tag) => (
+                                <a href={`/tags/${tag}`}>#{tag}</a>
+                            ))}
+                        </div>
+                    }
+                    <span>words: {words}</span>
+                    
+                    <!-- TODO: Only load if clicked and has share -->
+                    <Share title={title} description={description} />
+    
+                    <!-- TODO: add the correct slug -->
+                    <a target="_blank" href="https://github.com/dobladov/mdx-blog/edit/master/content/blog/writing-browser-extensions-without-compiling.mdx">Did I make a mistake? Please consider sending a pull request.</a>
+
+
+                    <script type="application/ld+json" set:html={
+                        JSON.stringify({
+                            "@context": "https://schema.org", 
+                            "@type": "BlogPosting",
+                            "headline": title,
+                            "image": "http://example.com/image.jpg",
+                            "editor": "Daniel Doblado", 
+                            // "genre": "search engine optimization", 
+                            "keywords": tags?.join(' '), 
+                            // "wordcount": "1120", take from fromatter
+                            "url": "http://www.example.com",
+                            "datePublished": "2015-09-20",
+                            "dateCreated": "2015-09-20",
+                            "dateModified": "2015-09-20",
+                            "description": description,
+                            "articleBody": "You can paste your entire post in here, and yes it can get really really long.",
+                            "author": {
+                            "@type": "Person",
+                            "name": "Daniel Doblado"
+                            }
+                        }, null, 2
+                    )}></script>
+
+                </div>
+            </details>
+        </div>
+
+        <div class="progress" />
+    </article>
+</Main>

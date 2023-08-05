@@ -18,7 +18,7 @@ This leave us with not many options but to use a browser, so in my case I decide
 
 So after a while playing with it I got the code to do it, it will download and log the data in the format that I need.
 
-```Javascript
+```javascript
 const fs = require('fs')
 const puppeteer = require('puppeteer');
 

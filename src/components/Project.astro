@@ -1,0 +1,22 @@
+---
+interface Props {
+    icon?: string;
+	title: string;
+	links: {
+        source: string;
+        live?: string;
+    };
+}
+
+
+const {icon, title, links} = Astro.props;
+---
+
+<div>
+    {icon && <img src="icon"/>}
+    <h2>{title}</h2>
+    <slot /> 
+
+    {links.live && <a target="_blank" href={links.live}>Live</a>}
+    {links.source && <a target="_blank" href={links.source}>Souce</a>}
+</div>

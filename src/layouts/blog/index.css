@@ -1,0 +1,140 @@
+article {
+    margin: 0 auto;
+    margin-top: 5rem;
+    max-width: 46rem;
+}
+
+.toArticle {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 0.3s ease-in-out;
+    padding: 0 1rem;
+}
+
+.toArticle:focus {
+    top: 1%;
+}
+
+#title {
+    /* margin-bottom: 4rem; */
+    text-align: left;
+}
+
+.date {
+    text-align: right;
+    font-style: italic;
+}
+
+.description {
+    font-size: 2rem;
+    line-height: 110%;
+    text-align: center;
+}
+
+@keyframes adjust-progressbar {
+    from { height: 0; }
+    to { height: 100%; }
+}
+
+aside::before,
+aside::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: .3rem;
+    width: 0.25rem;
+    height: 100%;
+    background: gray;
+    border-radius: 0.25rem;
+}
+
+aside::after {
+    background: var(--accent);
+    animation: adjust-progressbar;
+    animation-timeline: scroll(block root);
+    animation-duration: auto;
+}
+
+
+aside {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 50%;
+    max-width: 15rem;
+    transform: translateY(-50%);
+    max-height: 50vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+aside ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside a {
+    text-overflow: ellipsis;
+    display: block;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* img:hover {
+    transform: scale(1.1);
+    z-index: 2;
+} */
+
+pre {
+    margin-bottom: 2rem;
+}
+
+
+@media screen and (min-width: 992px) { 
+    img, pre {
+        --space: 8rem;
+        width: calc(100% + var(--space));
+        position: relative;
+        left: calc(var(--space) / -2);
+        max-width: none;
+    }
+
+    #title {
+        --space: 10rem;
+        width: calc(100% + var(--space));
+        position: relative;
+        left: calc(var(--space) / -2);
+        font-size: 4rem;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    aside {
+        display: block;
+    }
+}
+
+.details {
+    padding-top: 1rem;
+}
+
+
+#metadata {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}

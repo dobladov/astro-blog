@@ -2,6 +2,7 @@
 title: Curiosities about emojis
 description: "Finding about emojis that I find interesting"
 pubDate: 2023-07-29
+tags: [emoji]
 ---
 
 On vscode deleting 🧑‍🚀  causes it to remove the helmet.

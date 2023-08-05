@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import Main from '#astro/layouts/main/index.astro';
+
+const mapRange = (value: number, fromLow: number, fromHigh: number, toLow:number, toHigh:number) => {
+  const fromRange = fromHigh - fromLow;
+  const toRange = toHigh - toLow;
+  const scale = toRange / fromRange;
+  const mappedValue = (value - fromLow) * scale + toLow;
+  return mappedValue;
+};
+
+const blogs = await getCollection('blog');
+
+const tagCounts = blogs.reduce((tags, blog) => {
+    if (blog.data.tags) {
+        blog.data.tags.forEach((tag) => {
+            tags[tag] = (tags[tag] || 0) + 1;
+        });
+    }
+    return tags;
+}, [])
+
+const maxVal = Math.max(...Object.values(tagCounts));
+
+---
+<Main title='Tag' description='Page for the tag'>
+    <style>
+        main {
+            flex: 1;
+        }
+        ul {
+            padding: var(--padding);
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+    </style>
+    <ul>
+    {Object.entries(tagCounts).map(([tag, total]) => (
+        <li>
+            <a
+                style={{
+                    fontSize: `${mapRange(total, 1, maxVal, 1, 1.5)}rem`,
+                }}
+                href={`/tags/${tag}`}>
+                {tag} ({total})
+            </a>
+        </li>
+    ))}
+    </ul>
+</Main>

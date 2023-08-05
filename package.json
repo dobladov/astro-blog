@@ -13,6 +13,10 @@
     "@astrojs/mdx": "^0.19.7",
     "@astrojs/rss": "^2.4.3",
     "@astrojs/sitemap": "^2.0.1",
-    "astro": "^2.9.6"
+    "astro": "2.10.1",
+    "mdast-util-to-string": "4.0.0",
+    "reading-time": "1.5.0",
+    "rehype-autolink-headings": "6.1.1",
+    "rehype-slug": "5.1.0"
   }
 }

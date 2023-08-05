@@ -1,8 +1,8 @@
 ---
 title: "Automatically deploy to GitHub Pages using Actions"
 description: How to automate your workflows increasing your productivity and reducing manual errors.
-tags: ['GitHub', 'devops', 'production', 'gh-pages']
-heroImage: './actions.png' # not working
+tags: [GitHub, devops, production, gh-pages]
+heroImage: '/blog-placeholder-5.jpg'
 pubDate: "2020-02-07"
 ---
 
@@ -61,10 +61,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Build
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: '13.x'
     - run: |
@@ -110,7 +110,7 @@ The Action is now divided in different `steps` that will be executed sequentiall
 This step will checkout your repository to make the code available.
 ```yml
 - name: Checkout
-  uses: actions/checkout@v2
+  uses: actions/checkout@v3
 ```
 
 Now we set node.js and we use version 13 to run the code, I would recommend to read the docs to do some other interesting stuff like running multiple node versions.
@@ -118,9 +118,9 @@ Now we set node.js and we use version 13 to run the code, I would recommend to r
 This step will be similar for other code like go or rust
 ```yml
 - name: Build
-  uses: actions/setup-node@v1
+  uses: actions/setup-node@v3
   with:
-    node-version: '13.x'
+    node-version: '20.x'
 ```
 
 The interesting part, here we have to define the process of actually building the site in this case something similar to what we would execute on our local machine to do it.

@@ -1,0 +1,41 @@
+<script>
+    const themeButton = document.getElementById('themeButton');
+
+    if (themeButton) {
+        const theme = document.body.getAttribute('data-theme')
+        
+        const isDarkTheme = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        
+        if (isDarkTheme) {
+            themeButton.innerText = '☼'
+        } else {
+            themeButton.innerText = '☾'
+        }
+        
+        themeButton.addEventListener('click', () => {
+    
+            if (themeButton.innerText === '☼') {
+                localStorage.setItem('theme', 'light');
+                document.body.setAttribute('data-theme', 'light');
+                themeButton.innerText = '☾';
+                
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeButton.innerText = '☼';
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        })
+    }
+
+</script>
+
+
+<button role="button" id="themeButton" />
+<style>
+    #themeButton {
+        width: 2rem;
+        background-color: transparent;
+        color: var(--text);
+        border: none;
+    }
+</style>

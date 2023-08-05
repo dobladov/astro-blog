@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Main from '#astro/layouts/main/index.astro';
+
+export async function getStaticPaths() {
+    const blogs = await getCollection('blog');
+    
+    const tags = [...new Set(blogs.map((post) => post.data.tags).flat().filter(Boolean))];
+
+    return tags.map((tag) => {
+        const postWithTag = blogs.filter((post) => post.data.tags?.includes(tag))
+        return {
+            params: {tag},
+            props: {
+                posts: postWithTag,
+                total: postWithTag.length
+            }
+        }
+    })
+}
+
+const { posts, total } = Astro.props;
+const { tag } = Astro.params;
+---
+<Main title='Tag' description='Page for the tag'>
+    <style>
+        section {
+            padding: var(--padding);
+        }
+        .list {
+            margin-top: 2rem;
+        }
+    </style>
+    <section>
+        <header>
+            <h1>Post with tag "{tag}" ({total})</h1>
+        </header>
+        {posts.map((post) => (
+            <ul class="list">
+                <li>
+                    <a href={`/blog/${post.slug}`}><h2>{post.data.title}</h2></a>
+                    <p>{post.data.description}</p>
+                </li>
+            </ul>
+        ))
+    </section>
+</Main>
