@@ -149,3 +149,7 @@ hr {
 		padding: 1em;
 	}
 }
+
+svg {
+	fill: var(--accent);
+}

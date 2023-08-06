@@ -1,22 +1,40 @@
 ---
+import { Icon } from 'astro-icon'
+
 interface Props {
-    icon?: string;
+    logo?: string;
 	title: string;
-	links: {
-        source: string;
+	links?: {
+        source?: string;
         live?: string;
     };
 }
 
 
-const {icon, title, links} = Astro.props;
+const {title, links, logo} = Astro.props;
 ---
 
-<div>
-    {icon && <img src="icon"/>}
-    <h2>{title}</h2>
+<div class="project">
+    <div class="header">
+        <Icon name={logo} />
+        <h2>{title}</h2>
+    </div>
     <slot /> 
 
-    {links.live && <a target="_blank" href={links.live}>Live</a>}
-    {links.source && <a target="_blank" href={links.source}>Souce</a>}
+    {links && links.live && <a target="_blank" href={links.live}>Live</a>}
+    {links && links.source && <a target="_blank" href={links.source}>Souce</a>}
+
+    <style>
+        svg {
+            min-width: 5rem;
+            max-width: 5rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 1.5rem;
+        }
+    </style>
 </div>
