@@ -1,55 +1,19 @@
 ---
 import Main from '#astro/layouts/main/index.astro';
 import { getCollection } from 'astro:content';
-import FormattedDate from '#astro/components/FormattedDate.astro';
+import PageTitle from '#astro/components/PageTitle.astro';
+import BlogList from '#astro/components/BlogList.astro';
+import {getPostsPerYear} from '#astro/components/utils';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const allPosts = await getCollection('blog');
+const posts = getPostsPerYear(allPosts);
 ---
 
 <Main
 	title='Blog'
 	description='A collection of articles and tutorials on web development and design.'
+	withSection
 >
-	<section class="container">
-		<style>
-			.container {
-				padding-left: 2rem;
-				padding-right: 2rem;
-			}
-			.list {
-				padding-left: 3rem;
-				list-style-type: none;
-				margin: 0;
-				padding-top: 2rem;
-			}
-
-			a {
-				text-decoration: none;
-				gap: 1rem;
-				display: flex;
-				align-items: center;
-			}
-
-			a:hover .title {
-				text-decoration: underline;
-			}
-		</style>
-		<ul class="list">
-			{
-				posts.map((post) => (
-					<li>
-						<a href={`/blog/${post.slug}/`}>
-							<FormattedDate className='date' date={post.data.pubDate} />
-							<div>
-								<h4 class="title">{post.data.title}</h4>
-								<p>{post.data.description}</p>
-							</div>
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</section>
+	<PageTitle title='Articles' />
+	<BlogList posts={posts} />
 </Main>

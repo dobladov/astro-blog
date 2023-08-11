@@ -57,7 +57,7 @@ You might be also wondering, "what if I need typescript, do you have to transpil
 
 ### How it ended
 
-I feel this change was a success, new code can be iterated easily without having to worry much about state or building, since the extension runs on modern browsers I don't have to care about with babel, etc
+I feel this change was a success, new code can be iterated easily without having to worry much about state or building, since the extension runs on modern browsers I don't have to care about babel, etc
 
 Right now the only concern I have about the extension is manifest v3 which is not supported in Firefox yet, but this is a story for another post.
 

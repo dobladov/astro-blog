@@ -1,12 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '#astro/components/FormattedDate.astro';
-import Share from '#astro/components/Share.astro';
+// import Share from '#astro/components/Share.astro';
 import Main from '#astro/layouts/main/index.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title,
+    id,
     description,
     pubDate,
     updatedDate,
@@ -20,27 +21,13 @@ import './index.css';
 const validHeadings = headings && headings.filter((heading) => heading.depth === 2);
 ---
 
-
 <Main
     title={title}
     description={description}
 >
     <a tabindex="1" class="toArticle" href="#article">To the article</a>
     <article id="article">
-        <!-- <div class="hero-image">
-            {heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-        </div> -->
         <div class="prose">
-
-            <script>
-                // Open metadata when clicking
-                const metadata = document.getElementById('metadata')
-                const metadataLink = document.getElementById('metadataLink')
-                metadataLink.addEventListener('click', () => {
-                    metadata.setAttribute('open', '')
-                })
-            </script>
-
             <header>
                 <h1 id="title">{title}</h1>
                 <div class="date">
@@ -84,29 +71,43 @@ const validHeadings = headings && headings.filter((heading) => heading.depth ===
             <details class="details">
                 <summary>Metadata</summary>
                 <div id="metadata">
-                    <!-- TODO: Better format -->
-                    <span>posted on {pubDate} </span>
-                    
-   
-                   <span>{minutesRead}</span>
-                    
-                    <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 
-                    {
-                        tags &&
-                        <div class="tags">
-                            {tags.map((tag) => (
-                                <a href={`/tags/${tag}`}>#{tag}</a>
-                            ))}
-                        </div>
-                    }
-                    <span>words: {words}</span>
+                    <div class="metaSection">
+                        <span class="title">Date</span>
+                        <span>{pubDate.toLocaleDateString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                        })}</span>
+                    </div>
                     
+                    <div class="metaSection">
+                        <span class="title">Length</span>
+                        <span>{minutesRead} ({words} words)</span>
+                    </div> 
+                    
+                   <div class="metaSection">
+                       <span class="title">License</span>
+                       <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+                   </div>
+
+
+                    <div class="metaSection">
+                        <span class="title">Tags</span>
+                        {
+                            tags &&
+                            <div class="tags">
+                                {tags.map((tag) => (
+                                    <a href={`/tags/${tag}`}>#{tag}</a>
+                                ))}
+                            </div>
+                        }
+                    </div>
+
                     <!-- TODO: Only load if clicked and has share -->
-                    <Share title={title} description={description} />
+                    <!-- <Share title={title} description={description} /> -->
     
-                    <!-- TODO: add the correct slug -->
-                    <a target="_blank" href="https://github.com/dobladov/mdx-blog/edit/master/content/blog/writing-browser-extensions-without-compiling.mdx">Did I make a mistake? Please consider sending a pull request.</a>
+                    <a class="centered correctLink" target="_blank" href={`https://github.com/dobladov/astro-blog/edit/main/src/content/blog/${id}`}>Did I make a mistake? Please consider sending a pull request</a>
 
 
                     <script type="application/ld+json" set:html={

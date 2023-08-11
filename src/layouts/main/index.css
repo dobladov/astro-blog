@@ -3,7 +3,9 @@ main {
  flex: 1;
 }
 
-.grain {
+
+main::before {
+    content: '';
     background-image: url('/noise.png');
     position: fixed;
     top: 0;

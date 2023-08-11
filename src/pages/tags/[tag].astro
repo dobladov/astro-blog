@@ -1,6 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Main from '#astro/layouts/main/index.astro';
+import BlogList from '#astro/components/BlogList.astro';
+import PageTitle from '#astro/components/PageTitle.astro';
+import {getPostsPerYear} from '#astro/components/utils';
 
 export async function getStaticPaths() {
     const blogs = await getCollection('blog');
@@ -8,11 +11,11 @@ export async function getStaticPaths() {
     const tags = [...new Set(blogs.map((post) => post.data.tags).flat().filter(Boolean))];
 
     return tags.map((tag) => {
-        const postWithTag = blogs.filter((post) => post.data.tags?.includes(tag))
+        const postWithTag = blogs.filter((post) => post.data.tags?.includes(tag));
         return {
             params: {tag},
             props: {
-                posts: postWithTag,
+                posts: getPostsPerYear(postWithTag),
                 total: postWithTag.length
             }
         }
@@ -22,26 +25,7 @@ export async function getStaticPaths() {
 const { posts, total } = Astro.props;
 const { tag } = Astro.params;
 ---
-<Main title='Tag' description='Page for the tag'>
-    <style>
-        section {
-            padding: var(--padding);
-        }
-        .list {
-            margin-top: 2rem;
-        }
-    </style>
-    <section>
-        <header>
-            <h1>Post with tag "{tag}" ({total})</h1>
-        </header>
-        {posts.map((post) => (
-            <ul class="list">
-                <li>
-                    <a href={`/blog/${post.slug}`}><h2>{post.data.title}</h2></a>
-                    <p>{post.data.description}</p>
-                </li>
-            </ul>
-        ))
-    </section>
+<Main withSection title='Tag' description='Page for the tag'>
+    <PageTitle title={`Post with tag "${tag}" [${total}]`} />
+    <BlogList posts={posts} />
 </Main>

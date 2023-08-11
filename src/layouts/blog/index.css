@@ -1,7 +1,12 @@
 article {
     margin: 0 auto;
-    margin-top: 5rem;
     max-width: 46rem;
+}
+
+@media screen and (min-width: 468px) {
+    article {
+        margin-top: 5rem;
+    }
 }
 
 .toArticle {
@@ -18,7 +23,6 @@ article {
 }
 
 #title {
-    /* margin-bottom: 4rem; */
     text-align: left;
 }
 
@@ -51,7 +55,8 @@ aside::after {
 }
 
 aside::after {
-    background: var(--accent);
+    background: var(--text);
+    box-shadow: 0px 6px 40px rgba(0, 0, 0, 0.4), 0px 1px 0px rgba(255, 255, 255, 0.15) inset;
     animation: adjust-progressbar;
     animation-timeline: scroll(block root);
     animation-duration: auto;
@@ -84,12 +89,11 @@ aside a {
     transform-origin: left;
     line-height: 1.2;
     padding-bottom: 0.5rem;
-
 }
 
 aside a:hover {
-    font-weight: bold;
     transform: scale(1.1);
+    color: var(--text);
 }
 
 pre {
@@ -137,4 +141,17 @@ pre {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
+}
+
+
+.metaSection {
+    gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid var(--text);
+}
+
+.correctLink {
+    margin-top: 1.5rem;
 }

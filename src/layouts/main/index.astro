@@ -6,9 +6,10 @@ import Footer from '#astro/components/Footer.astro';
 type Props = {
     title: string;
     description: string;
+    withSection: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, withSection } = Astro.props;
 
 import './index.css';
 ---
@@ -26,10 +27,27 @@ import './index.css';
         document.body.setAttribute('data-theme', theme);
     }
 </script>
+<style>
+    section {
+        padding: calc(var(--padding) / 4);
+    }
+
+	@media screen and (min-width: 468px) {
+		section {
+            padding: var(--padding);
+		}
+	}
+</style>
 <body>
     <Header />
     <main>
-        <slot />
+        {
+            withSection
+            ? <section>
+                <slot/>
+              </section>
+            : <slot />
+        }
         <div class="grain"></div>
     </main>
     <Footer/>

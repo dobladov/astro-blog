@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Main from '#astro/layouts/main/index.astro';
+import PageTitle from '#astro/components/PageTitle.astro';
 
 const mapRange = (value: number, fromLow: number, fromHigh: number, toLow:number, toHigh:number) => {
   const fromRange = fromHigh - fromLow;
@@ -25,19 +26,16 @@ const maxVal = Math.max(...Object.values(tagCounts));
 const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
 
 ---
-<Main title='Tag' description='Page for the tag'>
+<Main withSection title='Tag' description='Page for the tag'>
     <style>
-        section {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
+        .tags {
             align-items: center;
             max-width: 64rem;
             margin: 0 auto;
         }
 
         ul {
-            padding: var(--padding);
+            padding: 0;
             display: flex;
             flex-wrap: wrap;
             list-style: none;
@@ -47,23 +45,22 @@ const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
         }
     </style>
 
-    <section>
-        <header>
-            <h1>Blog tags: ({totalTags})</h1>
-        </header>
-    
-        <ul>
-        {Object.entries(tagCounts).map(([tag, total]) => (
-            <li>
-                <a
-                    style={{
-                        fontSize: `${mapRange(total, 1, maxVal, 1, 1.5)}rem`,
-                    }}
-                    href={`/tags/${tag}`}>
-                    {tag} ({total})
-                </a>
-            </li>
-        ))}
-        </ul>
-    </section>
+    <PageTitle title={`Tags: [${totalTags}]`} />
+
+    <ul class="tags">
+    {Object.entries(tagCounts)
+        .sort(([tagA], [tagB]) => tagA.localeCompare(tagB))
+        .map(([tag, total], i) => (
+        <li>
+            <a  
+                tabindex={i === 0 ? 0 : undefined}
+                style={{
+                    fontSize: `${mapRange(total, 1, maxVal, 1, 2)}rem`,
+                }}
+                href={`/tags/${tag}`}>
+                {tag} [{total}]
+            </a>
+        </li>
+    ))}
+    </ul>
 </Main>

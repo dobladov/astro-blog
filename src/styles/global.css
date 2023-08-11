@@ -5,14 +5,10 @@
  */
 
 :root {
-	--text: #3f3b37;
-	--background: #fff;
-	--accent: #3f3b37;
-	--accent2: #e7a92b;
-	--accent-dark: #db4c44;
-	--gray-light: 229, 233, 240;
-
-	--padding: 2rem;
+	--background: #e9e9e9;
+	--accent: rgb(46, 46, 50);
+	--text: rgb(116 116 116);
+	--padding: 4rem;
 }
 
 html {
@@ -20,8 +16,7 @@ html {
 }
 
 body {
-	/* font-family: 'Calibri', 'Verdana', 'Atkinson', sans-serif; */
-	font-family: "Trebuchet MS", Tahoma, sans-serif;;
+	font-family:  'Trebuchet MS', sans-serif;	
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -29,7 +24,7 @@ body {
 	overflow-wrap: break-word;
 	color: var(--text);
 	line-height: 1.7;
-	
+
 	background-color: var(--background);
 	display: flex;
     flex-direction: column;
@@ -39,21 +34,22 @@ body {
 
 @media (prefers-color-scheme: dark) {
 	body:not([data-theme]) {	
-		background-color: black;
-		--text: white;
+		--background: #18181b;
 		--accent: white;
+		--text: rgb(161, 161, 170);
 	}
 }
 
 body[data-theme="dark"] {
-	background-color: black;
-	--text: white;
+	--background: #18181b;
 	--accent: white;
+	--text: rgb(161, 161, 170);
 }
 
 h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5rem 0;
 	line-height: 1.2;
+	color: var(--accent);
 }
 
 h1 {
@@ -83,16 +79,16 @@ b {
 
 a {
 	color: var(--accent);
-	text-decoration-color: gray ;
+	text-decoration-color: var(--text) ;
 }
 
 a:hover {
-	color: var(--accent);
-	text-decoration-color: black ;
+	text-decoration-color: var(--accent);
 }
 
 p {
 	margin-bottom: 1em;
+	color: var(--text);
 }
 
 .prose p {
@@ -141,7 +137,7 @@ blockquote {
 
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	border-top: 1px solid rgb(229, 233, 240);
 }
 	
 @media (max-width: 720px) {
@@ -152,4 +148,8 @@ hr {
 
 svg {
 	fill: var(--accent);
+}
+
+.centered {
+	text-align: center;
 }
