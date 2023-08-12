@@ -14,10 +14,17 @@ import Project from '#astro/components/Project.astro';
 			gap: 4rem;
 			padding-bottom: 2rem;
 		}
-		
+
 		@media screen and (min-width: 468px) {
 			.projects {
+				max-width: 80rem;
+				margin: 0 auto;
 				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+			}
+			
+			.experiments {
+				margin: 0 auto;
+				max-width: 80rem;
 			}
 		}
 	</style>
@@ -103,15 +110,18 @@ import Project from '#astro/components/Project.astro';
 			<p>If you want to learn about recursion, click the "Live" link.</p>
 		</Project>
 	</div>
-	<Project title='Experiments' logo='scripts' >
-		<p>Random code for learning</p>
-		<a target="_blank" href="http://codepen.io/dobladov/pen/kXAXJx"><h3>Carousel</h3></a>
-		<p>A carousel using CSS and JQuery as a concept for a web music player, It got featured on Codepen, it has more than 286 favs, 1156 forks and 51,116 Views.</p>
-		<a target="_blank" href="https://editor.p5js.org/dobladov/sketches"><h3>P5 Sketches</h3></a>
-		<p>Around 50 experiments where I play with vectors, physics, trigonometry, perlin noise, etc... in a visual way.</p>
-		<a target="_blank" href="https://codepen.io/dobladov/pen/qoodaR"><h3>German Frequency lists</h3></a>
-		<p>Frequency lists/German subtitles 1000: This list has been generated from subtitles of movies and television series with a total of about 25 million words in 2009.</p>
-		<a target="_blank" href="https://codepen.io/dobladov/pen/bBOWEe"><h3>Star Wars Intro</h3></a>
-		<p>The mythical introduction of Star Wars The Force Awakens, made entirely with CSS and without external libraries.</p>
-	</Project>
+
+	<div class="experiments">
+		<Project title='Experiments' logo='scripts' >
+			<p>Random code for learning</p>
+			<a target="_blank" href="http://codepen.io/dobladov/pen/kXAXJx">Carousel</a>
+			<p>A carousel using CSS and JQuery as a concept for a web music player, It got featured on Codepen, it has more than 286 favs, 1156 forks and 51,116 Views.</p>
+			<a target="_blank" href="https://editor.p5js.org/dobladov/sketches">P5 Sketches</a>
+			<p>Around 50 experiments where I play with vectors, physics, trigonometry, perlin noise, etc... in a visual way.</p>
+			<a target="_blank" href="https://codepen.io/dobladov/pen/qoodaR">German Frequency lists</a>
+			<p>Frequency lists/German subtitles 1000: This list has been generated from subtitles of movies and television series with a total of about 25 million words in 2009.</p>
+			<a target="_blank" href="https://codepen.io/dobladov/pen/bBOWEe">Star Wars Intro</a>
+			<p>The mythical introduction of Star Wars The Force Awakens, made entirely with CSS and without external libraries.</p>
+		</Project>
+	</div>
 </Main>
