@@ -4,7 +4,6 @@ import Main from '#astro/layouts/main/index.astro';
 import PageTitle from '#astro/components/PageTitle.astro';
 import { map } from '#astro/components/utils'
 
-
 const blogs = await getCollection('blog');
 
 const tagCounts = blogs.reduce((tags, blog) => {

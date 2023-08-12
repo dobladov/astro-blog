@@ -155,10 +155,10 @@
     const perlin = new Perlin();
     const totalPoints = 100;
     const noiseScale = 0.01;
-    const particles = [];
+    const particles: Array<{x:string, y:string}> = [];
     const dotScale = 2;
     const displacement = 5;
-    let leftToRight;
+    let leftToRight: number | null;
     let mousePos = {
         x: 0,
         y: 0,
@@ -229,7 +229,7 @@
             ctx.fillRect(p.x - displacement, p.y, dotScale, dotScale);
 
             // Invert the direction
-            if (mousePos.x < (positionInfo.width / 2) + positionInfo.left) {
+            if (leftToRight < 0 || mousePos.x < (positionInfo.width / 2) + positionInfo.left) {
                 p.x += Math.cos(a) * pace;
                 p.y += Math.sin(a);
             } else {
