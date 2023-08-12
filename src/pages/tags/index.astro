@@ -2,14 +2,8 @@
 import { getCollection } from 'astro:content';
 import Main from '#astro/layouts/main/index.astro';
 import PageTitle from '#astro/components/PageTitle.astro';
+import { map } from '#astro/components/utils'
 
-const mapRange = (value: number, fromLow: number, fromHigh: number, toLow:number, toHigh:number) => {
-  const fromRange = fromHigh - fromLow;
-  const toRange = toHigh - toLow;
-  const scale = toRange / fromRange;
-  const mappedValue = (value - fromLow) * scale + toLow;
-  return mappedValue;
-};
 
 const blogs = await getCollection('blog');
 
@@ -24,8 +18,8 @@ const tagCounts = blogs.reduce((tags, blog) => {
 
 const maxVal = Math.max(...Object.values(tagCounts));
 const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
-
 ---
+
 <Main
     title='Tag'
     description='Page for the tag'
@@ -57,7 +51,7 @@ const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
             <li>
                 <a  
                     style={{
-                        fontSize: `${mapRange(total, 1, maxVal, 1, 2)}rem`,
+                        fontSize: `${map(total, 1, maxVal, 1, 2)}rem`,
                     }}
                     href={`/tags/${tag}`}
                 >

@@ -1,10 +1,10 @@
-<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
 <style>
     aside {
         position: relative;
         padding-top: 8.5rem;
         margin: 0 auto;
         bottom: -18px;
+        z-index: -1;
     }
     
     @media screen and (min-width: 768px) {
@@ -24,16 +24,14 @@
         position: absolute;
         left: 0;
         border-radius: 50%;
-        overflow: hidden;
         max-width: 20rem;
         right: 2rem;
         bottom: 14rem;
         opacity: .8;
         box-shadow: -3px -2px 5px -1px var(--text);
-        width: 100%;
-        height: 16.9rem;
+        max-width: 16.9rem;
+        max-height: 16.9rem;
     }
-
     
     #orb:after {
         content: '';
@@ -85,95 +83,167 @@
     }
 </style>
 
-
-<script is:inline>
-    const num = 300;
-    const noiseScale = 0.01;
-    const particles = [];
-    let leftToRight;
-
-    function handleMotionEvent(event) {
-        leftToRight = event.gamma;
-    }
-    window.addEventListener("deviceorientation", handleMotionEvent, true);
-
-    function setup() {
-        var canvas = createCanvas(500, 500);
-        
-        canvas.parent('orb');
-        for (let i = 0; i < num; i++) {
-            particles.push(createVector(random(width), random(height)));
-        }
-
-        const textColor = getComputedStyle(document.body).color;
-        const isDarkTheme = textColor.includes('255');
-        stroke(textColor);
-        strokeWeight(2);
-    }
-    
-    function draw() {
-        const textColor = getComputedStyle(document.body).color;
-        const isDarkTheme = textColor.includes('255');
-        // const backgroundColor = color(getComputedStyle(document.body).backgroundColor)
-        const backgroundColor = color('#282828')
-
-        backgroundColor.setAlpha(20)
-        background(backgroundColor);
-
-        for (let i = 0; i < num; i++) {
-            let p = particles[i];
-            let n = noise(p.x * noiseScale, p.y * noiseScale);
-            let a = TAU * n;
-            let displacement = 5;
-            let pace = map(mouseY, 0, height, .5, 2)
-            // let pace = 1 
-
-            // if (isDarkTheme) {
-                stroke(255, 0, 0);
-                point(p.x + displacement, p.y);
-                stroke(0, 255, 0);
-                point(p.x, p.y);
-                stroke(0, 0, 255);
-                point(p.x - displacement, p.y);
-            // } 
-            // else {
-            // 	stroke(textColor);
-            // 	point(p.x + displacement, p.y);
-            // 	// stroke(textColor);
-            // 	stroke('#cfcfcf');
-            // 	point(p.x, p.y);
-            // 	// stroke("#800034")
-            // 	point(p.x - displacement, p.y);
-            // }
-            
-            // Invert the direction
-            // if (mouseX < width / 2) {
-            if (leftToRight < 0 || !leftToRight && mouseX < width / 2) {
-                p.x += cos(a) * pace;
-                p.y += sin(a);
-            } else {
-                p.x -= cos(a) * pace;
-                p.y -= sin(a) * pace;
-            }
-            
-            if (!onScreen(p)) {
-            p.x = random(width);
-            p.y = random(height);
-            }
-        }
-    }
-
-    function mousePressed() {
-        noiseSeed(millis());
-    }
-
-    function onScreen(v) {
-    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
-    }
-</script>
-
 <aside>
     <img class="hand" src="/hand.png" alt="Hand">
     <img class="finger" src="/finger.png" alt="Finger">
-    <div role="presentation" id="orb"></div>
+    <canvas id='orb'/>
 </aside>
+
+<script>
+    import { map } from '#astro/components/utils'
+    class Perlin {
+        gradients;
+        memory;
+
+        constructor() {
+            this.seed()
+        }
+
+        rand_vect() {
+            let theta = Math.random() * 2 * Math.PI;
+            return {x: Math.cos(theta), y: Math.sin(theta)};
+        }
+        
+        dot_prod_grid(x, y, vx, vy) {
+            let g_vect;
+            let d_vect = {x: x - vx, y: y - vy};
+            if (this.gradients[[vx, vy]]){
+                g_vect = this.gradients[[vx,vy]];
+            } else {
+                g_vect = this.rand_vect();
+                this.gradients[[vx, vy]] = g_vect;
+            }
+            return d_vect.x * g_vect.x + d_vect.y * g_vect.y;
+        }
+
+        smootherstep(x) {
+            return 6*x**5 - 15*x**4 + 10*x**3;
+        }
+
+        interp(x, a, b) {
+            return a + this.smootherstep(x) * (b-a);
+        }
+
+        seed() {
+            this.gradients = {};
+            this.memory = {};
+        }
+
+        get(x, y) {
+            if (this.memory.hasOwnProperty([x,y]))
+                return this.memory[[x,y]];
+            let xf = Math.floor(x);
+            let yf = Math.floor(y);
+            //interpolate
+            let tl = this.dot_prod_grid(x, y, xf,   yf);
+            let tr = this.dot_prod_grid(x, y, xf+1, yf);
+            let bl = this.dot_prod_grid(x, y, xf,   yf+1);
+            let br = this.dot_prod_grid(x, y, xf+1, yf+1);
+            let xt = this.interp(x-xf, tl, tr);
+            let xb = this.interp(x-xf, bl, br);
+            let v = this.interp(y-yf, xt, xb);
+            this.memory[[x,y]] = v;
+            return v;
+        }
+    }
+
+    const canvas = document.getElementById('orb')
+    const ctx = canvas.getContext('2d')
+
+    const perlin = new Perlin();
+    const totalPoints = 100;
+    const noiseScale = 0.01;
+    const particles = [];
+    const dotScale = 2;
+    const displacement = 5;
+    let leftToRight;
+    let mousePos = {
+        x: 0,
+        y: 0,
+    };
+
+    window.addEventListener("deviceorientation", (event) => {   
+        leftToRight = event.gamma;
+    }, true);
+
+    window.addEventListener('mousemove', (event) => {
+        mousePos = { x: event.clientX, y: event.clientY };
+    });
+
+    window.addEventListener('mousedown', (e) => {
+        perlin.seed()
+    })
+
+    /* Set the size of the canvas for retina displays */
+    const scale = () => {
+        const width = 500;
+        const height = 500;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        const scale = window.devicePixelRatio;
+        canvas.width = Math.floor(width * scale / 2);
+        canvas.height = Math.floor(height * scale / 2);  
+    }
+
+    const random = (min = 0, max = 0) => {
+        return Math.floor(
+            Math.random() * (max - min) + min
+        )
+    }
+
+    scale();
+    /* Generate the initial random particles */
+    for (let i = 0; i < totalPoints; i++) {
+        particles.push({
+            x: random(canvas.width),
+            y: random(canvas.height)
+        });
+    }
+
+    // Indicates if the point is on the screen
+    const onScreen = (v) => {
+        return v.x >= 0 && v.x <= canvas.width && v.y >= 0 && v.y <= canvas.height;
+    }
+    
+    const draw = () => {  
+        const positionInfo = canvas.getBoundingClientRect();
+
+        // Clear the canvas with a transparent rect
+        ctx.fillStyle = "rgba(40, 40, 40, 0.03)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < totalPoints; i++) {
+            let p = particles[i];
+            let n = map(perlin.get(p.x * noiseScale, p.y * noiseScale), -1, 1, 0, 1);
+            let a = Math.PI * 2 * n;
+            let pace = map(mousePos.y, 0, window.screen.height * .9, .2, 2);
+            
+            // Draw the points slightly displaced
+            ctx.fillStyle = 'rgb(255, 0, 0)'
+            ctx.fillRect(p.x + displacement, p.y, dotScale, dotScale);
+            ctx.fillStyle = 'rgb(0, 255, 0)'
+            ctx.fillRect(p.x, p.y, dotScale, dotScale);
+            ctx.fillStyle = 'rgb(0, 0, 255)'
+            ctx.fillRect(p.x - displacement, p.y, dotScale, dotScale);
+
+            // Invert the direction
+            if (mousePos.x < (positionInfo.width / 2) + positionInfo.left) {
+                p.x += Math.cos(a) * pace;
+                p.y += Math.sin(a);
+            } else {
+                p.x -= Math.cos(a) * pace;
+                p.y -= Math.sin(a) * pace;
+            }
+            
+            // Move the point to a random position if it's out of the screen
+            if (!onScreen(p)) {
+                p.x = random(canvas.width);
+                p.y = random(canvas.height);
+            }
+        }
+
+        window.requestAnimationFrame(draw)
+    }
+
+    requestAnimationFrame(draw)
+</script>

@@ -11,3 +11,11 @@ export const getPostsPerYear = (posts) => {
         return posts
     }, {})
 }
+
+export const map = (value: number, fromLow: number, fromHigh: number, toLow:number, toHigh:number) => {
+    const fromRange = fromHigh - fromLow;
+    const toRange = toHigh - toLow;
+    const scale = toRange / fromRange;
+    const mappedValue = (value - fromLow) * scale + toLow;
+    return mappedValue;
+};
