@@ -90,9 +90,10 @@ import { SITE_AUTHOR } from '#astro/consts'
                    </div>
 
                     <div class="metaSection">
-                        <span class="title">Tags</span>
                         {
                             tags &&
+                            <span class="title">Tags</span>
+                            
                             <div class="tags">
                                 {tags.map((tag) => (
                                     <a href={`/tags/${tag}`}>#{tag}</a>
@@ -128,7 +129,6 @@ import { SITE_AUTHOR } from '#astro/consts'
                     }></script>
                 </div>
             </details>
-
         <div class="progress" />
     </article>
 </Main>
