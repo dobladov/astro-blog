@@ -89,9 +89,9 @@ import { SITE_AUTHOR } from '#astro/consts'
                        <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
                    </div>
 
-                    <div class="metaSection">
-                        {
-                            tags &&
+                    {
+                        tags &&
+                        <div class="metaSection">
                             <span class="title">Tags</span>
                             
                             <div class="tags">
@@ -99,8 +99,8 @@ import { SITE_AUTHOR } from '#astro/consts'
                                     <a href={`/tags/${tag}`}>#{tag}</a>
                                 ))}
                             </div>
-                        }
-                    </div>
+                        </div>
+                    }
     
                     <div class="centered">
                         <a class="correctLink" target="_blank" href={`https://github.com/dobladov/astro-blog/edit/main/src/content/blog/${id}`}>Did I make a mistake? Please consider sending a pull request</a>
