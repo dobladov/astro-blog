@@ -6,15 +6,9 @@
         const theme = document.body.getAttribute('data-theme')
         
         const isDarkTheme = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        
-        if (isDarkTheme) {
-            themeButton.innerText = '☀️'
-        } else {
-            themeButton.innerText = '🌑'
-        }
+        themeButton.innerText = isDarkTheme ? '☀️' : '🌑'
         
         themeButton.addEventListener('click', () => {
-    
             if (themeButton.innerText === '☀️') {
                 localStorage.setItem('theme', 'light');
                 document.body.setAttribute('data-theme', 'light');
@@ -30,12 +24,11 @@
 
 </script>
 
-
 <button role="button" id="themeButton" />
 <style>
     #themeButton {
-        font-size: 1rem;
-        width: 2rem;
+        cursor: pointer;
+        font-size: 1.5rem;
         background-color: transparent;
         color: var(--accent);
         border: none;

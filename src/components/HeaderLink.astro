@@ -13,6 +13,9 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 	<slot />
 </a>
 <style>
+	a{
+		color: var(--text);
+	}
 	a.active {
 		color: var(--accent);
 		transform: scale(1.01);

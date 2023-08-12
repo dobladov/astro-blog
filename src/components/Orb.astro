@@ -1,12 +1,10 @@
----
----
-<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
 <style>
     aside {
         position: relative;
         padding-top: 8.5rem;
         margin: 0 auto;
-        bottom: -10px;
+        bottom: -18px;
     }
     
     @media screen and (min-width: 768px) {
@@ -14,6 +12,7 @@
             position: fixed;
             right: -3.5rem;
             margin-right: 6rem;
+            bottom: -10px;
         }
     }
 
@@ -26,13 +25,13 @@
         left: 0;
         border-radius: 50%;
         overflow: hidden;
-        aspect-ratio: 1;
         max-width: 20rem;
         right: 2rem;
         bottom: 14rem;
         opacity: .8;
         box-shadow: -3px -2px 5px -1px var(--text);
         width: 100%;
+        height: 16.9rem;
     }
 
     
@@ -93,16 +92,8 @@
     const particles = [];
     let leftToRight;
 
-    // const acl = new Accelerometer({ frequency: 60 });
-    // window.addEventListener("devicemotion", accelerometerUpdate, true);
     function handleMotionEvent(event) {
-        // const x = event.accelerationIncludingGravity.x;
-        // const y = event.accelerationIncludingGravity.y;
-        // const z = event.accelerationIncludingGravity.z;
-
-        // console.log(x, y, z);
         leftToRight = event.gamma;
-        console.log(leftToRight);
     }
     window.addEventListener("deviceorientation", handleMotionEvent, true);
 

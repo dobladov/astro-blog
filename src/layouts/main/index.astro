@@ -42,6 +42,7 @@ const { title, description } = Astro.props;
     </style>
     
     <body data-js="false">
+        <slot name="before-all"/>
         <Header />
         <main>
             <section>

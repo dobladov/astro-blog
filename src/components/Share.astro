@@ -3,27 +3,47 @@
 interface Props {
     title: string;
     description: string;
+    url: string;
 }
 
-const {title, description} = Astro.props;
+const {title, description, url} = Astro.props;
 ---
-<div id="sharePlaceholder" />
+<style>
+    #share {
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        padding: 1rem 2rem;
+    }
 
-<script define:vars={{ title, description }}>
+    body[data-js="false"] #share {
+        display: none;
+    }
+
+</style>
+
+<div class="centered">
+    <button id="share">
+        Share
+    </button>
+</div>
+
+<script define:vars={{ title, description, url }}>
+    const shareBtn = document.getElementById("share");
+
     if (navigator.canShare) {
         const shareData = {
             title,
             text: description,
-            url: 'Astro.url.href', // @TODO: replace with real url
+            url,
         }
-        const sharePlaceholder = document.querySelector("#sharePlaceholder");
-        const shareBtn = document.createElement("button");
-        shareBtn.innerText = "Share";
 
         shareBtn.addEventListener("click", async () => {
             await navigator.share(shareData);
-        })
-
-        sharePlaceholder.replaceWith(shareBtn);
+        });
     }
+    // else {
+    //     console.log("remove");
+    //     shareBtn.parentElement.remove();
+    // }
 </script>

@@ -53,14 +53,14 @@ const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
     <ul class="tags">
         {Object.entries(tagCounts)
             .sort(([tagA], [tagB]) => tagA.localeCompare(tagB))
-            .map(([tag, total], i) => (
+            .map(([tag, total]) => (
             <li>
                 <a  
-                    tabindex={i === 0 ? 0 : undefined}
                     style={{
                         fontSize: `${mapRange(total, 1, maxVal, 1, 2)}rem`,
                     }}
-                    href={`/tags/${tag}`}>
+                    href={`/tags/${tag}`}
+                >
                     {tag} [{total}]
                 </a>
             </li>

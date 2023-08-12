@@ -11,6 +11,7 @@ const { title,
     description,
     pubDate,
     updatedDate,
+    dateModified,
     headings,
     minutesRead,
     tags,
@@ -18,17 +19,18 @@ const { title,
 } = Astro.props;
 import './index.css';
 
+const { href } =Astro.url;
 const validHeadings = headings && headings.filter((heading) => heading.depth === 2);
+import { SITE_AUTHOR } from '#astro/consts'
 ---
 
 <Main
     title={title}
     description={description}
 >
-    <a tabindex="1" class="toArticle" href="#article">To the article</a>
+    <a slot="before-all" class="toArticle" href="#article">To the article</a>
     <article id="article">
-        <div class="prose">
-            <header>
+        <header>
                 <h1 id="title">{title}</h1>
                 <div class="date">
                     {minutesRead} — <FormattedDate date={pubDate} />
@@ -41,7 +43,6 @@ const validHeadings = headings && headings.filter((heading) => heading.depth ===
                     }
                 </div>
             </header>
-
             
             {validHeadings && (validHeadings.length >= 1) &&
                 <aside>
@@ -67,6 +68,7 @@ const validHeadings = headings && headings.filter((heading) => heading.depth ===
             
             <slot />
 
+            <!-- <Share title={title} description={description} url={href} /> -->
 
             <details class="details">
                 <summary>Metadata</summary>
@@ -98,39 +100,58 @@ const validHeadings = headings && headings.filter((heading) => heading.depth ===
                             </div>
                         }
                     </div>
-
-                    <!-- TODO: Only load if clicked and has share -->
-                    <!-- <Share title={title} description={description} /> -->
     
-                    <a class="centered correctLink" target="_blank" href={`https://github.com/dobladov/astro-blog/edit/main/src/content/blog/${id}`}>Did I make a mistake? Please consider sending a pull request</a>
+                    <div class="centered">
+                        <a class="correctLink" target="_blank" href={`https://github.com/dobladov/astro-blog/edit/main/src/content/blog/${id}`}>Did I make a mistake? Please consider sending a pull request</a>
+                    </div>
 
                     <script type="application/ld+json" set:html={
                         JSON.stringify({
                             "@context": "https://schema.org", 
                             "@type": "BlogPosting",
                             "headline": title,
-                            "image": "http://example.com/image.jpg",
-                            "editor": "Daniel Doblado", 
-                            // "genre": "search engine optimization", 
+                            // "image": "http://example.com/image.jpg",
+                            "editor": SITE_AUTHOR, 
+                            "genre": tags?.join(' '), 
                             "keywords": tags?.join(' '), 
-                            // "wordcount": "1120", take from fromatter
-                            "url": "http://www.example.com",
-                            "datePublished": "2015-09-20",
-                            "dateCreated": "2015-09-20",
-                            "dateModified": "2015-09-20",
+                            "wordcount": words,
+                            "url": href,
+                            "datePublished": pubDate,
+                            "dateCreated": pubDate,
+                            ...(dateModified && { dateModified: dateModified }),
                             "description": description,
-                            "articleBody": "You can paste your entire post in here, and yes it can get really really long.",
                             "author": {
-                            "@type": "Person",
-                            "name": "Daniel Doblado"
+                                "@type": "Person",
+                                "name": SITE_AUTHOR
                             }
-                        }, null, 2
-                    )}></script>
-
+                        })
+                    }></script>
                 </div>
             </details>
-        </div>
 
         <div class="progress" />
     </article>
 </Main>
+
+<script>
+    const headings = document.querySelectorAll('#title, h2, #metadata');
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const links = document.querySelectorAll('aside a')
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.href.endsWith(`#${entry.target.id}`)) {
+                        link.classList.add('active');
+                    }
+                })
+            }
+        });
+    });
+
+    headings.forEach(heading => {
+        observer.observe(heading);
+    });
+
+</script>
