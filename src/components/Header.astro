@@ -1,7 +1,7 @@
 ---
 import HeaderLink from '#astro/components/HeaderLink.astro';
 import { SITE_TITLE } from '#astro/consts';
-import ThemeToggle from '#astro/components/ThemeToggle.astro';
+// import ThemeToggle from '#astro/components/ThemeToggle.astro';
 
 import { Icon } from 'astro-icon'
 
@@ -21,7 +21,6 @@ import { Icon } from 'astro-icon'
 	}
 	h1 {
 		margin: 0;
-		font-family: 'Brush Script MT', cursive;
 		font-size: 3em;
 		text-align: center;
 		font-weight: 100;
@@ -45,7 +44,7 @@ import { Icon } from 'astro-icon'
 
 	@media screen and (min-width: 768px) {
 		h1 {
-			font-size: 4em;
+			font-size: 3em;
 		}
 
 		nav {
@@ -75,7 +74,7 @@ import { Icon } from 'astro-icon'
 			<HeaderLink href="/rss.xml" title="RSS">
 				<Icon name='rss' />
 			</HeaderLink>
-			<ThemeToggle />
+			<!-- <ThemeToggle /> -->
 		</div>
 	</nav>	
 </header>
