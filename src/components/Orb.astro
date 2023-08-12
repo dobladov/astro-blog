@@ -29,6 +29,8 @@
         bottom: 14rem;
         opacity: .8;
         box-shadow: -3px -2px 5px -1px var(--text);
+        width: 16.9rem;
+        height: 16.9rem;
         max-width: 16.9rem;
         max-height: 16.9rem;
     }
@@ -204,7 +206,7 @@
     const onScreen = (v) => {
         return v.x >= 0 && v.x <= canvas.width && v.y >= 0 && v.y <= canvas.height;
     }
-    
+
     const draw = () => {  
         const positionInfo = canvas.getBoundingClientRect();
 

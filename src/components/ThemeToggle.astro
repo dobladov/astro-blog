@@ -6,13 +6,13 @@
         const theme = document.body.getAttribute('data-theme')
         
         const isDarkTheme = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        themeButton.innerText = isDarkTheme ? '☀️' : '🌑'
+        themeButton.innerText = isDarkTheme ? '☀️' : '🌃'
         
         themeButton.addEventListener('click', () => {
             if (themeButton.innerText === '☀️') {
                 localStorage.setItem('theme', 'light');
                 document.body.setAttribute('data-theme', 'light');
-                themeButton.innerText = '🌑';
+                themeButton.innerText = '🌃';
                 
             } else {
                 localStorage.setItem('theme', 'dark');
@@ -32,5 +32,27 @@
         background-color: transparent;
         color: var(--accent);
         border: none;
+        position: relative;
+        transition: all 0.3s ease-in-out;
+    }
+/* 
+    #themeButton:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: var(--text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: scale(0);
+        transition: transform 0.3s ease;
+        z-index: -1;
+        aspect-ratio: 1;
+    } */
+
+    #themeButton:hover {
+        transform: scale(1.4) rotate(5deg);
     }
 </style>
