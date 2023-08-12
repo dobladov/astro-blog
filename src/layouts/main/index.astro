@@ -6,50 +6,48 @@ import Footer from '#astro/components/Footer.astro';
 type Props = {
     title: string;
     description: string;
-    withSection: boolean;
 }
 
-const { title, description, withSection } = Astro.props;
-
-import './index.css';
+const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <BaseHead title={title} description={description} />
-</head>
-<script>
-    const theme = localStorage.getItem('theme');
-    if (theme) {
-        document.body.setAttribute('data-theme', theme);
-    }
-</script>
-<style>
-    section {
-        padding: calc(var(--padding) / 4);
-    }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <BaseHead title={title} description={description} />
+    </head>
 
-	@media screen and (min-width: 468px) {
-		section {
-            padding: var(--padding);
-		}
-	}
-</style>
-<body>
-    <Header />
-    <main>
-        {
-            withSection
-            ? <section>
-                <slot/>
-              </section>
-            : <slot />
+    <script>
+        document.body.removeAttribute('data-js');
+        
+        const theme = localStorage.getItem('theme');
+        if (theme) {
+            document.body.setAttribute('data-theme', theme);
         }
-        <div class="grain"></div>
-    </main>
-    <Footer/>
-</body>
+    </script>
+
+    <style>
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            padding-left: calc(var(--paddingSides) / 2);
+            padding-right: calc(var(--paddingSides) / 2);
+        }
+    </style>
+    
+    <body data-js="false">
+        <Header />
+        <main>
+            <section>
+                <slot/>
+            </section>
+        </main>
+        <Footer/>
+    </body>
 </html>

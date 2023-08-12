@@ -25,7 +25,10 @@ export async function getStaticPaths() {
 const { posts, total } = Astro.props;
 const { tag } = Astro.params;
 ---
-<Main withSection title='Tag' description='Page for the tag'>
-    <PageTitle title={`Post with tag "${tag}" [${total}]`} />
+<Main
+    title='Tag'
+    description=`Articles with tag ${tag}`
+>
+    <PageTitle title={`Articles with tag "${tag}" [${total}]`} />
     <BlogList posts={posts} />
 </Main>

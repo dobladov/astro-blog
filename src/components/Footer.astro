@@ -1,4 +1,4 @@
-<footer class="social-links">
+<footer>
 	<a target="_blank" href="https://codepen.io/dobladov">CodePen</a>
 	<a target="_blank" href="mailto:danieldoblado@gmail.com">E-Mail</a>
 	<a target="_blank" href="https://github.com/dobladov">GitHub</a>
@@ -6,15 +6,21 @@
 	<a target="_blank" href="https://twitter.com/danieldobla">Twitter</a>
 </footer>
 <style>
-	.social-links {
+	footer {
 		display: flex;
 		flex-wrap: wrap;
-		padding: var(--padding);
+		padding-left: var(--paddingSides);
+		padding-right: var(--paddingSides);
+		padding-top: 2rem;
+		padding-bottom: 2rem;
 		display: flex;
 		justify-content: center;
+		align-items: center;
 		gap: 1em;
 		font-size: 1.3rem;
 		font-weight: 600;
+		z-index: 2;
+		text-shadow: 1px 1px 1px var(--background);
 	}
 	
 	a {

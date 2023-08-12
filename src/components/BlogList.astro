@@ -1,0 +1,82 @@
+---
+interface Props {
+    posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+<style>
+    .list {
+        padding-left: 0rem;
+        list-style-type: none;
+        margin: 0 auto;
+        max-width: 64rem;
+    }
+
+    .yearBlock {
+        padding-bottom: 1rem;
+    }
+    
+    .yearBlock h2 {
+        position: sticky;
+        top: 0;
+        text-align: right;
+        font-size: 1.4rem;
+        border-bottom: 2px dotted gray;
+        background-color: var(--background);
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
+    .post {
+        gap: 1rem;
+        padding-left: 0rem;
+        margin-top: 1.5rem;
+    }
+    
+    @media screen and (min-width: 468px) {
+        .post {
+            display: flex;
+            padding-left: 2rem;
+        }
+	}
+    
+    .date {
+        color: gray;
+        min-width: 3rem;
+    }
+
+    .postText {
+        flex: 1;
+        text-align: left;
+    }
+</style>
+
+{Object.entries(posts)
+    .sort(([yearA], [yearB]) => yearB - yearA)
+    .map(([year, yearPosts]) => (
+    <ul class="list">
+        <li class="yearBlock">
+            <h2>{year}</h2>
+            {yearPosts
+                .sort((postA, postB) => postB.data.pubDate - postA.data.pubDate)
+                .map(post => (
+                <div class="post">
+                    <time class="date" datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                        })}
+                    </time>
+                    <div class="postText">
+                        <a href={`/blog/${post.slug}/`}>
+                            <h4 class="title">{post.data.title}</h4>
+                            </a>
+                        <span>{post.data.description}</span>
+                        </div>
+                </div>
+            ))}
+        </li>
+    </ul>
+))}

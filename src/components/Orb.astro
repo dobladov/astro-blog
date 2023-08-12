@@ -1,0 +1,188 @@
+---
+---
+<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+<style>
+    aside {
+        position: relative;
+        padding-top: 8.5rem;
+        margin: 0 auto;
+        bottom: -10px;
+    }
+    
+    @media screen and (min-width: 768px) {
+        aside {
+            position: fixed;
+            right: -3.5rem;
+            margin-right: 6rem;
+        }
+    }
+
+    img {
+        max-width: 90vw;
+    }
+
+    #orb {
+        position: absolute;
+        left: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        aspect-ratio: 1;
+        max-width: 20rem;
+        right: 2rem;
+        bottom: 14rem;
+        opacity: .8;
+        box-shadow: -3px -2px 5px -1px var(--text);
+        width: 100%;
+    }
+
+    
+    #orb:after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        border-radius: 50%;
+        box-shadow: 7px 6px 15px 13px #3a3a3a94 inset
+    }
+
+    body[data-js="false"] #orb:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background: radial-gradient(farthest-corner at top, #FFFFFF 0%, #ffffff 4%, #e4e4e4 12.25%, #7c7c7c 31.25%, #b1b1b1 50%) top right/200% 200%;
+        animation: rotation 5s infinite alternate, appear 10s;
+    }
+
+    .finger {
+        left: 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 6px;
+    }
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+
+<script is:inline>
+    const num = 300;
+    const noiseScale = 0.01;
+    const particles = [];
+    let leftToRight;
+
+    // const acl = new Accelerometer({ frequency: 60 });
+    // window.addEventListener("devicemotion", accelerometerUpdate, true);
+    function handleMotionEvent(event) {
+        // const x = event.accelerationIncludingGravity.x;
+        // const y = event.accelerationIncludingGravity.y;
+        // const z = event.accelerationIncludingGravity.z;
+
+        // console.log(x, y, z);
+        leftToRight = event.gamma;
+        console.log(leftToRight);
+    }
+    window.addEventListener("deviceorientation", handleMotionEvent, true);
+
+    function setup() {
+        var canvas = createCanvas(500, 500);
+        
+        canvas.parent('orb');
+        for (let i = 0; i < num; i++) {
+            particles.push(createVector(random(width), random(height)));
+        }
+
+        const textColor = getComputedStyle(document.body).color;
+        const isDarkTheme = textColor.includes('255');
+        stroke(textColor);
+        strokeWeight(2);
+    }
+    
+    function draw() {
+        const textColor = getComputedStyle(document.body).color;
+        const isDarkTheme = textColor.includes('255');
+        // const backgroundColor = color(getComputedStyle(document.body).backgroundColor)
+        const backgroundColor = color('#282828')
+
+        backgroundColor.setAlpha(20)
+        background(backgroundColor);
+
+        for (let i = 0; i < num; i++) {
+            let p = particles[i];
+            let n = noise(p.x * noiseScale, p.y * noiseScale);
+            let a = TAU * n;
+            let displacement = 5;
+            let pace = map(mouseY, 0, height, .5, 2)
+            // let pace = 1 
+
+            // if (isDarkTheme) {
+                stroke(255, 0, 0);
+                point(p.x + displacement, p.y);
+                stroke(0, 255, 0);
+                point(p.x, p.y);
+                stroke(0, 0, 255);
+                point(p.x - displacement, p.y);
+            // } 
+            // else {
+            // 	stroke(textColor);
+            // 	point(p.x + displacement, p.y);
+            // 	// stroke(textColor);
+            // 	stroke('#cfcfcf');
+            // 	point(p.x, p.y);
+            // 	// stroke("#800034")
+            // 	point(p.x - displacement, p.y);
+            // }
+            
+            // Invert the direction
+            // if (mouseX < width / 2) {
+            if (leftToRight < 0 || !leftToRight && mouseX < width / 2) {
+                p.x += cos(a) * pace;
+                p.y += sin(a);
+            } else {
+                p.x -= cos(a) * pace;
+                p.y -= sin(a) * pace;
+            }
+            
+            if (!onScreen(p)) {
+            p.x = random(width);
+            p.y = random(height);
+            }
+        }
+    }
+
+    function mousePressed() {
+        noiseSeed(millis());
+    }
+
+    function onScreen(v) {
+    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
+    }
+</script>
+
+<aside>
+    <img class="hand" src="/hand.png" alt="Hand">
+    <img class="finger" src="/finger.png" alt="Finger">
+    <div role="presentation" id="orb"></div>
+</aside>

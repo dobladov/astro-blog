@@ -10,31 +10,33 @@ import ThemeToggle from '#astro/components/ThemeToggle.astro';
 		<h1>
 			<a href="/">{SITE_TITLE}</a>
 		</h1>
-		<div class="internal-links">
+		<div class="internalLinks">
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/projects">Projects</HeaderLink>
 			<HeaderLink href="/tags">Tags</HeaderLink>
 			<HeaderLink href="/rss.xml">RSS</HeaderLink>
 			<ThemeToggle />
 		</div>
-	</nav>
-	
+	</nav>	
 </header>
 <style>
 	header {
 		margin: 0;
-		padding: 0 calc(var(--padding) / 2);
+		padding: 0 calc(var(--paddingSides) / 1.5);
 		padding-top: 1rem;
 	}
 
 	h1 a  {
+		color: var(--accent);
 		text-decoration: none;
 	}
 	h1 {
 		margin: 0;
-		font-size: 2em;
+		font-family: 'Brush Script MT', cursive;
+		font-size: 3em;
+		text-align: center;
 	}
-
+	
 	nav {
 		display: flex;
 		align-items: center;
@@ -43,18 +45,26 @@ import ThemeToggle from '#astro/components/ThemeToggle.astro';
 		gap: 1.5rem;
 		align-items: stretch;
 	}
+	.internalLinks {
+		font-size: 1.3em;
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	@media screen and (min-width: 768px) {
+		h1 {
+			font-size: 4em;
+		}
 
-	@media screen and (min-width: 468px) {
 		nav {
 			flex-direction: row;
 		}
+
+		.internalLinks {
+			flex-wrap: wrap;
+		}		
 	}
 
-	.internal-links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-		justify-content: center;
-    	align-items: center;
-	}
 </style>

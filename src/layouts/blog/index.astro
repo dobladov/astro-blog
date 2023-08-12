@@ -74,11 +74,7 @@ const validHeadings = headings && headings.filter((heading) => heading.depth ===
 
                     <div class="metaSection">
                         <span class="title">Date</span>
-                        <span>{pubDate.toLocaleDateString('en-us', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric',
-                        })}</span>
+                        <FormattedDate date={pubDate} />
                     </div>
                     
                     <div class="metaSection">
@@ -90,7 +86,6 @@ const validHeadings = headings && headings.filter((heading) => heading.depth ===
                        <span class="title">License</span>
                        <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
                    </div>
-
 
                     <div class="metaSection">
                         <span class="title">Tags</span>
@@ -108,7 +103,6 @@ const validHeadings = headings && headings.filter((heading) => heading.depth ===
                     <!-- <Share title={title} description={description} /> -->
     
                     <a class="centered correctLink" target="_blank" href={`https://github.com/dobladov/astro-blog/edit/main/src/content/blog/${id}`}>Did I make a mistake? Please consider sending a pull request</a>
-
 
                     <script type="application/ld+json" set:html={
                         JSON.stringify({

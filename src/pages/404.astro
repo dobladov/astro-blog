@@ -1,12 +1,14 @@
 ---
+import PageTitle from '#astro/components/PageTitle.astro';
 import Main from '#astro/layouts/main/index.astro';
 ---
 
 <Main 
     title="404"
     description="Page not found"
-    withSection
 >
-        <h1>404</h1>
-        <p>Page not found</p>
+    <PageTitle title="404 Not Found" />
+    
+    <p>You picked the wrong URL, fool!</p>
+    <p>AY, AY AY AY! Go back to <a href="/">home</a>, chill, chill!</p>    
 </Main>

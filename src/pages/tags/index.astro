@@ -26,7 +26,10 @@ const maxVal = Math.max(...Object.values(tagCounts));
 const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
 
 ---
-<Main withSection title='Tag' description='Page for the tag'>
+<Main
+    title='Tag'
+    description='Page for the tag'
+>
     <style>
         .tags {
             align-items: center;
@@ -48,19 +51,19 @@ const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
     <PageTitle title={`Tags: [${totalTags}]`} />
 
     <ul class="tags">
-    {Object.entries(tagCounts)
-        .sort(([tagA], [tagB]) => tagA.localeCompare(tagB))
-        .map(([tag, total], i) => (
-        <li>
-            <a  
-                tabindex={i === 0 ? 0 : undefined}
-                style={{
-                    fontSize: `${mapRange(total, 1, maxVal, 1, 2)}rem`,
-                }}
-                href={`/tags/${tag}`}>
-                {tag} [{total}]
-            </a>
-        </li>
-    ))}
+        {Object.entries(tagCounts)
+            .sort(([tagA], [tagB]) => tagA.localeCompare(tagB))
+            .map(([tag, total], i) => (
+            <li>
+                <a  
+                    tabindex={i === 0 ? 0 : undefined}
+                    style={{
+                        fontSize: `${mapRange(total, 1, maxVal, 1, 2)}rem`,
+                    }}
+                    href={`/tags/${tag}`}>
+                    {tag} [{total}]
+                </a>
+            </li>
+        ))}
     </ul>
 </Main>

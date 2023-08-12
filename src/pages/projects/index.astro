@@ -7,14 +7,17 @@ import Project from '#astro/components/Project.astro';
 <Main
 	title="Projects"
 	description="Projects I did over time"
-	withSection
 >
 	<style>
 		.projects {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 			gap: 4rem;
-			padding-bottom: 4rem;
+		}
+		
+		@media screen and (min-width: 468px) {
+			.projects {
+				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+			}
 		}
 	</style>
 	

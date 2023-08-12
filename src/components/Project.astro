@@ -21,20 +21,42 @@ const {title, links, logo} = Astro.props;
     </div>
     <slot /> 
 
-    {links && links.live && <a target="_blank" href={links.live}>Live</a>}
-    {links && links.source && <a target="_blank" href={links.source}>Souce</a>}
-
-    <style>
-        svg {
-            min-width: 5rem;
-            max-width: 5rem;
-        }
-
-        .header {
-            display: flex;
-            justify-content: left;
-            align-items: center;
-            gap: 1.5rem;
-        }
-    </style>
+    <div class="links">
+        {links && links.live && <a target="_blank" href={links.live}>Live</a>}
+        {links && links.source && <a target="_blank" href={links.source}>Souce</a>}
+    </div>
 </div>
+<style>
+    svg {
+        min-width: 4rem;
+        max-width: 4rem;
+    }
+
+    .header {
+        background-color: var(--background);
+        position: sticky;
+        top: 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        gap: 1.5rem;
+        font-size: .8rem;
+    }
+
+    a {
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+    }
+
+    svg {
+        fill: var(--accent);
+    }
+
+    .links {
+        display: flex;
+        gap: 1rem;
+</style>

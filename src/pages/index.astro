@@ -1,25 +1,37 @@
 ---
 import Main from '#astro/layouts/main/index.astro';
+import PageTitle from '#astro/components/PageTitle.astro';
+import Orb from '#astro/components/Orb.astro';
 ---
 
-<Main title='Home' description='The home page'>
+<Main
+	title='Home'
+	description='The home page'
+>
 	<style>
-		.container {
-			padding: var(--padding);
-			display: grid;
-			place-items: center;
+		.text {
+			font-size: 1.5em;
+		}
+
+		@media screen and (min-width: 768px) {
+			.text {
+				padding-right: 20rem;
+			}
 		}
 	</style>
-	<section class="container">
-		<h1>About me</h1>
-		<p>My name is Daniel, originally from Spain, I'm a Web Developer currently based in Berlin 🇩🇪, with true passion for Open-source and building better platforms.</p>
-		<p>Mostly made of six elements: oxygen, carbon, hydrogen, nitrogen, calcium, and phosphorus</p>
+
+	<PageTitle title="About me" />
+	<div class="text">
+		<p>My name is Daniel, originally from Spain 🇪🇸 and currently based in Berlin 🇩🇪, I'm a senior frontend developer working at <a target="_blank" href="https://zattoo.com">Zattoo</a>.</p>
+
+		<p>On my day to day, I work on making performant and accesible web applications with focus on interfaces and infrastructure, manly using <a target="_blank" href="https://react.dev/">React</a> and <a href="https://nodejs.org/en" target="_blank">Node.js</a>, but not limited to these technologies.</p>
 		<p>
 			From time to time I <a target="_blank" href="https://github.com/dobladov/">develop</a> some <a href="/projects">projects</a> or <a href="/blog">write</a> about them.
 		</p>
-		<p>Currently working at <a target="_blank" href="https://zattoo.com">Zattoo</a></p>
 		<p>
 			Say Hi! <a href="mailto:danieldoblado@gmail.com">danieldoblado@gmail.com</a>
 		</p>
-	</section>
+	</div>
 </Main>
+
+<Orb client:visible />
