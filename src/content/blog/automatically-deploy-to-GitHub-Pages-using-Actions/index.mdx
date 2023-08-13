@@ -3,6 +3,7 @@ title: "Automatically deploy to GitHub Pages using Actions"
 description: How to automate your workflows increasing your productivity and reducing manual errors.
 tags: [GitHub, devops, production, gh-pages]
 pubDate: "2020-02-07"
+updatedDate: "2023-08-13"
 ---
 
 import actions from './actions.png'
@@ -14,7 +15,6 @@ After setting up this workflow your code will be automatically deployed after ea
 
 > “There should be two tasks for a human being to perform to deploy software into a development, test, or production environment: to pick the version and environment and to press the “deploy” button.”
 > ― David Farley, Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation
-
 
 ## Advantages
 
@@ -165,12 +165,13 @@ To create this token go to `Settings` -> `Developer settings` -> `Personal acces
 With this configuration, we can use a personal token that needs to be set on Settings -> Secrets, since the `secrets.GITHUB_TOKEN` only allows you to commit to your current repository.
 ```yml
 - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2
-      env:
-        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        EXTERNAL_REPOSITORY: dobladov/dobladov.github.io
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./public
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        external_repository: dobladov/dobladov.github.io
+        publish_branch: master
+        publish_dir: ./dist
+
 ```
 
 ### Testing multiple platforms

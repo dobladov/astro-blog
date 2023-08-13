@@ -11,7 +11,6 @@ const { title,
     description,
     pubDate,
     updatedDate,
-    dateModified,
     headings,
     minutesRead,
     tags,
@@ -36,8 +35,8 @@ import { SITE_AUTHOR } from '#astro/consts'
                     {minutesRead} — <FormattedDate date={pubDate} />
                     {
                         updatedDate && (
-                            <div class="last-updated-on">
-                                Last updated on <FormattedDate date={updatedDate} />
+                            <div>
+                                Last updated — <FormattedDate date={updatedDate} />
                             </div>
                         )
                     }
@@ -75,9 +74,16 @@ import { SITE_AUTHOR } from '#astro/consts'
                 <div id="metadata">
 
                     <div class="metaSection">
-                        <span class="title">Date</span>
+                        <span class="title">Published</span>
                         <FormattedDate date={pubDate} />
                     </div>
+                    {
+                        updatedDate &&
+                        <div class="metaSection">
+                            <span class="title">Updated</span>
+                            <FormattedDate date={updatedDate} />
+                        </div>
+                    }
                     
                     <div class="metaSection">
                         <span class="title">Length</span>
@@ -119,7 +125,7 @@ import { SITE_AUTHOR } from '#astro/consts'
                             "url": href,
                             "datePublished": pubDate,
                             "dateCreated": pubDate,
-                            ...(dateModified && { dateModified: dateModified }),
+                            ...(updatedDate && { dateModified: updatedDate }),
                             "description": description,
                             "author": {
                                 "@type": "Person",
