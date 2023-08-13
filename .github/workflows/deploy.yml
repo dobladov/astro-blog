@@ -16,7 +16,7 @@ jobs:
     - name: Build
       uses: actions/setup-node@v3
       with:
-        node-version-file: '.nvrmc'
+        node-version-file: '.nvmrc'
     - run: |
         npm install
         npm test
