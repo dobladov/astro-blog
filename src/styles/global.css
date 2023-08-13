@@ -82,6 +82,7 @@ h5 {
 
 strong,
 b {
+	color: var(--accent);
 	font-weight: 700;
 }
 
@@ -128,6 +129,9 @@ img {
 code {
 	padding: 2px 5px;
 	border-radius: 2px;
+    color: #9ecbff;
+    border: 1px solid #9ecbff;
+    background: #24292f;
 }
 
 pre {
