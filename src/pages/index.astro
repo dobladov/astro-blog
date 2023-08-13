@@ -2,6 +2,7 @@
 import Main from '#astro/layouts/main/index.astro';
 import PageTitle from '#astro/components/PageTitle.astro';
 import Orb from '#astro/components/Orb.astro';
+import { SITE_AUTHOR } from '#astro/consts';
 ---
 
 <style>
@@ -22,7 +23,7 @@ import Orb from '#astro/components/Orb.astro';
 
 <Main
 	title='Home'
-	description='The home page'
+	description='Home page of Daniel Doblado describing a little bit about myself and my work.'
 >
 	<PageTitle title="About me" />
 	<div class="intro">
@@ -39,6 +40,58 @@ import Orb from '#astro/components/Orb.astro';
 			Say Hi! <a href="mailto:danieldoblado@gmail.com">danieldoblado@gmail.com</a>
 		</p>
 	</div>
+
+	<script type="application/ld+json" set:html={
+		JSON.stringify({
+			"@context": "http://www.schema.org",
+			"@type": "Person",
+			"@id": "https://dobla.do/#person",
+			"name": SITE_AUTHOR,
+			"alternateName": `${SITE_AUTHOR} Vera`,
+			"nationality": "Spanish",
+			"birthPlace" : {
+				"@type": "Place",
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Málaga",
+					"addressRegion": "Andalusia",
+					"addressCountry": "Spain"
+				}
+			},
+			"gender": "Male",
+			"Description": "Technologist, web developer, frontend developer.",
+			"jobTitle": "Senior frontend developer",
+			"worksFor": [
+				{
+					"@type": "Organization",
+					"name": "Zattoo",
+					"sameAs": [
+						"https://zattoo.com/",
+						"https://twitter.com/zattoo",
+						"https://www.facebook.com/zattoo.de/",
+						"https://www.linkedin.com/company/zattoo",
+					]
+				}
+			],
+			"url": "https://dobla.do",
+			"image": "https://dobla.do/me.png",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Berlin",
+				"addressRegion": "Berlin",
+				"addressCountry": "Germany"
+			},
+			"sameAs": [
+				"https://x.com/danieldobla",
+				"https://codepen.io/dobladov",
+				"https://github.com/dobladov",
+				"https://mastodon.social/@danieldobla",
+				"https://stackoverflow.com/users/2498992/daniel-doblado",
+				"https://www.youtube.com/channel/UCDSzT113tsecMI4wMh5u0qg",
+				"https://www.linkedin.com/in/daniel-doblado-9630191a3",
+			]
+		})
+	}></script>
 </Main>
 
 <Orb />

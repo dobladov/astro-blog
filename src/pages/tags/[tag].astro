@@ -26,8 +26,8 @@ const { posts, total } = Astro.props;
 const { tag } = Astro.params;
 ---
 <Main
-    title='Tag'
-    description=`Articles with tag ${tag}`
+    title={`Tag "${tag}"`}
+    description=`List of articles with tag ${tag}`
 >
     <PageTitle title={`Articles with tag "${tag}" [${total}]`} />
     <BlogList posts={posts} />
