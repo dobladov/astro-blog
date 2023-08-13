@@ -5,6 +5,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 import sitemap from '@astrojs/sitemap'
 import { remarkReadingTime } from './utils/remark-reading-time.mjs'
+import rehypeExternalLinks from 'rehype-external-links'
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,7 +14,20 @@ export default defineConfig({
     assets: true
   },
   markdown: {
-    rehypePlugins: [remarkReadingTime, rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'append' }]]
+    rehypePlugins: [
+      remarkReadingTime,
+      rehypeSlug,
+      [rehypeAutolinkHeadings,
+        { behavior: 'append' }
+      ],
+      [
+        rehypeExternalLinks,
+        {
+          rel: ['nofollow'],
+          target: ['_blank']
+        }
+      ]
+    ]
   },
   site: 'https://dobla.do',
   integrations: [mdx(), sitemap()]
