@@ -24,8 +24,8 @@ jobs:
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
-      env:
-        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        EXTERNAL_REPOSITORY: dobladov/dobladov.github.io
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./dist
+      with:
+        github_token: ${{ secrets.PERSONAL_TOKEN }}
+        external_repository: dobladov/dobladov.github.io
+        publish_branch: master
+        publish_dir: ./dist
