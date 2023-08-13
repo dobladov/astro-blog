@@ -1,6 +1,6 @@
 ---
 title: Crawling data from dynamically generated sites
-tags: [js, devops, crawler]
+tags: [javascript, crawler]
 description: How to get data from other sites using free online services
 pubDate: "2020-02-14"
 ---

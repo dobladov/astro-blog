@@ -1,7 +1,7 @@
 ---
 title: How to configure a 4k screen in Linux
 pubDate: 2020-04-18
-tags: [4k, Screen, Xrandr, KDE]
+tags: [4k, screen, Xrandr, KDE]
 description: Troubles with your screen?, here is how to fix it.
 ---
 
