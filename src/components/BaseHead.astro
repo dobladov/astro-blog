@@ -22,7 +22,7 @@ const { title, description, image = '/orb512.png'  } = Astro.props;
 <link rel="icon" type="image/png" href="/orb512.png" >
 <meta name="generator" content={Astro.generator} />
 <link rel="manifest" href="/manifest.webmanifest" />
-<link rel="alternate" type="application/rss+xml"  href="/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title={`RSS for ${SITE_TITLE}`}  href="/rss.xml" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

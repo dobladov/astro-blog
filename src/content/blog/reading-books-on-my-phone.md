@@ -49,6 +49,6 @@ I will miss the smell, the sense of physical progress, the uncontested battery l
 
 ## Conclusion
 
-I try to be pragmatic, and while nostalgia has a huge component here, what made me read more during these past 4 years was my phone and the convenience that brings, so I'll keep doing it.
+I try to be pragmatic, and while nostalgia is a huge component here, what made me read more during these past 4 years was my phone and the convenience that brings, so I'll keep doing it.
 
 Who knows, maybe in the future we can have screens in our retinas, and I will write this post again.
