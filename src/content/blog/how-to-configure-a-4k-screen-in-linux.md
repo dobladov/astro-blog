@@ -11,7 +11,7 @@ You just got a new cool 4K monitor, you opened it, connected it to your Linux de
 
 ## Why is this problem happening?
 
-Apparently some screens might not give the correct [EDID](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) information, in my case a [SAMSUNG LU28E85KRS](https://www.samsung.com/us/business/support/owners/product/ue850-series-u28e850r/), this makes impossible to select all supported modes for our screen, showing some default ones, without including resolutions greater than 1920x1080.
+Apparently some screens might not give the correct [EDID](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) information, in my case a [SAMSUNG LU28E85KRS](https://www.samsung.com/us/business/support/owners/product/ue850-series-u28e850r/), this makes it impossible to select all supported modes for our screen, showing some default ones, without including resolutions greater than 1920x1080.
 
 
 ## How to get the correct EDID and set it using xrandr
@@ -51,13 +51,13 @@ The first value after the mode number tell us the horizontal resolution, in my c
 Modeline    "Mode 0" 297.00 3840 4016 4104 4400 2160 2168 2178 2250 +hsync +vsync 
 ```
 
-Let's create a new mode, we can name it anything we want but I prefer to name if after the output resolution.
+Let's create a new mode, we can name it anything we want, but I prefer to name it after the output resolution.
 
 ```bash
 xrandr --newmode "3840x2160" 297.00 3840 4016 4104 4400 2160 2168 2178 2250 +hsync +
 ```
 
-Now we add the mode to the outut, if you are not sure which one is the output, run `xrandr` and it will show something like `HDMI-2 connected`.
+Now we add the mode to the output, if you are not sure which one is the output, run `xrandr` and it will show something like `HDMI-2 connected`.
 
 We use the name of the output.
 
