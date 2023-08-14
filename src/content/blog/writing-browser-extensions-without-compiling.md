@@ -17,7 +17,7 @@ So in order to build trust and avoid wasting reviewer's time, all the code neede
 
 Tools like [snowpack](https://www.snowpack.dev/) made me realize that with the advance of JavaScript modules, we might not need to compile what it's an interpreted language, seriously how did we reach this point.
 
-### Coming with simpler solutions
+## Coming with simpler solutions
 
 Let's look at the requirements, I wanted to use components, separate my logic from styles, use declarative logic, not set up any bundler (webpack, parcel, etc...) for this React would not make the cut since JSX needs some tooling and care.
 
@@ -55,7 +55,7 @@ On top of those advantages, I love the nested syntax, far shorter than JSX, now 
 You might be also wondering, "what if I need typescript, do you have to transpile?" the answer is no, you can use [JSDocs with Typescript](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html) without having to create a single `ts` file.
 
 
-### How it ended
+## How it ended
 
 I feel this change was a success, new code can be iterated easily without having to worry much about state or building, since the extension runs on modern browsers I don't have to care about babel, etc
 
