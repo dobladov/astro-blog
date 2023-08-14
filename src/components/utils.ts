@@ -1,5 +1,8 @@
 export const getPostsPerYear = (posts) => {
     return posts.reduce((posts, post) => {
+
+        if (post.data.draft === true) return posts;
+
         const year = post.data.pubDate.getFullYear() || 'Unknown'
     
         if (posts[year] === undefined) {
