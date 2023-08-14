@@ -7,6 +7,8 @@ import { map } from '#astro/components/utils'
 const blogs = await getCollection('blog');
 
 const tagCounts = blogs.reduce((tags, blog) => {
+    if (blog.data.draft) return tags;
+
     if (blog.data.tags) {
         blog.data.tags.forEach((tag) => {
             tags[tag] = (tags[tag] || 0) + 1;
