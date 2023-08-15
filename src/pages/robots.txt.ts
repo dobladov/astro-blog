@@ -7,7 +7,6 @@ Disallow: /
 
 User-agent: *
 Sitemap: ${SITE_URL}/sitemap.xml
-Host: ${SITE_URL}
-    `
+`
   }
 }
