@@ -6,9 +6,7 @@ pubDate: "2020-02-07"
 updatedDate: "2023-08-13"
 ---
 
-import actions from './actions.png'
-
-<img src={actions.src} alt="List of github actions executed or failed." height={actions.height} width={actions.width} />
+![List of github actions executed or failed](./actions.png) 
 
 This has become the main way to deploy most of my projects and it has greatly reduced the time invested doing it by hand, also avoiding headaches that you might be familiar with like, "ohhh! I forgot to checkout the proper branch", "I used the wrong script.", "I accidentally deleted the database and all the backups while updating a CSS color".
 

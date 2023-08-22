@@ -4,8 +4,6 @@ description: Reasons to use Foam and why I think it's the best note-taking workf
 pubDate: 2023-08-15
 tags: [notes, productivity, vscode, foam, obsidian, git, markdown]
 ---
-import grapView from './graph-view.png'
-import excalidrawPreview from './excalidraw-preview.png'
 
 ## Introduction
 
@@ -27,12 +25,7 @@ The view of the graph is the main selling point to use *Obsidian*, no more need 
 
 A graph view is something that I always wanted to have and what makes the difference in my total number of edits, and the view in *Foam* works great, it can be positioned like any other tab which I always keep as a pinned tab with `cmd + k shift + enter`.
 
-<img
-    alt="Graph view of Foam"
-    src={grapView.src}
-    widht={grapView.width}
-    height={grapView.height}
-/>
+![Graph view of Foam](./graph-view.png)
 
 There's some sense of satisfaction after looking at all the connections on the graph that making me want to write even more.
 
@@ -48,12 +41,7 @@ I can integrate dynamic [Excalidraw](https://excalidraw.com/) documents, before 
 
 On top of it, I can directly link the `excalidraw.png` file inside Markdown and preview it while still being editable.
 
-<img
-    alt="Mockup draing showing an example of useage of Excalidraw"
-    src={excalidrawPreview.src}
-    widht={excalidrawPreview.width}
-    height={excalidrawPreview.height}
-/>
+![Mockup drawing showing an example of useage of Excalidraw](./excalidraw-preview.png)
 
 There are many other integrations, to [paste images](https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image), [create todos](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-markdown-todo), [preview images](https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview) like shown in the last screenshot or simply have a [better markdown experience](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one).
 
