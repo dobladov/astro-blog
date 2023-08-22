@@ -1,6 +1,6 @@
 ---
 title: Reading books on my phone
-pubDate: 2023-08-18
+pubDate: 2023-08-17
 description: While physical books are great, I prefer reading on my phone
 tags: [opinion, reading, books, phone, apps, kindle, productivity]
 ---
