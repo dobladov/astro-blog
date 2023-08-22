@@ -5,9 +5,6 @@ pubDate: 2023-08-16
 tags: [dependencies, update, npm, javascript, devops, maintenance]
 ---
 
-import exampleOutdated  from './example-npm-outdated.png'
-import exampleCheck  from './example-npm-check.png'
-
 ## Introduction
 
 How many times do you work on a project and many dependencies are outdated, and neither you nor your colleagues want to take care of them because it's a huge tech debt task, especially with major versions?
@@ -18,12 +15,7 @@ This might not happen if you take care of your dependencies regularly; even bett
 
 The simplest way to see if there are new versions of your dependencies is to run `npm outdated`, this  command will show you the current version of your dependencies and the latest version available, pretty useful to get an overview.
 
-<img 
-    alt="Example of the output of npm outdated"
-    src={exampleOutdated.src}
-    widht={exampleOutdated.width}
-    height={exampleOutdated.height}
-/>
+![Example of the output of npm outdated](./example-npm-outdated.png)
 
 From here we can do `npm update`, it will update all the dependencies to the latest version, but this is not always the best option because it can break your codebase, so you need to be careful, it's much better to update packages one by one and check if everything is working as expected by running your tests, especially with major versions.
 
@@ -39,12 +31,7 @@ The command `npx npm-check -u -E` will show an interactive list indicating the s
 
 It makes incredibly easy to install each dependency once at a time to avoid breaking changes. My advice here is to always run the tests after installing any major version.
 
-<img
-    alt="Example of the output of npm-check"
-    src={exampleCheck.src}
-    widht={exampleCheck.width}
-    height={exampleCheck.height}
-/>
+![Example of the output of npm-check](./example-npm-check.png)
 
 ## Workflow 
 
