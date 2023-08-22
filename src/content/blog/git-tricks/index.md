@@ -31,7 +31,7 @@ These are my most used shortcuts:
 - `git pull origin "$(git_current_branch)` -> `ggpull`
 - `git push origin "$(git_current_branch)"` -> `ggpush`
 
-Commands that include variables like `git_current_branch` same a huge amount of time and mental attention.
+Commands that include variables like `git_current_branch` save a huge amount of time and mental attention.
 
 ## Custom aliases
 
