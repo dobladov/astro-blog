@@ -18,7 +18,7 @@ const { posts } = Astro.props;
         padding-bottom: 1rem;
     }
     
-    .yearBlock h2 {
+    .yearBlock h3 {
         position: sticky;
         top: 0;
         text-align: right;
@@ -63,7 +63,7 @@ const { posts } = Astro.props;
     .map(([year, yearPosts]) => (
     <ul class="list">
         <li class="yearBlock">
-            <h2>{year}</h2>
+            <h3>{year}</h3>
             {yearPosts
                 .sort((postA, postB) => postB.data.pubDate - postA.data.pubDate)
                 .map(post => (
@@ -75,9 +75,11 @@ const { posts } = Astro.props;
                         })}
                     </time>
                     <div class="postText">
-                        <a class="title" href={`/blog/${post.slug}/`}>
-                            {post.data.title}
-                        </a>
+                        <h4>
+                            <a class="title" href={`/blog/${post.slug}/`}>
+                                {post.data.title}
+                            </a>
+                        </h4>
                         <div>{post.data.description}</div>
                         </div>
                 </div>
