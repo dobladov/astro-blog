@@ -231,7 +231,6 @@
             let p = particles[i];
             let n = map(perlin.get(p.x * noiseScale, p.y * noiseScale), -1, 1, 0, 1);
             let a = Math.PI * 2 * n;
-            let pace = map(mousePos.y, 0, window.screen.height * .9, .2, 2);
             
             // Draw the points slightly displaced
             ctx.fillStyle = 'rgb(255, 0, 0)'
@@ -243,11 +242,11 @@
 
             // Invert the direction
             if (leftToRight < 0 || mousePos.x < (positionInfo.width / 2) + positionInfo.left) {
-                p.x += Math.cos(a) * pace;
+                p.x += Math.cos(a) * 2;
                 p.y += Math.sin(a);
             } else {
-                p.x -= Math.cos(a) * pace;
-                p.y -= Math.sin(a) * pace;
+                p.x -= Math.cos(a) * 2;
+                p.y -= Math.sin(a) * 2;
             }
             
             // Move the point to a random position if it's out of the screen
