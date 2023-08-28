@@ -1,6 +1,6 @@
 ---
 title: Writing browser extensions without compiling
-tags: [javascript, extension, tooling, framework]
+tags: [javascript, extensions, tooling, framework, firefox, chrome, manifest]
 description: Positive development changes for one of my extensions.
 pubDate: "2021-06-24"
 ---
