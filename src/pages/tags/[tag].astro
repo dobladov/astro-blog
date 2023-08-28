@@ -11,7 +11,10 @@ export async function getStaticPaths() {
     const tags = [...new Set(blogs.map((post) => post.data.tags).flat().filter(Boolean))];
 
     return tags.map((tag) => {
-        const postWithTag = blogs.filter((post) => post.data.tags?.includes(tag));
+        const postWithTag = blogs.filter((post) => {
+            return post.data.draft !== true && post.data.tags?.includes(tag);
+        });
+
         return {
             params: {tag},
             props: {
