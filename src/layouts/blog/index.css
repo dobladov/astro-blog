@@ -51,7 +51,7 @@ aside::after {
     content: "";
     position: absolute;
     top: 0;
-    left: .3rem;
+    left: 0;
     width: 0.25rem;
     height: 100%;
     background: var(--text);
@@ -71,7 +71,7 @@ aside::after {
 aside {
     display: none;
     position: fixed;
-    left: 0;
+    left: 1rem;
     top: 50%;
     max-width: 15rem;
     transform: translateY(-50%);
