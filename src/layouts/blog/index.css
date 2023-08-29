@@ -176,3 +176,17 @@ summary {
 .correctLink {
     margin-top: 1.5rem;
 }
+
+@media print {
+    article {
+        max-width: 210mm;
+        width: 210mm;
+    }
+
+    .toArticle,
+    .date,
+    .correctLink,
+    details {   
+        display: none;
+    }
+}

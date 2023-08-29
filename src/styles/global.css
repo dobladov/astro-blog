@@ -169,3 +169,16 @@ hr {
 		font-size: 3.052em;
 	}
 }
+
+@media print {
+	* {
+		-webkit-transition: none !important;
+		transition: none !important;
+	}
+
+	body {
+		--background: white;
+		--text: black;
+		--accent: charcoal;
+	}
+}

@@ -60,6 +60,12 @@ import { Icon } from 'astro-icon'
 		width: 1rem;
         fill: var(--text);
     }
+
+	@media print {
+		header {
+			display: none;
+		}
+	}
 </style>
 
 <header>
