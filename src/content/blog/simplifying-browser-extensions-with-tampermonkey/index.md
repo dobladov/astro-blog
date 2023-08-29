@@ -61,4 +61,4 @@ For example, as a quick way to set special cookies or log users without a form, 
 
 I would only consider *Tampermonkey* a tool for developers; there are many cases where a full extension is needed, but for quick hacks or to avoid the hassle of maintaining multiple versions of the same extension, it's a great tool.
 
-![monkey writing on a laptop](./monkey.jpeg)
+![monkey writing on a laptop](./monkey.jpg)

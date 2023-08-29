@@ -45,4 +45,4 @@ I can do it anywhere, anytime, and for as long as I want. I can do it in a way t
 
 Find your loop and replace it.
 
-![Abstract dithered image representing addiction](./addiction.jpeg)
+![Abstract dithered image representing addiction](./addiction.jpg)
