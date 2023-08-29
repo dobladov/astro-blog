@@ -24,7 +24,8 @@ const { title, description, image = '/orb512.png'  } = Astro.props;
 <link rel="manifest" href="/manifest.webmanifest" />
 <meta http-equiv="content-language" content="en">
 
-<link rel="alternate" type="application/rss+xml" title={`RSS for ${SITE_TITLE}`} href="/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="/rss.xml" />
+<link rel="alternate" type="application/feed+json" title="JSON feed" href="/feed.json" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
