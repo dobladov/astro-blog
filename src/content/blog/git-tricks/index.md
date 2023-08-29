@@ -98,3 +98,5 @@ I use [GitHub CLI](https://cli.github.com/) mostly for scripting, there are two 
 Another command that I like to execute is `gh run watch` to know when a workflow is finished, for example, when I'm running tests on a PR, it can be pipped to the command `say [message]` to get a notification when the workflow is finished.
 
 There's more to this command, but these three options are really useful.
+
+![Dithered image of a ghost juggling](./ghost.jpg)
