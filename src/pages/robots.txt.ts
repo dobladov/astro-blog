@@ -6,7 +6,7 @@ export async function get () {
 Disallow: /
 
 User-agent: *
-Sitemap: ${SITE_URL}/sitemap.xml
+Sitemap: ${SITE_URL}/sitemap-index.xml
 `
   }
 }
