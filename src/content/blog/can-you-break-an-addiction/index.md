@@ -17,7 +17,7 @@ The loop is a cycle of repetition. It's a habit that you can't seem to break. It
 
 The first step is to become aware of the loop. You have to be able to see it, and realize how it's negatively affecting your life.
 
-At some point, I came to the realization that breaking the [loop](#the-loop) can only be done one way: **by replacing the addiction with something positive**.
+At some point, I came to the realization that breaking the loop can only be done one way: **by replacing the addiction with something positive**.
 
 Once you know what you have to get rid of, it's important to find a replacement. At this point, you have to understand that **there's no stop of of the bad habit by willpower alone**; the only way to get rid of it is by being busy enough with something else to the point that you don't have time to think about it.
 
