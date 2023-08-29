@@ -36,7 +36,7 @@ export async function get (context) {
                         summary: post.data.description,
                         date_published: post.data.pubDate,
                         content_html: sanitizeHtml(parser.render(post.body), {
-                            allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ])
+                            // allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ])
                         }),
                         tags: post.data.tags,
                     }

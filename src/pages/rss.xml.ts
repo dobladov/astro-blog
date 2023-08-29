@@ -27,7 +27,7 @@ export async function get (context) {
           ...post.data,
           link: `/blog/${post.slug}/`,
           content: sanitizeHtml(parser.render(post.body), {
-            allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ])
+            // allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ])
           }),
           categories: post.data.tags,
           author: SITE_AUTHOR
