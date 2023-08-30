@@ -9,10 +9,6 @@ import rehypeExternalLinks from 'rehype-external-links'
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: {
-    viewTransitions: true,
-    assets: true
-  },
   markdown: {
     rehypePlugins: [
       remarkReadingTime,
