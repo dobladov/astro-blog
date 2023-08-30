@@ -7,9 +7,9 @@
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '#astro/consts'
 
-export async function get () {
-  return {
-    body: JSON.stringify({
+export async function GET () {
+  return new Response(
+    JSON.stringify({
       name: SITE_TITLE,
       short_name: SITE_TITLE.split(' ')[1],
       developer: {
@@ -55,5 +55,5 @@ export async function get () {
         }
       ]
     })
-  }
+  )
 }
