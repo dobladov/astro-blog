@@ -10,11 +10,11 @@ const { bottom } = Astro.props;
     .pattern {
         --fill: rgba(255, 255, 255, 0.15);
         position: absolute;
-        top: 0;
+        top: -5%;
         left: 0;
         width: 100%;
-        height: 35vh;
-        background-size: 12px 12px;
+        height: 30vh;
+        background-size: 7px 7px;
         -webkit-mask-image: radial-gradient(at top center, var(--background) 45%, transparent 70%);
         mask-image: radial-gradient(at top center, var(--background) 45%, transparent 70%);
         background-image: radial-gradient(var(--fill) 1px, transparent 0);
@@ -24,7 +24,7 @@ const { bottom } = Astro.props;
     
     .bottom {
         top: auto;
-        bottom: 0;
+        bottom: -5%;
         -webkit-mask-image: radial-gradient(at bottom center, var(--background) 45%, transparent 70%);
         mask-image: radial-gradient(at bottom center, var(--background) 45%, transparent 70%);
     }
