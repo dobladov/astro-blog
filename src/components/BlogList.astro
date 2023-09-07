@@ -56,6 +56,10 @@ const { posts } = Astro.props;
         font-size: 1.2rem;
         display: inline-block;    
     }
+
+    .dot {
+        color: var(--link);
+    }
 </style>
 
 {Object.entries(posts)
@@ -70,8 +74,11 @@ const { posts } = Astro.props;
                 <div class="post">
                     <time class="date" datetime={post.data.pubDate.toISOString()}>
                         {post.data.pubDate.toLocaleDateString('en-us', {
-                            day: 'numeric',
                             month: 'short',
+                        })}
+                        <span class="dot">&nbsp;·&nbsp;</span>
+                        {post.data.pubDate.toLocaleDateString('en-us', {
+                            day: '2-digit',
                         })}
                     </time>
                     <div class="postText">
