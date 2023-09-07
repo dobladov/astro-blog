@@ -1,3 +1,7 @@
+---
+import Pattern from "./Pattern.astro";
+---
+
 <footer>
 	<a target="_blank" href="https://codepen.io/dobladov">CodePen</a>
 	<a target="_blank" href="mailto:danieldoblado@gmail.com">E-Mail</a>
@@ -5,9 +9,11 @@
 	<a target="_blank" href="https://stackoverflow.com/users/2498992/daniel-doblado">StackOverflow</a>
 	<a target="_blank" href="https://mastodon.social/@danieldobla">Mastodon</a>
 	<a target="_blank" href="https://x.com/danieldobla">𝕏</a>
+	<Pattern bottom />
 </footer>
 <style>
 	footer {
+		position: relative;
 		display: flex;
 		flex-wrap: wrap;
 		padding-left: var(--paddingSides);
