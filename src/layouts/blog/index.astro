@@ -21,6 +21,7 @@ import './index.css';
 const { href } =Astro.url;
 const validHeadings = headings && headings.filter((heading) => heading.depth === 2);
 import { SITE_AUTHOR } from '#astro/consts'
+import Separator from '#astro/components/Separator.astro';
 ---
 
 <Main
@@ -32,7 +33,7 @@ import { SITE_AUTHOR } from '#astro/consts'
         <header>
                 <h1 id="title">{title}</h1>
                 <div class="date">
-                    {minutesRead} — <FormattedDate date={pubDate} />
+                    {minutesRead}<Separator/><FormattedDate date={pubDate} />
                     {
                         updatedDate && (
                             <div>
