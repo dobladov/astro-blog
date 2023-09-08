@@ -18,8 +18,13 @@
 }
 
 html {
-	scroll-behavior: smooth;
 	scrollbar-gutter: stable;
+}
+
+@media not (prefers-reduced-motion) {
+	html {
+		scroll-behavior: smooth;
+	}
 }
 
 body {
