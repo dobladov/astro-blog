@@ -56,3 +56,6 @@ Git once understood it's such a powerful tool that changes your way to think, fo
 For my normal workflow, I write my notes during the day and next day review the changes using git, make corrections and push them to the repository, this helps to refresh my memory and improve the quality of the notes.
 
 And again all of this without leaving *VSCode* and completely open source, I can't thank enough all the [contributors](https://foambubble.github.io/foam/#thanks-and-attribution).
+
+
+![Abstract painting of bubble foam](./bubble-faom.jpg)
