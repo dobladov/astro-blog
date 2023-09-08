@@ -32,9 +32,12 @@ const { posts } = Astro.props;
     }
 
     .post {
+        position: relative;
         gap: 1rem;
         padding-left: 0rem;
         margin-top: 1.5rem;
+        animation-name: slideIn;
+        animation-timing-function: ease-in-out;
     }
     
     @media screen and (min-width: 468px) {
@@ -57,6 +60,19 @@ const { posts } = Astro.props;
         font-size: 1.2rem;
         display: inline-block;    
     }
+
+    @media (prefers-reduced-motion: no-preference) {
+            @keyframes slideIn {
+                from {
+                    bottom: -2rem;
+                    opacity: 0;
+                }
+                to {
+                    bottom: 0;
+                    opacity: 1;
+                }
+            }
+        }
 </style>
 
 {Object.entries(posts)
@@ -67,8 +83,13 @@ const { posts } = Astro.props;
             <h3>{year}</h3>
             {yearPosts
                 .sort((postA, postB) => postB.data.pubDate - postA.data.pubDate)
-                .map(post => (
-                <div class="post">
+                .map((post, i) => (
+                <div
+                    class="post"
+                    style={{
+                        animationDuration: `${i * 0.2}s`,
+                    }}
+                >
                     <time class="date" datetime={post.data.pubDate.toISOString()}>
                         {post.data.pubDate.toLocaleDateString('en-us', {
                             month: 'short',

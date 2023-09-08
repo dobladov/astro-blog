@@ -15,6 +15,10 @@ export const getPostsPerYear = (posts) => {
     }, {})
 }
 
+export const rand = (min: number, max: number) => {
+    return Math.random() * (max - min) + min;
+};
+
 export const map = (value: number, fromLow: number, fromHigh: number, toLow:number, toHigh:number) => {
     const fromRange = fromHigh - fromLow;
     const toRange = toHigh - toLow;

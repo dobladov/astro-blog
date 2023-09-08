@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Main from '#astro/layouts/main/index.astro';
 import PageTitle from '#astro/components/PageTitle.astro';
-import { map } from '#astro/components/utils'
+import { map, rand } from '#astro/components/utils'
 
 const blogs = await getCollection('blog');
 
@@ -46,6 +46,23 @@ const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
         sup {
             color: var(--link);
         }
+
+        a {
+            animation-name: fadeIn;
+            animation-timing-function: ease-in-out;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+        }
+        
     </style>
 
     <PageTitle title={`Tags: [${totalTags}]`} />
@@ -58,9 +75,10 @@ const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
                 <a  
                     style={{
                         fontSize: `${map(total, 1, maxVal, 1, 2)}rem`,
+                        animationDuration:  `${rand(1, 2.5)}s`
                     }}
                     href={`/tags/${tag}`}
-                >
+                    >
                     {tag}<sup>{total}</sup>
                 </a>
             </li>
