@@ -1,84 +1,75 @@
 ---
-import { Icon } from 'astro-icon'
+import { Icon } from "astro-icon";
 
 interface Props {
-    logo?: string;
-	title: string;
-	links?: {
-        source?: string;
-        live?: string;
-    };
+  logo?: string;
+  title: string;
+  links?: {
+    source?: string;
+    live?: string;
+  };
 }
 
-import { rand } from '#astro/components/utils'
-
-const {title, links, logo} = Astro.props;
+const { title, links, logo } = Astro.props;
 ---
 
-<div class="project"
-    style={{
-        animationDuration: `${rand(.5, 1)}s`
-    }}
->
-    <div class="header">
-        <Icon name={logo} />
-        <h3>{title}</h3>
-    </div>
-    <slot /> 
+<div class="project">
+  <div class="header">
+    <Icon name={logo} />
+    <h3>{title}</h3>
+  </div>
+  <slot />
 
-    <div class="links">
-        {links && links.live && <a target="_blank" href={links.live}>Live</a>}
-        {links && links.source && <a target="_blank" href={links.source}>Souce</a>}
-    </div>
+  <div class="links">
+    {
+      links && links.live && (
+        <a target="_blank" href={links.live}>
+          Live
+        </a>
+      )
+    }
+    {
+      links && links.source && (
+        <a target="_blank" href={links.source}>
+          Souce
+        </a>
+      )
+    }
+  </div>
 </div>
 <style>
-    svg {
-        min-width: 4rem;
-        max-width: 4rem;
-    }
+  svg {
+    min-width: 4rem;
+    max-width: 4rem;
+  }
 
-    .header {
-        background-color: var(--transparentBackground);
-        position: sticky;
-        top: 0;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        gap: 1.5rem;
-        font-size: . 8rem;
-        z-index: 1;
-    }
+  .header {
+    background-color: var(--transparentBackground);
+    position: sticky;
+    top: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: . 8rem;
+    z-index: 1;
+  }
 
-    a {
-        color: var(--accent);
-        border: 1px solid var(--accent);
-        padding: 0.5rem 1rem;
-        text-decoration: none;
-    }
+  a {
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
 
-    svg {
-        fill: var(--accent);
-    }
+  svg {
+    fill: var(--accent);
+  }
 
-    .links {
-        display: flex;
-        gap: 1rem;
-    }
-
-    @media not (prefers-reduced-motion) {
-        .project {
-            opacity: 0;
-            animation: slideIn 1s ease-in-out forwards;
-            transform: rotateY(30deg);
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: rotateY(0deg);
-            }     
-        }
-    }
+  .links {
+    display: flex;
+    gap: 1rem;
+  }
 </style>
