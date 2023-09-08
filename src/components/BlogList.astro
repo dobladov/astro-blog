@@ -61,7 +61,7 @@ const { posts } = Astro.props;
         display: inline-block;    
     }
 
-    @media (prefers-reduced-motion: no-preference) {
+    @media not (prefers-reduced-motion) {
             @keyframes slideIn {
                 from {
                     bottom: -2rem;

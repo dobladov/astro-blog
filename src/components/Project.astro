@@ -10,11 +10,16 @@ interface Props {
     };
 }
 
+import { rand } from '#astro/components/utils'
 
 const {title, links, logo} = Astro.props;
 ---
 
-<div class="project">
+<div class="project"
+    style={{
+        animationDuration: `${rand(.5, 3)}s`
+    }}
+>
     <div class="header">
         <Icon name={logo} />
         <h3>{title}</h3>
@@ -60,4 +65,20 @@ const {title, links, logo} = Astro.props;
     .links {
         display: flex;
         gap: 1rem;
+    }
+
+    @media not (prefers-reduced-motion) {
+        .project {
+            opacity: 0;
+            animation: slideIn 1s ease-in-out forwards;
+            transform: rotateY(30deg);
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: rotateY(0deg);
+            }     
+        }
+    }
 </style>

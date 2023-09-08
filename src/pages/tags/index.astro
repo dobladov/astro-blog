@@ -52,7 +52,7 @@ const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
             animation-timing-function: ease-in-out;
         }
 
-        @media (prefers-reduced-motion: no-preference) {
+        @media not (prefers-reduced-motion) {
             @keyframes fadeIn {
                 from {
                     opacity: 0;
