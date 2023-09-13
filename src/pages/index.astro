@@ -1,99 +1,140 @@
 ---
-import Main from '#astro/layouts/main/index.astro';
-import PageTitle from '#astro/components/PageTitle.astro';
-import Orb from '#astro/components/Orb.astro';
-import { SITE_AUTHOR } from '#astro/consts';
+import Main from "#astro/layouts/main/index.astro";
+import PageTitle from "#astro/components/PageTitle.astro";
+import Orb from "#astro/components/Orb.astro";
+import { SITE_AUTHOR } from "#astro/consts";
 ---
 
 <style>
-	.intro {
-		font-size: 1.5em;
-	}
-	
-	@media screen and (min-width: 768px) {
-		.intro {
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			padding-left: 2rem;
-			padding-right: 20rem;
-			max-width: 64rem;
-			margin: 0 auto;
-		}
-	}
+  .intro {
+    font-size: 1.5em;
+  }
+
+  @media screen and (min-width: 768px) {
+    .intro {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding-left: 2rem;
+      padding-right: 20rem;
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+  }
+
+  @media not (prefers-reduced-motion) {
+    .p1,
+    .p2,
+    .p3,
+    .p4 {
+      animation: fadeIn 0.6s forwards ease-in;
+    }
+
+    .p2 {
+      animation-duration: 1s;
+    }
+    .p3 {
+      animation-duration: 1.5s;
+    }
+    .p4 {
+      animation-duration: 2s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
 </style>
 
-<Main
-	title='About'
-	description='A little bit about myself and my work.'
->
-	<PageTitle title="About me" />
-	<div class="intro">
-		<p>
-			My name is Daniel, originally from Spain 🇪🇸 and currently based in Berlin 🇩🇪, I am a senior frontend developer working at <a target="_blank" href="https://zattoo.com">Zattoo</a>.
-		</p>
-		<p>
-			On a daily basis, I make performant and accessible web applications with focus on interfaces and infrastructure, primarily using <a target="_blank" href="https://react.dev/">React</a> and <a href="https://nodejs.org/en" target="_blank">Node.js</a>, but not limited to these technologies.
-		</p>
-		<p>
-			From time to time, I <a target="_blank" href="https://github.com/dobladov/">develop</a> personal <a href="/projects">projects</a> or <a href="/blog">write</a> about them.
-		</p>
-		<p>
-			Say Hi! <a href="mailto:danieldoblado@gmail.com">danieldoblado@gmail.com</a>
-		</p>
-	</div>
+<Main title="About" description="A little bit about myself and my work.">
+  <PageTitle title="About me" />
+  <div class="intro">
+    <p class="p1">
+      My name is Daniel, originally from Spain 🇪🇸 and currently based in Berlin
+      🇩🇪, I am a senior frontend developer working at <a
+        target="_blank"
+        href="https://zattoo.com">Zattoo</a
+      >.
+    </p>
+    <p class="p2">
+      On a daily basis, I make performant and accessible web applications with
+      focus on interfaces and infrastructure, primarily using <a
+        target="_blank"
+        href="https://react.dev/">React</a
+      > and <a href="https://nodejs.org/en" target="_blank">Node.js</a>, but not
+      limited to these technologies.
+    </p>
+    <p class="p2">
+      From time to time, I <a
+        target="_blank"
+        href="https://github.com/dobladov/">develop</a
+      > personal <a href="/projects">projects</a> or <a href="/blog">write</a>
+       about them.
+    </p>
+    <p class="p3">
+      Say Hi! <a href="mailto:danieldoblado@gmail.com"
+        >danieldoblado@gmail.com</a
+      >
+    </p>
+  </div>
 
-	<script type="application/ld+json" set:html={
-		JSON.stringify({
-			"@context": "http://www.schema.org",
-			"@type": "Person",
-			"@id": "https://dobla.do/#person",
-			"name": SITE_AUTHOR,
-			"alternateName": `${SITE_AUTHOR} Vera`,
-			"nationality": "Spanish",
-			"birthPlace" : {
-				"@type": "Place",
-				"address": {
-					"@type": "PostalAddress",
-					"addressLocality": "Málaga",
-					"addressRegion": "Andalusia",
-					"addressCountry": "Spain"
-				}
-			},
-			"gender": "Male",
-			"Description": "Technologist, web developer, frontend developer.",
-			"jobTitle": "Senior frontend developer",
-			"worksFor": [
-				{
-					"@type": "Organization",
-					"name": "Zattoo",
-					"sameAs": [
-						"https://zattoo.com/",
-						"https://twitter.com/zattoo",
-						"https://www.facebook.com/zattoo.de/",
-						"https://www.linkedin.com/company/zattoo",
-					]
-				}
-			],
-			"url": "https://dobla.do",
-			"image": "https://dobla.do/me.png",
-			"address": {
-				"@type": "PostalAddress",
-				"addressLocality": "Berlin",
-				"addressRegion": "Berlin",
-				"addressCountry": "Germany"
-			},
-			"sameAs": [
-				"https://x.com/danieldobla",
-				"https://codepen.io/dobladov",
-				"https://github.com/dobladov",
-				"https://mastodon.social/@danieldobla",
-				"https://stackoverflow.com/users/2498992/daniel-doblado",
-				"https://www.youtube.com/channel/UCDSzT113tsecMI4wMh5u0qg",
-				"https://www.linkedin.com/in/daniel-doblado-9630191a3",
-			]
-		})
-	}></script>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "http://www.schema.org",
+      "@type": "Person",
+      "@id": "https://dobla.do/#person",
+      name: SITE_AUTHOR,
+      alternateName: `${SITE_AUTHOR} Vera`,
+      nationality: "Spanish",
+      birthPlace: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Málaga",
+          addressRegion: "Andalusia",
+          addressCountry: "Spain",
+        },
+      },
+      gender: "Male",
+      Description: "Technologist, web developer, frontend developer.",
+      jobTitle: "Senior frontend developer",
+      worksFor: [
+        {
+          "@type": "Organization",
+          name: "Zattoo",
+          sameAs: [
+            "https://zattoo.com/",
+            "https://twitter.com/zattoo",
+            "https://www.facebook.com/zattoo.de/",
+            "https://www.linkedin.com/company/zattoo",
+          ],
+        },
+      ],
+      url: "https://dobla.do",
+      image: "https://dobla.do/me.png",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Berlin",
+        addressRegion: "Berlin",
+        addressCountry: "Germany",
+      },
+      sameAs: [
+        "https://x.com/danieldobla",
+        "https://codepen.io/dobladov",
+        "https://github.com/dobladov",
+        "https://mastodon.social/@danieldobla",
+        "https://stackoverflow.com/users/2498992/daniel-doblado",
+        "https://www.youtube.com/channel/UCDSzT113tsecMI4wMh5u0qg",
+        "https://www.linkedin.com/in/daniel-doblado-9630191a3",
+      ],
+    })}
+  />
 </Main>
 
 <Orb />

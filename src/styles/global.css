@@ -5,47 +5,47 @@
  */
 
 :root {
-	/* --background: #e9e9e9;
+  /* --background: #e9e9e9;
 	--accent: rgb(46, 46, 50);
 	--text: rgb(94 94 94); */
-	--background: rgb(22, 22, 22);
-	--accent: rgb(250, 250, 250);
-	--text: rgb(161, 161, 170);
-	--link: rgb(255, 99,71);
-	--paddingSides: 1.5rem;
-	--transparentBackground: rgb(22, 22, 22, 0.4);
-	--border: rgb(41, 42, 49);
+  --background: rgb(22, 22, 22);
+  --accent: rgb(250, 250, 250);
+  --text: rgb(161, 161, 170);
+  --link: rgb(255, 99, 71);
+  --paddingSides: 1.5rem;
+  --transparentBackground: rgb(22, 22, 22, 0.4);
+  --border: rgb(41, 42, 49);
 }
 
 html {
-	scrollbar-gutter: stable;
+  scrollbar-gutter: stable;
 }
 
 @media not (prefers-reduced-motion) {
-	html {
-		scroll-behavior: smooth;
-	}
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
-	font-family:  'Trebuchet MS', sans-serif;	
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: var(--text);
-	line-height: 1.7;
+  font-family: "Trebuchet MS", sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: var(--text);
+  line-height: 1.7;
 
-	background-color: var(--background);
-	display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 ::selection {
-	color: var(--accent);
-	background: rgb(255, 99, 71, .8);
+  color: var(--accent);
+  background: rgb(255, 99, 71, 0.8);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -62,131 +62,136 @@ body[data-theme="dark"] {
 	--text: rgb(161, 161, 170);
 } */
 
-h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 0.5rem 0;
-	line-height: 1.2;
-	color: var(--accent);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+  color: var(--accent);
 }
 
 h1 {
-	font-size: 2.5em;
+  font-size: 2.5em;
 }
 
 h2 {
-	font-size: 2.441em;
+  font-size: 2.441em;
 }
 
 h3 {
-	font-size: 1.953em;
+  font-size: 1.953em;
 }
 
 h4 {
-	font-size: 1.563em;
+  font-size: 1.563em;
 }
 
 h5 {
-	font-size: 1.25em;
+  font-size: 1.25em;
 }
 
 strong,
 b {
-	color: var(--accent);
-	font-weight: 700;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 a {
-	color: var(--accent);
-	position: relative;
-	text-decoration: none;
-	background: linear-gradient(0deg, var(--link), var(--link)) no-repeat right bottom / 0 var(--bg-h);
-	transition: background-size 350ms;
-	--bg-h: 100%;
-	padding-bottom: 2px;
-	--bg-h: 2px;
+  color: var(--accent);
+  position: relative;
+  text-decoration: none;
+  background: linear-gradient(0deg, var(--link), var(--link)) no-repeat right
+    bottom / 0 var(--bg-h);
+  transition: background-size 350ms;
+  --bg-h: 100%;
+  padding-bottom: 2px;
+  --bg-h: 2px;
 }
 
 a:hover {
-	background-size: 100% var(--bg-h);
-	background-position-x: left;
+  background-size: 100% var(--bg-h);
+  background-position-x: left;
 }
 
 p {
-	margin-bottom: 1em;
-	color: var(--text);
+  margin-bottom: 1em;
+  color: var(--text);
 }
 
 textarea {
-	width: 100%;
-	font-size: 16px;
+  width: 100%;
+  font-size: 16px;
 }
 
 input {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 table {
-	width: 100%;
+  width: 100%;
 }
 
 img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 code {
-	padding: 2px 5px;
-	border-radius: 2px;
-    color: #9ecbff;
-    border: 1px solid #9ecbff;
-    background: #24292f;
+  padding: 2px 5px;
+  border-radius: 2px;
+  color: #9ecbff;
+  border: 1px solid #9ecbff;
+  background: #24292f;
 }
 
 pre {
-	padding: 1.5em;
-	border-radius: 8px;
+  padding: 1.5em;
+  border-radius: 8px;
 }
 
 pre > code {
-	all: unset;
+  all: unset;
 }
 
 blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
+  border-left: 4px solid var(--accent);
+  padding: 0 0 0 20px;
+  margin: 0px;
+  font-size: 1.333em;
 }
 
 hr {
-	border: none;
-	border-top: 1px solid rgb(229, 233, 240);
+  border: none;
+  border-top: 1px solid rgb(229, 233, 240);
 }
 
 .centered {
-	text-align: center;
+  text-align: center;
 }
 
-
 @media screen and (min-width: 468px) {
-	body {
-		--paddingSides: 4rem;
-	}
+  body {
+    --paddingSides: 4rem;
+  }
 
-	h1 {
-		font-size: 3.052em;
-	}
+  h1 {
+    font-size: 3.052em;
+  }
 }
 
 @media print {
-	* {
-		-webkit-transition: none !important;
-		transition: none !important;
-	}
+  * {
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
 
-	body {
-		--background: white;
-		--text: black;
-		--accent: charcoal;
-	}
+  body {
+    --background: white;
+    --text: black;
+    --accent: charcoal;
+  }
 }
