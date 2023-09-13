@@ -1,87 +1,86 @@
 ---
-import { getCollection } from 'astro:content';
-import Main from '#astro/layouts/main/index.astro';
-import PageTitle from '#astro/components/PageTitle.astro';
-import { map, rand } from '#astro/components/utils'
+import { getCollection } from "astro:content";
+import Main from "#astro/layouts/main/index.astro";
+import PageTitle from "#astro/components/PageTitle.astro";
+import { map, rand } from "#astro/components/utils";
 
-const blogs = await getCollection('blog');
+const blogs = await getCollection("blog");
 
 const tagCounts = blogs.reduce((tags, blog) => {
-    if (blog.data.draft) return tags;
+  if (blog.data.draft) return tags;
 
-    if (blog.data.tags) {
-        blog.data.tags.forEach((tag) => {
-            tags[tag] = (tags[tag] || 0) + 1;
-        });
-    }
-    return tags;
-}, [])
+  if (blog.data.tags) {
+    blog.data.tags.forEach((tag) => {
+      tags[tag] = (tags[tag] || 0) + 1;
+    });
+  }
+  return tags;
+}, []);
 
 const maxVal = Math.max(...Object.values(tagCounts));
 const totalTags = Object.keys(tagCounts).reduce((total) => total + 1, 0);
 ---
 
-<Main
-    title='Tag'
-    description='List of all tags'
->
-    <style>
-        .tags {
-            align-items: center;
-            max-width: 64rem;
-            margin: 0 auto;
+<Main title="Tag" description="List of all tags">
+  <style>
+    .tags {
+      align-items: center;
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+
+    ul {
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      row-gap: 0.5rem;
+    }
+
+    sup {
+      color: var(--link);
+    }
+
+    a {
+      animation-name: fadeIn;
+      animation-timing-function: ease-in-out;
+    }
+
+    @media not (prefers-reduced-motion) {
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-
-        ul {
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            row-gap: .5rem
+        to {
+          opacity: 1;
         }
+      }
+    }
+  </style>
 
-        sup {
-            color: var(--link);
-        }
+  <PageTitle title={`Tags: [${totalTags}]`} />
 
-        a {
-            animation-name: fadeIn;
-            animation-timing-function: ease-in-out;
-        }
-
-        @media not (prefers-reduced-motion) {
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                }
-                to {
-                    opacity: 1;
-                }
-            }
-        }
-        
-    </style>
-
-    <PageTitle title={`Tags: [${totalTags}]`} />
-
-    <ul class="tags">
-        {Object.entries(tagCounts)
-            .sort(([tagA], [tagB]) => tagA.localeCompare(tagB))
-            .map(([tag, total]) => (
-            <li>
-                <a  
-                    style={{
-                        fontSize: `${map(total, 1, maxVal, 1, 2)}rem`,
-                        animationDuration:  `${rand(1, 2.5)}s`
-                    }}
-                    href={`/tags/${tag}`}
-                    >
-                    {tag}<sup>{total}</sup>
-                </a>
-            </li>
-        ))}
-    </ul>
+  <ul class="tags">
+    {
+      Object.entries(tagCounts)
+        .sort(([tagA], [tagB]) => tagA.localeCompare(tagB))
+        .map(([tag, total]) => (
+          <li>
+            <a
+              style={{
+                fontSize: `${map(total, 1, maxVal, 1, 2)}rem`,
+                animationDuration: `${rand(1, 2.5)}s`,
+              }}
+              href={`/tags/${tag}`}
+            >
+              {tag}
+              <sup>{total}</sup>
+            </a>
+          </li>
+        ))
+    }
+  </ul>
 </Main>
