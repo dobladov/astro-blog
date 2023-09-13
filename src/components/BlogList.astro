@@ -1,114 +1,116 @@
 ---
-import Separator from './Separator.astro';
+import Separator from "./Separator.astro";
 interface Props {
-    posts: Post[];
+  posts: Post[];
 }
 
 const { posts } = Astro.props;
 ---
 
 <style>
-    .list {
-        padding-left: 0rem;
-        list-style-type: none;
-        margin: 0 auto;
-        max-width: 64rem;
-    }
+  .list {
+    padding-left: 0rem;
+    list-style-type: none;
+    margin: 0 auto;
+    max-width: 64rem;
+  }
 
-    .yearBlock {
-        padding-bottom: 1rem;
-    }
-    
-    .yearBlock h3 {
-        position: sticky;
-        top: 0;
-        text-align: right;
-        font-size: 1.4rem;
-        border-bottom: 2px dotted var(--border);
-        background-color: var(--transparentBackground);
-        padding-top: .5rem;
-        padding-bottom: .5rem;
-        z-index: 1;
-    }
+  .yearBlock {
+    padding-bottom: 1rem;
+  }
 
+  .yearBlock h3 {
+    position: sticky;
+    top: 0;
+    text-align: right;
+    font-size: 1.4rem;
+    border-bottom: 2px dotted var(--border);
+    background-color: var(--transparentBackground);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    z-index: 1;
+  }
+
+  .post {
+    position: relative;
+    gap: 1rem;
+    padding-left: 0rem;
+    margin-top: 1.5rem;
+    animation-name: slideIn;
+    animation-timing-function: ease-in-out;
+  }
+
+  @media screen and (min-width: 468px) {
     .post {
-        position: relative;
-        gap: 1rem;
-        padding-left: 0rem;
-        margin-top: 1.5rem;
-        animation-name: slideIn;
-        animation-timing-function: ease-in-out;
+      display: flex;
+      padding-left: 2rem;
     }
-    
-    @media screen and (min-width: 468px) {
-        .post {
-            display: flex;
-            padding-left: 2rem;
-        }
-	}
-    
-    .date {
-        color: gray;
-        min-width: 3rem;
-    }
+  }
 
-    .postText {
-        flex: 1;
-        text-align: left;
-    }
-    .title {
-        font-size: 1.2rem;
-        display: inline-block;    
-    }
+  .date {
+    color: gray;
+    min-width: 3rem;
+  }
 
-    @media not (prefers-reduced-motion) {
-            @keyframes slideIn {
-                from {
-                    bottom: -2rem;
-                    opacity: 0;
-                }
-                to {
-                    bottom: 0;
-                    opacity: 1;
-                }
-            }
-        }
+  .postText {
+    flex: 1;
+    text-align: left;
+  }
+  .title {
+    font-size: 1.2rem;
+    display: inline-block;
+  }
+
+  @media not (prefers-reduced-motion) {
+    @keyframes slideIn {
+      from {
+        bottom: -2rem;
+        opacity: 0;
+      }
+      to {
+        bottom: 0;
+        opacity: 1;
+      }
+    }
+  }
 </style>
 
-{Object.entries(posts)
+{
+  Object.entries(posts)
     .sort(([yearA], [yearB]) => yearB - yearA)
-    .map(([year, yearPosts]) => (
-    <ul class="list">
+    .map(([year, yearPosts], i) => (
+      <ul class="list">
         <li class="yearBlock">
-            <h3>{year}</h3>
-            {yearPosts
-                .sort((postA, postB) => postB.data.pubDate - postA.data.pubDate)
-                .map((post, i) => (
-                <div
-                    class="post"
-                    style={{
-                        animationDuration: `${i * 0.2}s`,
-                    }}
-                >
-                    <time class="date" datetime={post.data.pubDate.toISOString()}>
-                        {post.data.pubDate.toLocaleDateString('en-us', {
-                            month: 'short',
-                        })}
-                        <Separator />
-                        {post.data.pubDate.toLocaleDateString('en-us', {
-                            day: '2-digit',
-                        })}
-                    </time>
-                    <div class="postText">
-                        <h4>
-                            <a class="title" href={`/blog/${post.slug}/`}>
-                                {post.data.title}
-                            </a>
-                        </h4>
-                        <div>{post.data.description}</div>
-                        </div>
+          <h3>{year}</h3>
+          {yearPosts
+            .sort((postA, postB) => postB.data.pubDate - postA.data.pubDate)
+            .map((post, j) => (
+              <div
+                class="post"
+                style={{
+                  animationDuration: `${(i + j) * 0.2}s`,
+                }}
+              >
+                <time class="date" datetime={post.data.pubDate.toISOString()}>
+                  {post.data.pubDate.toLocaleDateString("en-us", {
+                    month: "short",
+                  })}
+                  <Separator />
+                  {post.data.pubDate.toLocaleDateString("en-us", {
+                    day: "2-digit",
+                  })}
+                </time>
+                <div class="postText">
+                  <h4>
+                    <a class="title" href={`/blog/${post.slug}/`}>
+                      {post.data.title}
+                    </a>
+                  </h4>
+                  <div>{post.data.description}</div>
                 </div>
+              </div>
             ))}
         </li>
-    </ul>
-))}
+      </ul>
+    ))
+}
