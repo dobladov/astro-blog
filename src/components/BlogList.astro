@@ -88,7 +88,7 @@ const { posts } = Astro.props;
               <div
                 class="post"
                 style={{
-                  animationDuration: `${(i + j) * 0.2}s`,
+                  animationDuration: `${(i + 1 + j) * 0.2}s`,
                 }}
               >
                 <time class="date" datetime={post.data.pubDate.toISOString()}>
