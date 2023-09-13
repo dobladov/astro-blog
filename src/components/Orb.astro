@@ -13,12 +13,16 @@
       right: -3.5rem;
       margin-right: 6rem;
       bottom: -10px;
-      animation: moveUp 1s ease-out;
     }
 
-    @keyframes moveUp {
-      from {
-        bottom: -58px;
+    @media not (prefers-reduced-motion) {
+      aside {
+        animation: moveUp 1s ease-out;
+      }
+      @keyframes moveUp {
+        from {
+          bottom: -58px;
+        }
       }
     }
   }
