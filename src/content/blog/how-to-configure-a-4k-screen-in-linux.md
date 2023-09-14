@@ -13,7 +13,6 @@ You just got a new cool 4K monitor, you opened it, connected it to your Linux de
 
 Apparently some screens might not give the correct [EDID](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) information, in my case a [SAMSUNG LU28E85KRS](https://www.samsung.com/us/business/support/owners/product/ue850-series-u28e850r/), this makes it impossible to select all supported modes for our screen, showing some default ones, without including resolutions greater than 1920x1080.
 
-
 ## How to get the correct EDID and set it using xrandr
 
 ### Getting the correct EDID
@@ -29,7 +28,7 @@ Cool, we get all supported modes.
 
 ```bash
 Modeline    "Mode 1" 148.500 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync
-Modeline    "Mode 0" 297.00 3840 4016 4104 4400 2160 2168 2178 2250 +hsync +vsync 
+Modeline    "Mode 0" 297.00 3840 4016 4104 4400 2160 2168 2178 2250 +hsync +vsync
 Modeline    "Mode 2" 74.250 1280 1390 1420 1650 720 725 730 750 +hsync +vsync
 Modeline    "Mode 3" 148.500 1920 2448 2492 2640 1080 1084 1089 1125 +hsync +vsync
 Modeline    "Mode 4" 74.250 1280 1720 1760 1980 720 725 730 750 +hsync +vsync
@@ -37,10 +36,10 @@ Modeline    "Mode 5" 27.027 720 736 798 858 480 489 495 525 -hsync -vsync
 Modeline    "Mode 6" 27.000 720 732 796 864 576 581 586 625 -hsync -vsync
 Modeline    "Mode 7" 74.250 1920 2558 2602 2750 1080 1084 1089 1125 +hsync +vsync
 Modeline    "Mode 8" 74.250 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync
-Modeline    "Mode 9" 148.50 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync 
-Modeline    "Mode 10" 148.50 1920 2448 2492 2640 1080 1084 1089 1125 +hsync +vsync 
-Modeline    "Mode 11" 74.25 1280 1390 1430 1650 720 725 730 750 +hsync +vsync 
-Modeline    "Mode 12" 241.50 2560 2608 2640 2720 1440 1443 1448 1481 +hsync -vsync 
+Modeline    "Mode 9" 148.50 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync
+Modeline    "Mode 10" 148.50 1920 2448 2492 2640 1080 1084 1089 1125 +hsync +vsync
+Modeline    "Mode 11" 74.25 1280 1390 1430 1650 720 725 730 750 +hsync +vsync
+Modeline    "Mode 12" 241.50 2560 2608 2640 2720 1440 1443 1448 1481 +hsync -vsync
 ```
 
 ### Adding the new modes with xrandr
@@ -48,7 +47,7 @@ Modeline    "Mode 12" 241.50 2560 2608 2640 2720 1440 1443 1448 1481 +hsync -vsy
 The first value after the mode number tell us the horizontal resolution, in my case I'm interested in `Mode 0`.
 
 ```bash
-Modeline    "Mode 0" 297.00 3840 4016 4104 4400 2160 2168 2178 2250 +hsync +vsync 
+Modeline    "Mode 0" 297.00 3840 4016 4104 4400 2160 2168 2178 2250 +hsync +vsync
 ```
 
 Let's create a new mode, we can name it anything we want, but I prefer to name it after the output resolution.

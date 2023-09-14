@@ -27,7 +27,7 @@ Although the battery life was amazing, it was still another device to charge and
 
 I tried to use my phone as my main reading device after accidentally stepping on my Kindle, which unfortunately didn't survive. Sometimes misfortune brings new opportunities.
 
-Turns out I always carry my phone with me; just the mental barrier of having to carry my kindle was enough to make me read less. 
+Turns out I always carry my phone with me; just the mental barrier of having to carry my kindle was enough to make me read less.
 
 Now I have the reading app very prominent on my phone screen, reminding me to read, meaning I have many short bursts of time to read before a meeting, while commuting, or while shopping, with the advantage that it's time that otherwise would be wasted with some social media app.
 

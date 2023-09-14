@@ -27,7 +27,7 @@ It does not ask you to send your data; you gather the data whenever you want, an
 
 Unsubscribe is always on your side; just remove the URL from your client and you're done.
 
-RSS can be tailored; some sites separate their feeds by category, so you can choose what you want to read,  yes there are some newsletters with preferences that require an account, but with RSS, you just choose a URL and be done with it.
+RSS can be tailored; some sites separate their feeds by category, so you can choose what you want to read, yes there are some newsletters with preferences that require an account, but with RSS, you just choose a URL and be done with it.
 
 ## Advantages of newsletters
 
@@ -37,6 +37,6 @@ There are more email providers giving completely free service than RSS readers, 
 
 ## Conclusion
 
-If you care about privacy, RSS is the way to go. 
+If you care about privacy, RSS is the way to go.
 
 It seems to be decreasing with social platforms removing support, browsers not having dynamic bookmarks anymore and it's sad that the tech that respects users the most is dying.

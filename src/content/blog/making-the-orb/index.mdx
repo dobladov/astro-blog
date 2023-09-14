@@ -1,41 +1,69 @@
 ---
 title: Making the Orb
 description: How the interactive orb in my site was made.
-tags: [javascript, logo, orb, p5, animation, flow field, chromatic-aberration, noise, dither]
+tags:
+  [
+    javascript,
+    logo,
+    orb,
+    p5,
+    animation,
+    flow field,
+    chromatic-aberration,
+    noise,
+    dither,
+  ]
 pubDate: 2023-08-19
 ---
 
-import orbMeme from './orb-meme.jpg'
-import YoutubeVideo from '#astro/components/YoutubeVideo.astro';
-import orb from './orb.webm'
-import noJsOrb from './orb-no-js.webm'
+import orbMeme from "./orb-meme.jpg";
+import YoutubeVideo from "#astro/components/YoutubeVideo.astro";
+import orb from "./orb.webm";
+import noJsOrb from "./orb-no-js.webm";
 
 ## Introduction
 
-Inspired by sites  like [Oimo](https://oimo.io/) I wanted to have one interactive element, ideally something that doesn't get in the way and makes the main page standout while not being too resource intense.
+Inspired by sites like [Oimo](https://oimo.io/) I wanted to have one interactive element, ideally something that doesn't get in the way and makes the main page standout while not being too resource intense.
 
 I played with some other ideas like noise backgrounds, generating a map that constantly changes, [Rorschach patterns](https://en.wikipedia.org/wiki/Rorschach_test), floating particles, but none of them looked good enough (I'm not a designer) or felt more special than a background.
 
-<video width="400" autoplay loop style={{display: "flex", margin: "0 auto"}}>
+<video width="400" autoplay loop style={{ display: "flex", margin: "0 auto" }}>
   <source src={orb} type="video/webm" />
-</video> 
+</video>{" "}
 
-<br/>
+<br />
 
 ## Implementation
 
 Then I saw this wonderful video from [Barney Codes](https://www.youtube.com/@BarneyCodes) and I loved how the flow field looked; He did a wonderful explanation and re-creating it was a breeze, a channel totally worth [subscribing](https://www.youtube.com/@BarneyCodes?sub_confirmation=1).
 
-<YoutubeVideo videoId="sZBfLgfsvSk" videoTitle="Easy Perlin Noise Flow Fields" />
+<YoutubeVideo
+  videoId="sZBfLgfsvSk"
+  videoTitle="Easy Perlin Noise Flow Fields"
+/>
 
 ## Tweaks
 
 [p5](https://p5js.org/) can be a bit of a heavy library and it's global nature makes it not ideal for a final implementation, I ported the code to be mostly vanilla <abbr title="JavaScript">js</abbr> with the exception of the [perlin noise](https://github.com/josephg/noisejs), the author of the library has a good article of how it works, ["Creating perlin noise in JS"](https://joeiddon.github.io/projects/javascript/perlin.html).
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="js,result" data-slug-hash="dyQBGMG" data-preview="true" data-user="dobladov" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/dobladov/pen/dyQBGMG">
-  Flow Field with chromatic aberration</a> by DobladoV (<a href="https://codepen.io/dobladov">@dobladov</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+<p
+  class="codepen"
+  data-height="300"
+  data-theme-id="dark"
+  data-default-tab="js,result"
+  data-slug-hash="dyQBGMG"
+  data-preview="true"
+  data-user="dobladov"
+  style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;"
+>
+  <span>
+    See the Pen{" "}
+    <a href="https://codepen.io/dobladov/pen/dyQBGMG">
+      Flow Field with chromatic aberration
+    </a>{" "}
+    by DobladoV (<a href="https://codepen.io/dobladov">@dobladov</a>) on{" "}
+    <a href="https://codepen.io">CodePen</a>.
+  </span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
@@ -50,7 +78,8 @@ The idea of making it an orb was inspired by this [meme](https://twitter.com/wiz
   alt="Meme with two images, one says 'Our hands look like this..' representing heavily used keyboards and tobaco stained fingers, the other says 'So yours can look like this' with a picture of a hand with a glowing orb in the middle."
   width={orbMeme.width}
   height={orbMeme.height}
-  style={{width: "27rem",
+  style={{
+    width: "27rem",
     display: "flex",
     margin: "0 auto",
     maxWidth: "100%",
@@ -65,15 +94,19 @@ I also decided to use a photo of my hand and use a dither filter using https://d
 I added some other changes like turning the direction of the flow according to the mouse position, and some minor change that probably nobody will ever notice, to do the same using the device orientation on phones.
 
 ```javascript
-    window.addEventListener("deviceorientation", (event) => {   
-        leftToRight = event.gamma;
-    }, true);
+window.addEventListener(
+  "deviceorientation",
+  (event) => {
+    leftToRight = event.gamma;
+  },
+  true,
+);
 ```
 
 There are some other minor changes like stacked shadows to make it look more like glass and a shine in the background.
 
 As an Easter egg, I also made it show some basic animation if JavaScript it's disabled.
 
-<video width="400" autoplay loop style={{display: "flex", margin: "0 auto"}}>
+<video width="400" autoplay loop style={{ display: "flex", margin: "0 auto" }}>
   <source src={noJsOrb} type="video/webm" />
-</video> 
+</video>{" "}

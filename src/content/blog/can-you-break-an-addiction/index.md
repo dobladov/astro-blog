@@ -2,7 +2,24 @@
 title: Can you break an addiction?
 pubDate: 2023-08-30
 description: Leaving the loop of repetition.
-tags: [addiction, loop, repetition, habits, pattern, routine, productivity, Reddit, Pocket, calisthenics, exercise, running, reading, books, phone]
+tags:
+  [
+    addiction,
+    loop,
+    repetition,
+    habits,
+    pattern,
+    routine,
+    productivity,
+    Reddit,
+    Pocket,
+    calisthenics,
+    exercise,
+    running,
+    reading,
+    books,
+    phone,
+  ]
 ---
 
 ## Introduction
@@ -29,9 +46,9 @@ At some point, I knew I was getting nothing from it, no fun, no growth, not even
 
 I took many approaches, some very effective, like blocking the content in tedious ways to use it, like blocking the domain in the hosts file, and while it reduced the consumption, it was still a problem, causing me to go back to the same pattern.
 
-The only thing that worked was to completely replace it by reading. If I really want to go to *Reddit*, I always have better content prepared.
+The only thing that worked was to completely replace it by reading. If I really want to go to _Reddit_, I always have better content prepared.
 
-I store hundreds of articles in [Pocket](https://pocket.com/) to read later, I started to [read on my phone](http://localhost:3000/blog/reading-books-on-my-phone/). This way, I have content that really fulfills me, and I can do it anywhere, anytime, with the same convenience of scrolling *Reddit*.
+I store hundreds of articles in [Pocket](https://pocket.com/) to read later, I started to [read on my phone](http://localhost:3000/blog/reading-books-on-my-phone/). This way, I have content that really fulfills me, and I can do it anywhere, anytime, with the same convenience of scrolling _Reddit_.
 
 That was the key factor: make it as convenient as possible and make it something that I really enjoy, and that's the only way to break the loop.
 

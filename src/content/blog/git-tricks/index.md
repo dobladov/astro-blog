@@ -2,7 +2,19 @@
 title: Git tricks
 pubDate: 2023-08-22
 description: Some of my tweaks for using git more efficiently
-tags: [git, productivity, tools, zsh, oh-my-zsh, gh, github, gitignore, gitconfig, git-aliases]
+tags:
+  [
+    git,
+    productivity,
+    tools,
+    zsh,
+    oh-my-zsh,
+    gh,
+    github,
+    gitignore,
+    gitconfig,
+    git-aliases,
+  ]
 # draft: true
 ---
 
@@ -14,7 +26,7 @@ tags: [git, productivity, tools, zsh, oh-my-zsh, gh, github, gitignore, gitconfi
 
 One of the first things I do after setting up my laptop is to install [ZSH](https://www.zsh.org/) and [Oh My ZSH](https://ohmyz.sh/).
 
-Their [aliases](https://kapeli.com/cheat_sheets/Oh-My-Zsh_Git.docset/Contents/Resources/Documents/index) have become completely natural to me, and I can't work without them. 
+Their [aliases](https://kapeli.com/cheat_sheets/Oh-My-Zsh_Git.docset/Contents/Resources/Documents/index) have become completely natural to me, and I can't work without them.
 
 While the list looks a bit overwhelming, it's actually very easy to remember them; most of the time it's the initial letter or how you would pronounce them, for example `git checkout` becomes `gco`.
 
@@ -36,6 +48,7 @@ Commands that include variables like `git_current_branch` save a huge amount of 
 ## Custom aliases
 
 Switching between my latest edited branches is common, and this command helps me quickly visualize my modified branches in order.
+
 ```bash
 alias branchOrder='git branch --sort=-committerdate'
 ```
@@ -47,6 +60,7 @@ alias gcoi='git checkout $(git branch -a | fzf | xargs)'
 ```
 
 For one of my projects, we include the PR number on the [Changelog](https://keepachangelog.com/), this command gives me the value without having to open the browser.
+
 ```bash
 alias lastPR='gh pr list -s all --json number --jq ".|=sort_by(.number)|last|.n>
 ```
@@ -56,7 +70,6 @@ alias lastPR='gh pr list -s all --json number --jq ".|=sort_by(.number)|last|.n>
 I like to keep a global gitignore file, this is useful for ignoring files that are not specific to a project, for example, IDE configuration files.
 
 Adding `devNotes*` is especially useful as it helps me to write notes about a project while being sure they won't be pushed by accident to the repository.
-
 
 ```bash
 nano .gitignore_global
@@ -72,12 +85,11 @@ dev-notes*
 
 ## ZSH theme
 
-ZSH themes are very customizable, I like to keep it simple, my current one is basically the default one with a few tweaks, a simpler way to display the **branch name** on the left side and the **SHA commit** on the right,  content on the `RPROMPT` will be automatically hidden if the content goes over it.
+ZSH themes are very customizable, I like to keep it simple, my current one is basically the default one with a few tweaks, a simpler way to display the **branch name** on the left side and the **SHA commit** on the right, content on the `RPROMPT` will be automatically hidden if the content goes over it.
 
 That information helps me understand what I'm working at a glance, avoiding the need to run `git status` or `git branch` to get that information.
 
 ![zsh-theme](./theme.png)
-
 
 ```bash
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"

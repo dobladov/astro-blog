@@ -25,40 +25,36 @@ So the decision went to [Skruv](https://skruv.io/), this framework is amazing, n
 
 You can tell how nice the framework is by looking at this framework's goals:
 
-+ No build time or runtime dependencies, no parsers
-+ Pretty small:
-	+ ~350 LOC vDOM
-	+ ~100 LOC State management
-	+ ~300 LOC HTML/SVG helpers
-+ Useable without bundling/compilation/transpilation
-+ Fast enough for most normal use cases: [benchmark](https://krausest.github.io/js-framework-benchmark/2023/table_chrome_116.0.5845.82.html)
-+ Supports async components like `import()` and `async` generators
-+ CSS scoping via shadow DOM
-+ Hopefully grokable/understandable code
+- No build time or runtime dependencies, no parsers
+- Pretty small:
+  - ~350 LOC vDOM
+  - ~100 LOC State management
+  - ~300 LOC HTML/SVG helpers
+- Useable without bundling/compilation/transpilation
+- Fast enough for most normal use cases: [benchmark](https://krausest.github.io/js-framework-benchmark/2023/table_chrome_116.0.5845.82.html)
+- Supports async components like `import()` and `async` generators
+- CSS scoping via shadow DOM
+- Hopefully grokable/understandable code
 
 The best part is that to use it I just have to import the files, that's it.
 
 ```javascript
-import { div } from  './skruv/html.js'
-import { renderNode } from  './skruv/vDOM.js'
+import { div } from "./skruv/html.js";
+import { renderNode } from "./skruv/vDOM.js";
 
-let root = document.querySelector('#root')
+let root = document.querySelector("#root");
 
-root = renderNode(
-	div({}, 'Hello world!'),
-	root
-)
+root = renderNode(div({}, "Hello world!"), root);
 ```
 
 On top of those advantages, I love the nested syntax, far shorter than JSX, now that I think about it feels weird that we moved to write HTML in JS.
 
 You might be also wondering, "what if I need typescript, do you have to transpile?" the answer is no, you can use [JSDocs with Typescript](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html) without having to create a single `ts` file.
 
-
 ## How it ended
 
 I feel this change was a success, new code can be iterated easily without having to worry much about state or building, since the extension runs on modern browsers I don't have to care about babel, etc
 
-Right now the only concern I have about the extension is *manifest v3* which is not supported in Firefox yet, but this is a story for another post.
+Right now the only concern I have about the extension is _manifest v3_ which is not supported in Firefox yet, but this is a story for another post.
 
 I have to say that I'm glad about the feedback people gave, this refactor was motivated because changes on Youtube made it fail and people reported issues with a lot of support, not only that, but I've seen articles written in Vietnamese, Japanese and German in how to use the extension and how they find it useful, it really makes me want to keep contributing free, anti-traking open-source code.
