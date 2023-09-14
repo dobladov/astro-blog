@@ -19,29 +19,38 @@ This leave us with not many options but to use a browser, so in my case I decide
 So after a while playing with it I got the code to do it, it will download and log the data in the format that I need.
 
 ```javascript
-const fs = require('fs')
-const puppeteer = require('puppeteer');
+const fs = require("fs");
+const puppeteer = require("puppeteer");
 
 (async () => {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-  await page.goto('https://ncov.dxy.cn/ncovh5/view/pneumonia')
-  const data = await page.evaluate(body => {
-    [...document.querySelectorAll(".close___2yTiY:not(.open___3it7L)")].forEach(e => e.click())
-    return [...document.querySelectorAll('.areaBox___3jZkr')[1].querySelectorAll('.areaBlock2___27vn7')].map(row => {
-      const [area, ,confirmed, dead, cured] = [...row.querySelectorAll('p')]
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto("https://ncov.dxy.cn/ncovh5/view/pneumonia");
+  const data = await page.evaluate((body) => {
+    [...document.querySelectorAll(".close___2yTiY:not(.open___3it7L)")].forEach(
+      (e) => e.click(),
+    );
+    return [
+      ...document
+        .querySelectorAll(".areaBox___3jZkr")[1]
+        .querySelectorAll(".areaBlock2___27vn7"),
+    ].map((row) => {
+      const [area, , confirmed, dead, cured] = [...row.querySelectorAll("p")];
       return {
         area: area.innerText,
         confirmed: +confirmed.innerText || 0,
         dead: +dead.innerText || 0,
-        cured: +cured.innerText || 0
-      }
-    })
-  })
-  console.log(data)
-  fs.writeFileSync(`2020-02-16T21:21:26.466Z.json`, JSON.stringify(data, null, 2))
-  await browser.close()
-})()
+        cured: +cured.innerText || 0,
+      };
+    });
+  });
+  console.log(data);
+  fs.writeFileSync(
+    `2020-02-16T21:21:26.466Z.json`,
+    JSON.stringify(data, null, 2),
+  );
+  await browser.close();
+})();
 ```
 
 After launching this script with `node crawler.js` I get a file that I can use as the source data of my visualization.
@@ -55,29 +64,29 @@ For this I definitely need a server running but for this case I wanted to see wh
 My first approach was to use [Glitch](glitch.com), after setting a express server and a few tries later I got my data every time I curl this url: https://coronacrawler.glitch.me
 
 ```javascript
-const express = require("express")
-const app = express()
-const puppeteer = require('puppeteer')
+const express = require("express");
+const app = express();
+const puppeteer = require("puppeteer");
 
-app.use(express.static("public"))
+app.use(express.static("public"));
 
-app.get("/", async function(request, response) {
+app.get("/", async function (request, response) {
   try {
     const browser = await puppeteer.launch({
-      args: ['--no-sandbox']
+      args: ["--no-sandbox"],
     });
 
     // Same code to get the data before
 
-    res.json(data)
+    res.json(data);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
 
-const listener = app.listen(process.env.PORT, function() {
-  console.log("Your app is listening on port " + listener.address().port)
-})
+const listener = app.listen(process.env.PORT, function () {
+  console.log("Your app is listening on port " + listener.address().port);
+});
 ```
 
 Cool, but this creates another problem.
@@ -87,11 +96,14 @@ Cool, but this creates another problem.
 The map running in ObservableHQ needs to crawl this data and unfortunately if you curl a different domain from a website it needs to have Cross-origin headers enabled or for security reasons it will not load, after adding this to our express server it works.
 
 ```javascript
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-  next()
-})
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
+  next();
+});
 ```
 
 #### Alternative to Cross-origin
@@ -123,36 +135,36 @@ We need to modify the previous script a little since we have other constrains.
 First we need a start point for the api query in this case we need a file in `/api/index.js`
 
 ```javascript
-const getData = require('./getData')
+const getData = require("./getData");
 
 module.exports = async (req, res) => {
-  const data = await getData()
-  res.json(data)
-}
+  const data = await getData();
+  res.json(data);
+};
 ```
 
 The first problem I encountered is that using puppeteer is a little bit different, luckily this guide [Serverless Chrome via Puppeteer with Now 2.0](https://zeit.co/blog/serverless-chrome) explains how to do it well.
 
 ```javascript
-const chrome = require('chrome-aws-lambda')
-const puppeteer = require('puppeteer-core')
+const chrome = require("chrome-aws-lambda");
+const puppeteer = require("puppeteer-core");
 
 const getData = async () => {
   const browser = await puppeteer.launch({
     args: chrome.args,
     executablePath: await chrome.executablePath,
     headless: chrome.headless,
-  })
+  });
 
-  const page = await browser.newPage()
-  await page.goto('https://ncov.dxy.cn/ncovh5/view/pneumonia')
+  const page = await browser.newPage();
+  await page.goto("https://ncov.dxy.cn/ncovh5/view/pneumonia");
 
-// Same code to get the data before
+  // Same code to get the data before
 
-  return data
-}
+  return data;
+};
 
-module.exports = getData
+module.exports = getData;
 ```
 
 #### Supporting Cross-origin
@@ -161,8 +173,8 @@ To enable cors we need a file `/api/200.js`
 
 ```javascript
 module.exports = async (req, res) => {
-  res.status(200).send({ message: 'cors ok' });
-}
+  res.status(200).send({ message: "cors ok" });
+};
 ```
 
 Also our `now.js` file should look like this.
