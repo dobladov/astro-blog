@@ -5,6 +5,11 @@ interface Props {
 }
 
 const { posts } = Astro.props;
+
+// This is bad code
+const images = await Astro.glob("/src/content/blog/**/*.jpg").then((files) => {
+  return files.map((file) => file.default);
+});
 ---
 
 <style>
@@ -33,7 +38,6 @@ const { posts } = Astro.props;
 
   .post {
     position: relative;
-    gap: 1rem;
     padding-left: 0rem;
     margin-top: 1.5rem;
     animation-name: slideIn;
@@ -73,6 +77,10 @@ const { posts } = Astro.props;
       }
     }
   }
+
+  .pic {
+    padding-right: 1rem;
+  }
 </style>
 
 {
@@ -84,32 +92,45 @@ const { posts } = Astro.props;
           <h3>{year}</h3>
           {yearPosts
             .sort((postA, postB) => postB.data.pubDate - postA.data.pubDate)
-            .map((post, j) => (
-              <div
-                class="post"
-                style={{
-                  animationDuration: `${(i + 1 + j) * 0.2}s`,
-                }}
-              >
-                <time class="date" datetime={post.data.pubDate.toISOString()}>
-                  {post.data.pubDate.toLocaleDateString("en-us", {
-                    month: "short",
-                  })}
-                  <Separator />
-                  {post.data.pubDate.toLocaleDateString("en-us", {
-                    day: "2-digit",
-                  })}
-                </time>
-                <div class="postText">
-                  <h4>
-                    <a class="title" href={`/blog/${post.slug}/`}>
-                      {post.data.title}
+            .map((post, j) => {
+              const src =
+                post.data.heroImage &&
+                images.find((img) =>
+                  img.src.includes(post.data.heroImage.replace("./", ""))
+                ).src;
+
+              return (
+                <div
+                  class="post"
+                  style={{
+                    animationDuration: `${(i + 1 + j) * 0.2}s`,
+                  }}
+                >
+                  {src && (
+                    <a class="pic" href={`/blog/${post.slug}/`}>
+                      <img src={src} width="64" />
                     </a>
-                  </h4>
-                  <div>{post.data.description}</div>
+                  )}
+                  <div class="postText">
+                    <h4>
+                      <a class="title" href={`/blog/${post.slug}/`}>
+                        {post.data.title}
+                      </a>
+                    </h4>
+                    <div>{post.data.description}</div>
+                  </div>
+                  <time class="date" datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString("en-us", {
+                      month: "short",
+                    })}
+                    <Separator />
+                    {post.data.pubDate.toLocaleDateString("en-us", {
+                      day: "2-digit",
+                    })}
+                  </time>
                 </div>
-              </div>
-            ))}
+              );
+            })}
         </li>
       </ul>
     ))
