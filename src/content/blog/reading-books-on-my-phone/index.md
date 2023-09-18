@@ -3,6 +3,7 @@ title: Reading books on my phone
 pubDate: 2023-08-17
 description: While physical books are great, I prefer reading on my phone
 tags: [opinion, reading, books, phone, apps, kindle, productivity]
+heroImage: "./reading-on-phone.jpg"
 ---
 
 What started as a test has become a habit, my mentality used to be "reading physical books is better than digital", because we like to follow the motto:

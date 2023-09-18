@@ -26,6 +26,7 @@ const blog = defineCollection({
       .optional(),
     minutesRead: z.string().optional(),
     words: z.number().optional(),
+    heroImage: z.string().optional(),
   }),
 });
 

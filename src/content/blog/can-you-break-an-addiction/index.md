@@ -20,6 +20,7 @@ tags:
     books,
     phone,
   ]
+heroImage: ./addiction.jpg
 ---
 
 ## Introduction

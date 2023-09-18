@@ -3,6 +3,7 @@ title: Simplifying browser extensions with Tampermonkey
 pubDate: 2023-08-28
 description: A brief introduction to Tampermonkey as an alternative to extensions.
 tags: [programming, javascript, tampermonkey, extensions, chrome, firefox]
+heroImage: './monkey.jpg'
 ---
 
 ## Introduction

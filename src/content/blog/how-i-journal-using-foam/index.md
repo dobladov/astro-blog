@@ -3,6 +3,7 @@ title: How I journal using Foam
 description: Reasons to use Foam and why I think it's the best note-taking workflow.
 pubDate: 2023-08-15
 tags: [notes, productivity, vscode, foam, obsidian, git, markdown]
+heroImage: './bubble-faom.jpg'
 ---
 
 ## Introduction

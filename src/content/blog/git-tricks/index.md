@@ -15,7 +15,7 @@ tags:
     gitconfig,
     git-aliases,
   ]
-# draft: true
+heroImage: ./ghost.jpg
 ---
 
 ## Introduction
