@@ -104,7 +104,7 @@ const images = await Astro.glob("/src/content/blog/**/*.jpg").then((files) => {
                 post.data.heroImage &&
                 images.find((img) =>
                   img.src.includes(post.data.heroImage.replace("./", ""))
-                ).src;
+                )?.src;
 
               return (
                 <div
