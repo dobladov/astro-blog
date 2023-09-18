@@ -2,7 +2,7 @@
 title: Choosing a game engine
 pubDate: 2023-09-18
 description: Moving from canvas to game engines like Godot or Defold
-tags: [godot, gamedev, defold, unity, canvas, webgl, lua]
+tags: [godot, gamedev, defold, unity, canvas, webgl, lua, games, phaser, javascript, pixi, threejs, unreal, raylib, bevy]
 heroImage: './engine.jpg'
 ---
 
