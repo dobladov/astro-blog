@@ -1,18 +1,17 @@
 ---
 title: Making the Orb
 description: How the interactive orb in my site was made.
-tags:
-  [
-    javascript,
-    logo,
-    orb,
-    p5,
-    animation,
-    flow field,
-    chromatic-aberration,
-    noise,
-    dither,
-  ]
+tags: [
+  javascript,
+  logo,
+  orb,
+  p5,
+  animation,
+  flow field,
+  chromatic-aberration,
+  noise,
+  dither
+]
 pubDate: 2023-08-19
 heroImage: orb-meme.jpg
 ---
@@ -28,9 +27,9 @@ Inspired by sites like [Oimo](https://oimo.io/) I wanted to have one interactive
 
 I played with some other ideas like noise backgrounds, generating a map that constantly changes, [Rorschach patterns](https://en.wikipedia.org/wiki/Rorschach_test), floating particles, but none of them looked good enough (I'm not a designer) or felt more special than a background.
 
-<video width="400" autoplay loop style={{ display: "flex", margin: "0 auto" }}>
+<video width="400" autoplay loop style={{ maxWidth: "100%", display: "flex", margin: "0 auto" }}>
   <source src={orb} type="video/webm" />
-</video>{" "}
+</video>
 
 <br />
 
@@ -58,11 +57,11 @@ Then I saw this wonderful video from [Barney Codes](https://www.youtube.com/@Bar
   style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;"
 >
   <span>
-    See the Pen{" "}
+    See the Pen
     <a href="https://codepen.io/dobladov/pen/dyQBGMG">
       Flow Field with chromatic aberration
-    </a>{" "}
-    by DobladoV (<a href="https://codepen.io/dobladov">@dobladov</a>) on{" "}
+    </a>
+    by DobladoV (<a href="https://codepen.io/dobladov">@dobladov</a>) on
     <a href="https://codepen.io">CodePen</a>.
   </span>
 </p>
@@ -108,6 +107,6 @@ There are some other minor changes like stacked shadows to make it look more lik
 
 As an Easter egg, I also made it show some basic animation if JavaScript it's disabled.
 
-<video width="400" autoplay loop style={{ display: "flex", margin: "0 auto" }}>
+<video width="400" autoplay loop style={{ maxWidth: "100%", display: "flex", margin: "0 auto" }}>
   <source src={noJsOrb} type="video/webm" />
-</video>{" "}
+</video>
