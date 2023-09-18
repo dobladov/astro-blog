@@ -79,7 +79,14 @@ const images = await Astro.glob("/src/content/blog/**/*.jpg").then((files) => {
   }
 
   .pic {
+    display: none;
     padding-right: 1rem;
+  }
+
+  @media screen and (min-width: 468px) {
+    .pic {
+      display: block;
+    }
   }
 </style>
 
@@ -108,7 +115,12 @@ const images = await Astro.glob("/src/content/blog/**/*.jpg").then((files) => {
                 >
                   {src && (
                     <a class="pic" href={`/blog/${post.slug}/`}>
-                      <img src={src} width="64" />
+                      <img
+                        src={src}
+                        width="64"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </a>
                   )}
                   <div class="postText">
