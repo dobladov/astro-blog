@@ -26,9 +26,10 @@ So far, Pixi.js is my best option, but I'm still not happy with it.
 
 ## Using game engines
 
-I never paid much attention to *Unity*, and after all the controversy with the fees,  many developers are moving on to other alternatives, the main ones seem to be [Godot](https://godotengine.org/) or [Unreal Engine](https://www.unrealengine.com/). Unreal is probably overkill for what I want to do and not suitable for 2D, so my first choice was Godot.
 
 The main reason for using a game engine is that it will handle all the complexity across many platforms, not limiting me to just the web, although that's my main target. But hey, more performance is always good, and if I do free games, I want people to be able to download them and keep them forever, or for at least longer than the time I host them.
+
+I never paid much attention to *Unity*, and after all the controversy with the fees,  many developers are moving on to other alternatives, the main ones seem to be [Godot](https://godotengine.org/) or [Unreal Engine](https://www.unrealengine.com/). Unreal is probably overkill for what I want to do and not suitable for 2D, so my first choice was Godot.
 
 ## Godot
 
@@ -43,7 +44,7 @@ There are two options for writing the code: GDScript and C#. After watching many
 
 Writing GDScript seems simple enough; it has basically the same syntax as Python, and it brings deep integration with the IDE.
 
-While Godot seems to be great for making games, the situation of making web games is problematic at the moment because it does not support macOS web export. This is a problem when I'm planning on mainly making web games, with the additional plus of being able to export to desktop.
+While Godot seems to be great for making games, the situation of making web games is problematic at the moment because it does not support macOS web export. This is a problem when I'm planning on mainly making web games.
 
 - [All HTML5 exports crash on loading](https://github.com/godotengine/godot/issues/67949)
 - [HTML5 export for Godot 4.0 takes 1-2 minutes to load on macOS](https://github.com/godotengine/godot/issues/70691)
@@ -62,7 +63,7 @@ The IDE is very well organized, I was able to create most of the logic I need fo
 
 So far, I feel more tempted to start writing my game in *Defold* until Godot gets their web export fixed.
 
-While they promote themselves as a 2D engine, underneath it's a 3D engine, and it's [getting better and better](https://twitter.com/AGulev/status/1702085104422592541)
+While they promote themselves as a 2D engine, underneath it's a 3D engine, and it's [getting better and better](https://twitter.com/AGulev/status/1702085104422592541).
 
 There are fewer tutorials for *Defold* on the wild, the official tutorials are high quality, teaching step by step, with clear goals and good results.
 
