@@ -12,7 +12,7 @@ With the recent [controversy about Unity](https://news.ycombinator.com/item?id=3
 
 [Cocoa Moss](https://cocoamoss.com/) a team of two people that makes really cozy games, motivated me to give gamedev another try. I have been playing their games with my girlfriend for the past week almost every night, and they always make us happy.
 
-## Problems with canvas and using not using a framework
+## Problems with canvas and not using a framework
 
 My last game required hundreds of elements on the the screen moving and colliding with each other. canvas is very limited in this sense, and while it works, the performance is not the best. I also have to handle quirks like different density screens and other visual glitches.
 
