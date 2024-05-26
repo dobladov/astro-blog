@@ -65,12 +65,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "20.x"
+          node-version: "22.x"
       - run: |
           npm install
           npm test
@@ -119,7 +119,7 @@ This step will checkout your repository to make the code available.
 
 ```yml
 - name: Checkout
-  uses: actions/checkout@v3
+  uses: actions/checkout@v4
 ```
 
 Now we set node.js and we use version 13 to run the code, I would recommend to read the docs to do some other interesting stuff like running multiple node versions.
@@ -128,9 +128,9 @@ This step will be similar for other code like go or rust
 
 ```yml
 - name: Build
-  uses: actions/setup-node@v3
+  uses: actions/setup-node@v4
   with:
-    node-version: "20.x"
+    node-version: "22.x"
 ```
 
 The interesting part, here we have to define the process of actually building the site in this case something similar to what we would execute on our local machine to do it.
@@ -177,7 +177,7 @@ With this configuration, we can use a personal token that needs to be set on Set
 
 ```yml
 - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: dobladov/dobladov.github.io
