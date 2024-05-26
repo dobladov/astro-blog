@@ -6,6 +6,8 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import sitemap from '@astrojs/sitemap'
 import { remarkReadingTime } from './utils/remark-reading-time.mjs'
 import rehypeExternalLinks from 'rehype-external-links'
+import icon from "astro-icon";
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,5 +28,5 @@ export default defineConfig({
     ]
   },
   site: 'https://dobla.do',
-  integrations: [mdx(), sitemap()]
+  integrations: [icon(), mdx(), sitemap()]
 })
