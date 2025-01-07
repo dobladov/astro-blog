@@ -21,6 +21,7 @@ import Pattern from './Pattern.astro';
 	}
 	h1 {
 		margin: 0;
+		filter: url("#goovey");
 		font-size: 3em;
 		text-align: center;
 		font-weight: 100;
@@ -88,5 +89,16 @@ import Pattern from './Pattern.astro';
 			<!-- <ThemeToggle /> -->
 		</div>
 	</nav>
+	<svg style="width: 0; height: 0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+		<defs>   
+		  <filter id="goovey">
+				  <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="1" result="warpper"/>
+				<feColorMatrix in="warpper" type="hueRotate">
+					  <animate attributeType="XML" attributeName="values" values="0;110;150;210;360" dur="6s" repeatCount="indefinite"/>
+				</feColorMatrix>
+				<feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="20" in="SourceGraphic"/>
+		  </filter>
+		</defs>
+	  </svg>
 	<Pattern />
 </header>
