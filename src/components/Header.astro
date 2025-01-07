@@ -66,6 +66,11 @@ import Pattern from './Pattern.astro';
 			display: none;
 		}
 	}
+
+	.rss {
+		position: relative;
+		top: .1rem;
+	}
 </style>
 
 <header>
@@ -77,7 +82,7 @@ import Pattern from './Pattern.astro';
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/projects">Projects</HeaderLink>
 			<HeaderLink href="/tags">Tags</HeaderLink>
-			<HeaderLink href="/rss.xml" title="RSS">
+			<HeaderLink class="rss" href="/rss.xml" title="RSS">
 				<Icon name='rss' />
 			</HeaderLink>
 			<!-- <ThemeToggle /> -->
