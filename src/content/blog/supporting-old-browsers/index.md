@@ -52,7 +52,8 @@ Once serving this file and accessing it from the device, the error was much more
   const contextMap = gT[ContextKey] ??= /* @__PURE__ */ new Map();
 ```
 
-In this case, the operator `??=` [Nullish coalescing assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_assignment) was not supported at this version of iOS https://caniuse.com/?search=Nullish%20coalescing%20assignment
+In this case, the operator `??=` [Nullish coalescing assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_assignment) was not supported at this version of iOS: [Can I use Search
+Nullish coalescing assignment ?](https://caniuse.com/?search=Nullish%20coalescing%20assignment)
 
 ## Fixing the code
 
@@ -67,17 +68,15 @@ const contextMap = gT[ContextKey] = gT[ContextKey] === undefined || gT[ContextKe
   : gT[ContextKey];
 ```
 
-The patch can be more permanent using `npx patch-package` 
-
-https://stackoverflow.com/questions/72820625/what-is-the-proper-way-to-patch-a-node-modules-module/77385111#77385111
+The patch can be more *permanent* using `npx patch-package`: [Stack overflow - Patch a "node_modules" (Node.js) module](https://stackoverflow.com/questions/72820625/what-is-the-proper-way-to-patch-a-node-modules-module/77385111#77385111)
 
 This could be a good hotfix, but we want it fixed for future cases.
 
 ### Creating a pull request
 
-Second solution, to create a PR in the `react-redux` project and use less modern JavaScript, this solution is far from ideal. First, I don’t like to write older code, we should look at the future. Second, when it does make the library more compatible I would have to justify and convince them to merge it, so I decided not to do it. 
+Second solution, to create a PR in the `react-redux` project and use less modern JavaScript, this solution is far from ideal. I don’t like to write older code, we should look at the future and while it does make the library more compatible I would have to justify and convince them to merge it, so I decided not to do it.
 
-https://github.com/reduxjs/react-redux/blob/7e2fdd4ee2021e4282e12ba9fc722f09124e30cd/src/components/Context.ts#L31
+[Line of code to change](https://github.com/reduxjs/react-redux/blob/7e2fdd4ee2021e4282e12ba9fc722f09124e30cd/src/components/Context.ts#L31)
 
 ### Babel plugins
 
