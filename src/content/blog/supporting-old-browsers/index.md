@@ -91,3 +91,5 @@ Well, the newer version of the package uses JS modules, and now the extension of
 It’s important to understand how other people’s code end up in your build. In this case, I learned how to better debug third-party code with Safari which is not fun, how to adapt code to work in devices that were not supposed to work with it, and how to make sure that the code is transpiled correctly.
 
 I hope this post helps someone in the future, at the very least was useful for a small subset of users that still use old devices.
+
+![Abstract illustration of an old browser](./glitched-browser.png)
