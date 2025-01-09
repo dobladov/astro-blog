@@ -102,8 +102,10 @@ import Separator from '#astro/components/Separator.astro';
                             <span class="title">Tags</span>
                             
                             <div class="tags">
-                                {tags.map((tag) => (
-                                    <a href={`/tags/${tag}`}>#{tag}</a>
+                                {tags.map((tag, index) => (
+                                    <>
+                                        <a href={`/tags/${tag}`}>#{tag}{index < tags.length - 1 && ' '}</a>
+                                    </>
                                 ))}
                             </div>
                         </div>
