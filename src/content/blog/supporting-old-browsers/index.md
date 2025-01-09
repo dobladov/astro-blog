@@ -88,6 +88,6 @@ Well, the newer version of the package uses JS modules, and now the extension of
 
 ## Conclusion
 
-It’s important to understand how yours and other people’s code end up in your build. In this case, I learned how to better debug third-party code with Safari which is not fun and adapt code to work in devices that were not supposed to work with it.
+It’s important to understand how other people’s code end up in your build. In this case, I learned how to better debug third-party code with Safari which is not fun, how to adapt code to work in devices that were not supposed to work with it, and how to make sure that the code is transpiled correctly.
 
-While this work is tedious, it was a rewarding outcome.
+I hope this post helps someone in the future, at the very least was useful for a small subset of users that still use old devices.
