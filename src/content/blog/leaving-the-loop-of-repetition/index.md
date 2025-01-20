@@ -1,7 +1,7 @@
 ---
-title: Can you break an addiction?
+title: Leaving the loop of repetition
 pubDate: 2023-08-30
-description: Leaving the loop of repetition.
+description: Breaking the loop of addiction by replacing it with something positive
 tags:
   [
     addiction,
