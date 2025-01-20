@@ -1,7 +1,8 @@
 ---
 title: Why there are no posts this year
-pubDate: 2024-12-02
-description: A reflection on the year and why there are no posts in 2024
+pubDate: 2024-12-28
+description: A reflection on the year and why I decided to not post during 2024
+tags: [meta, blogging, social networks]
 ---
 
 ## Blogging about blogging
