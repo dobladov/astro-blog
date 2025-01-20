@@ -25,7 +25,7 @@ I even invested some time to understand how their [AT protocol](https://atproto.
 
 Which led me to think "What am I doing with my time"? I consume all this content that I don't even enjoy, and then deleted the accounts.
 
-Ironically [Instagram](https://www.instagram.com/) is the only social network of any value for myself now, only following people I know and avoiding reels and other never-ending content, I simply have it on my phone (web app) with a timer to limit how much I use it; this keeps me connected to my friends and family which is real value, I do hate that it is owned by Meta, but both posting and commenting on people I care increases my connection to other people.
+Ironically [Instagram](https://www.instagram.com/) is the only social network of any value for myself now, only following people I know and avoiding reels and other never-ending content, I simply have it on my phone (web app) with a timer to limit how much I use it; this keeps me connected to my friends and family which is real value, I do hate that it is owned by Meta, but both posting and commenting to people I care increases my connection to them.
 
 In general my only social interactions beside the mentioned are some occasional comments on [Hacker News](https://news.ycombinator.com/) and searches on Reddit but they are so sporadic that they barely count.
 
