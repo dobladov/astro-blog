@@ -6,7 +6,7 @@ tags: [javascript, deno, node, bun, ssr, react, development, programming, deno]
 draft: false
 ---
 
-The goal is to have a server able to stream React Components directly from the server using the client for navigation, removing the need to request data from the server after the first load, some call it *"Universal Data Fetching"* or *"Isomorphic Data Fetching"*. 
+The goal is to have a server able to stream React Components directly from the server using the client for navigation, removing the need to request data from the server after the first load, some call it *"Universal Data Fetching"* or *"Isomorphic Data Fetching"*. 
 
 > This pattern ensures that the data required to render a page is fetched on the server during the initial request and then re-fetched or reused on the client side for subsequent interactions.
 
@@ -14,17 +14,17 @@ The full repository with the code can be seen in [dobladov/bun-ssr-react](https:
 
 **⚠️ Disclaimer**: I'm not implementing [React Server Components](https://react.dev/reference/rsc/server-components), but good old React hydrated on the client.
 
-I want to mention another repo that is doing similar logic, but all responses come from the sever: [alexkates/ssr-bun-react](https://github.com/alexkates/ssr-bun-react/blob/main/index.tsx), a good approach if you want to have a more traditional SSR.
+I want to mention another repo that is doing similar logic, but all responses come from the server: [alexkates/ssr-bun-react](https://github.com/alexkates/ssr-bun-react/blob/main/index.tsx), a good approach if you want to have a more traditional SSR.
 
 ## Why did I choose Bun?
 
-It’s a batteries includes tool, if you had to make SSR work with webpack and node, you might know how much of a pain is to deal with JSX in both in the server and client, then add other issues like babel plugins, common JS modules vs ESM and you realize most of the setup is to exists to fix issues related to JavaScript instead of focusing on writing code.
+It’s a batteries-included tool, if you had to make SSR work with webpack and node, you might know how much of a pain it is to deal with JSX in both the server and client, then add other issues like babel plugins, common JS modules vs ESM and you realize most of the setup exists to fix issues related to JavaScript instead of focusing on writing code.
 
 Bun solves all of those directly for you, including the server, although you might want to use [Elysia](https://elysiajs.com/) or [Express](https://expressjs.com/) for more complex apps.
 
 I have to be honest, so far I’m not using [Bun](https://bun.sh/) at work or in any projects that are critical, only side projects and occasional scripts, but I love it so far, and the only thing that worries me is the company behind it cutting funding or trying to lock you in their ecosystem or the main developers leaving the project, because wow, what an incredible job they are making with such a small team.
 
-In any case it’s a project that’s forcing [Node](https://nodejs.org/en) and [Deno](https://deno.com/) to improve themselves and this competition so far brings many new functionalities that make my work easier.
+In any case, it’s a project that’s forcing [Node](https://nodejs.org/en) and [Deno](https://deno.com/) to improve themselves and this competition so far brings many new functionalities that make my work easier.
 
 ## Build process
 
@@ -39,7 +39,7 @@ bun init
 bun add react react-dom react-router
 ```
 
-Let’s add a script  to `pacakge.json` to run in dev mode and also watch for changes.
+Let’s add a script to [package.json](https://github.com/dobladov/bun-ssr-react/blob/main/package.json) to run in dev mode and also watch for changes.
 If you wonder why `.tsx` is because I want to have [JSX](https://react.dev/learn/writing-markup-with-jsx) directly in this file.
 
 ```bash
@@ -59,18 +59,18 @@ Bun.build({
 
 ## Client logic
 
-[src/client.tsx](https://github.com/dobladov/bun-ssr-react/blob/main/src/client.tsx) has two goals, to [hydrate](https://react.dev/reference/react-dom/client/hydrateRoot) React once the file is loaded so we can interact with the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)  on the client, and to generate the routing for client navigation.
+[src/client.tsx](https://github.com/dobladov/bun-ssr-react/blob/main/src/client.tsx) has two goals, to [hydrate](https://react.dev/reference/react-dom/client/hydrateRoot) React once the file is loaded so we can interact with the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) on the client, and to generate the routing for client navigation.
 
 <details>
 <summary>Rant about react-router</summary>
-I’m very disappointed with the approach of react-router for their docs, they definitely care about the project and add cool functionality, but I find the docs completely lacking and confusing, I can’t link any of the next functions that I’m mentioning, there are barely any example of how to do SSR, and the framework vs library approach is confusing to even people experienced in using it, there are also may methods that I can’t even find in the API reference even when they are not deprecated, the only way I found to understand how to implement this was to do searches in the repo.
+I’m very disappointed with the approach of react-router for their docs, they definitely care about the project and add cool functionality, but I find the docs completely lacking and confusing, I can’t link any of the next functions that I’m mentioning, there are barely any examples of how to do SSR, and the framework vs library approach is confusing to even people experienced in using it, there are also many methods that I can’t even find in the API reference even when they are not deprecated, the only way I found to understand how to implement this was to do searches in the repo.
 
 For next projects I will look at alternatives like [TanStack Router](https://tanstack.com/router/latest).
 </details>
 
-We need `<RouterProvider` to create a router that can use loaders otherwise a simple `<BrowserRouter` would be enough.
+We need `<RouterProvider>` to create a router that can use loaders otherwise a simple `<BrowserRouter>` would be enough.
 
-`createBrowserRouter` is equivalent to `<BrowserRouter`, but we need to call it this way for our purpose and I like to use `createRoutesFromElements` because I find JSX more intuitive for nested routes.
+`createBrowserRouter` is equivalent to `<BrowserRouter>`, but we need to call it this way for our purpose and I like to use `createRoutesFromElements` because I find JSX more intuitive for nested routes.
 
 ```bash
 const root = document.getElementById('root');
@@ -263,12 +263,12 @@ export const App = (props: Props) => {
 }
 ```
 
-And we are ready, `bun run dev` should lunch the server and provide the URL [http://localhost:5000](http://localhost:5000/) where we can check our app.
+And we are ready, `bun run dev` should launch the server and provide the URL [http://localhost:5000](http://localhost:5000/) where we can check our app.
 
 ## Retrospective
 
-As mentioned I like how simple everything is, at least compared to another production project at work with the same goal using node, express and webpack, this far more maintainable, the build is faster and overall improves in all areas, with far less dependencies.
+As mentioned I like how simple everything is, at least compared to another production project at work with the same goal using node, express and webpack, this is far more maintainable, the build is faster and overall improves in all areas, with less dependencies.
 
-I will definitely use Bun more and more if they continue providing so much value out of the box, at the moment I'm working on a side project that relies in their [SQLitle](https://bun.sh/docs/api/sqlite) implementation and I'm very happy with it.
+I will definitely use Bun more and more if they continue providing so much value out of the box, at the moment I'm working on a side project that relies on their [SQLite](https://bun.sh/docs/api/sqlite) implementation and I'm very happy with it.
 
 ![glitched-food-bun](./bun.png)
