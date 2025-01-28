@@ -63,7 +63,7 @@ Bun.build({
 
 <details>
 <summary>Rant about react-router</summary>
-I’m very disappointed with the approach of react-router for their docs, they definitely care about the project and add cool functionality, but I find the docs completely lacking and confusing, I can’t link any of the next functions that I’m mentioning, there are barely any example of how to do SSR, and the framework vs library approach is confusing to even people experienced in using it, there are also may methods that I can’t even find in the API reference even when if they are not deprecated, the only way I found to understand how to implement this was to do searches in the repo.
+I’m very disappointed with the approach of react-router for their docs, they definitely care about the project and add cool functionality, but I find the docs completely lacking and confusing, I can’t link any of the next functions that I’m mentioning, there are barely any example of how to do SSR, and the framework vs library approach is confusing to even people experienced in using it, there are also may methods that I can’t even find in the API reference even when they are not deprecated, the only way I found to understand how to implement this was to do searches in the repo.
 
 For next projects I will look at alternatives like [TanStack Router](https://tanstack.com/router/latest).
 </details>
