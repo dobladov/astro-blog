@@ -240,7 +240,7 @@ Let’s analyze each match:
 
 1. Allows to serve our static assets in the public folder including the client build generated at the beginning with `Bun.build`, our CSS, favicon, images can be served this way.
 2. Just an example of a JSON API, that both client and server can request.
-3. Here comes the magic that makes SSR possible, we re-use the client routes with `createRoutesFromElements`, and we need `createStaticHandler` and `createStaticRouter` again here because we use `loader` prop in our `Routes`. 
+3. Here comes the magic that makes SSR possible, we re-use the client routes with `createRoutesFromElements`, and we need `createStaticHandler` and `createStaticRouter` again here because we use a `loader` prop in our `Routes`. 
 
 Once we have created the routing, we can stream the App with [renderToReadableStream](https://react.dev/reference/react-dom/server/renderToReadableStream).
 
