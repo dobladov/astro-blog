@@ -3,6 +3,7 @@ title: SSR with Bun and React
 pubDate: 2025-01-28
 description: How to set up a server side rendered server using Bun, react and react-router
 tags: [javascript, deno, node, bun, ssr, react, development, programming, deno]
+draft: false
 ---
 
 The goal is to have a server able to stream React Components directly from the server using the client for navigation, removing the need to request data from the server after the first load, some call it *"Universal Data Fetching"* or *"Isomorphic Data Fetching"*. 
