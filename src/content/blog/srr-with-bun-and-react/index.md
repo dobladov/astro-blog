@@ -1,7 +1,7 @@
 ---
 title: SSR with Bun and React
 pubDate: 2025-01-28
-description: How to set up a server side rendered server using Bun, react and react-router
+description: How to set up a server side rendered app using Bun, react and react-router
 tags: [javascript, deno, node, bun, ssr, react, development, programming, deno]
 draft: false
 ---
