@@ -90,7 +90,7 @@ if (root) {
 
 ## Routes
 
-Our routes can be very simple, in [src/routing.tsx](https://github.com/dobladov/bun-ssr-react/blob/main/src/routes.tsx) we have the following, note that we will re-use this file for server and client which is gives us a very clean way to handle our app with minimal config.
+Our routes can be very simple, in [src/routing.tsx](https://github.com/dobladov/bun-ssr-react/blob/main/src/routes.tsx) we have the following, note that we will re-use this file for server and client which gives us a very clean way to handle our app with minimal config.
 
 An `errorElement` to act as an [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary).
 
