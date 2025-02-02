@@ -19,7 +19,7 @@ const { videoId, videoTitle } = Astro.props;
 </style>
 
 <div class="youtubeVideo">
-  <lite-youtube videoid={videoId} videotitle={videoTitle} autoLoad>
+  <lite-youtube videoid={videoId} videotitle={videoTitle}>
     <a
       class="lite-youtube-fallback"
       href={`https://www.youtube.com/watch?v=${videoId}`}
