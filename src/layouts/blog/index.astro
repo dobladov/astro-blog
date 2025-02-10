@@ -20,7 +20,7 @@ import './index.css';
 
 const { href } =Astro.url;
 const validHeadings = headings && headings.filter((heading) => heading.depth === 2);
-import { SITE_AUTHOR } from '#astro/consts'
+import { SITE_AUTHOR, SITE_URL } from '#astro/consts'
 import Separator from '#astro/components/Separator.astro';
 ---
 
@@ -131,6 +131,7 @@ import Separator from '#astro/components/Separator.astro';
                             ...(updatedDate && { dateModified: updatedDate }),
                             "description": description,
                             "author": {
+                                "url": SITE_URL,
                                 "@type": "Person",
                                 "name": SITE_AUTHOR
                             }
