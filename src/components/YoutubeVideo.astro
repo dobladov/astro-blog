@@ -2,9 +2,10 @@
 export interface Props {
   videoId: string;
   videoTitle?: string;
+  loading?: 'eager' | 'lazy';
 }
 
-const { videoId, videoTitle } = Astro.props;
+const { videoId, videoTitle, loading = 'lazy' } = Astro.props;
 ---
 
 <script
@@ -19,7 +20,7 @@ const { videoId, videoTitle } = Astro.props;
 </style>
 
 <div class="youtubeVideo">
-  <lite-youtube videoid={videoId} videotitle={videoTitle}>
+  <lite-youtube videoid={videoId} videotitle={videoTitle} posterloading={loading}>
     <a
       class="lite-youtube-fallback"
       href={`https://www.youtube.com/watch?v=${videoId}`}
