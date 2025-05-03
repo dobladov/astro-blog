@@ -187,22 +187,19 @@
   const perlin = new Perlin();
   const totalPoints = 100;
   const noiseScale = 0.01;
-  const particles: Array<{ x: string; y: string }> = [];
+  const particles: Array<{ 
+    x: string; 
+    y: string; 
+    lifetime: number; 
+    maxLifetime: number; 
+  }> = [];
   const dotScale = 2;
   const displacement = 5;
-  let leftToRight: number | null;
   let mousePos = {
     x: 0,
     y: 0,
   };
 
-  window.addEventListener(
-    "deviceorientation",
-    (event) => {
-      leftToRight = event.gamma;
-    },
-    true
-  );
 
   window.addEventListener("mousemove", (event) => {
     mousePos = { x: event.clientX, y: event.clientY };
@@ -233,6 +230,8 @@
     particles.push({
       x: random(canvas.width),
       y: random(canvas.height),
+      lifetime: random(50, 200), // Random initial lifetime
+      maxLifetime: random(100, 250), // Maximum lifetime varies per particle
     });
   }
 
@@ -250,34 +249,72 @@
 
     for (let i = 0; i < totalPoints; i++) {
       let p = particles[i];
+      
+      // Decrease lifetime
+      p.lifetime--;
+      
+      // Reset particle if lifetime ended or it's out of screen
+      if (p.lifetime <= 0 || !onScreen(p)) {
+        p.x = random(canvas.width);
+        p.y = random(canvas.height);
+        p.lifetime = p.maxLifetime;
+      }
+      
       let n = map(perlin.get(p.x * noiseScale, p.y * noiseScale), -1, 1, 0, 1);
       let a = Math.PI * 2 * n;
 
-      // Draw the points slightly displaced
-      ctx.fillStyle = "rgb(255, 0, 0)";
+      // Calculate opacity based on lifetime (fade out when close to end of life)
+      const opacity = Math.min(1, p.lifetime / (p.maxLifetime * 0.3));
+      
+      // Draw the points slightly displaced with opacity
+      ctx.fillStyle = `rgba(255, 0, 0, ${opacity})`;
       ctx.fillRect(p.x + displacement, p.y, dotScale, dotScale);
-      ctx.fillStyle = "rgb(0, 255, 0)";
+      ctx.fillStyle = `rgba(0, 255, 0, ${opacity})`;
       ctx.fillRect(p.x, p.y, dotScale, dotScale);
-      ctx.fillStyle = "rgb(0, 0, 255)";
+      ctx.fillStyle = `rgba(0, 0, 255, ${opacity})`;
       ctx.fillRect(p.x - displacement, p.y, dotScale, dotScale);
 
-      // Invert the direction
-      if (
-        leftToRight < 0 ||
-        mousePos.x < positionInfo.width / 2 + positionInfo.left
-      ) {
-        p.x += Math.cos(a) * 2;
-        p.y += Math.sin(a);
-      } else {
-        p.x -= Math.cos(a) * 2;
-        p.y -= Math.sin(a) * 2;
+      // Improved mouse position tracking with angle fix
+      // Get canvas position relative to viewport
+      const rect = canvas.getBoundingClientRect();
+      
+      // Calculate mouse position relative to canvas
+      const canvasMouseX = mousePos.x - rect.left;
+      const canvasMouseY = mousePos.y - rect.top;
+      
+      // Scale mouse coordinates to match canvas internal coordinates
+      const scaledMouseX = (canvasMouseX / rect.width) * canvas.width;
+      const scaledMouseY = (canvasMouseY / rect.height) * canvas.height;
+      
+      // Calculate direction angle from particle to mouse
+      const dx = scaledMouseX - p.x;
+      const dy = scaledMouseY - p.y;
+      
+      // Use atan2 to get the angle and ensure it's in the range of 0 to 2π
+      let mouseAngle = Math.atan2(dy, dx);
+      
+      // Check for potential dead zone in the angle calculation
+      if (mouseAngle < 0) {
+        mouseAngle += 2 * Math.PI; // Normalize to 0-2π range
       }
-
-      // Move the point to a random position if it's out of the screen
-      if (!onScreen(p)) {
-        p.x = random(canvas.width);
-        p.y = random(canvas.height);
-      }
+      
+      // Blend perlin noise angle with mouse direction for natural movement
+      const blendFactor = 0.7; // Higher values make particles follow mouse more directly
+      
+      // Ensure the perlin angle is also in the same range (0-2π)
+      const normalizedPerlinAngle = a % (2 * Math.PI);
+      
+      // Use the shortest path for angle blending to prevent dead zones
+      let angleDiff = mouseAngle - normalizedPerlinAngle;
+      if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+      if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+      
+      const blendedAngle = normalizedPerlinAngle + angleDiff * blendFactor;
+      
+      // Move particles based on blended angle
+      const speed = 2;
+      p.x += Math.cos(blendedAngle) * speed;
+      p.y += Math.sin(blendedAngle) * speed;
     }
 
     window.requestAnimationFrame(draw);
