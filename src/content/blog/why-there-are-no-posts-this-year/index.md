@@ -7,11 +7,11 @@ tags: [meta, blogging, social networks]
 
 ## Blogging about blogging
 
-I realized most of the drafts I wrote in 2024 were about blogging, while some meta might be interesting including this post, I don't want to be the guy that only talks about blogging, the purpose of blogging should be for sharing knowledge and experiences, not for explaining how to blog, probably Aristotle would have wrote this in his blog, but I'm not Aristotle.
+I realized most of the drafts I wrote in 2024 were about blogging, while some meta might be interesting including this post, I don't want to be the kind of person that only writes about blogging, the purpose of blogging should be for sharing knowledge and experiences, not for explaining how to blog, probably Aristotle would have wrote this in his blog, but I'm not Aristotle.
 
 > “The Purpose of ~~Knowledge~~Blogging is Action, not ~~Knowledge~~Blogging” Aristotle
 
-This led me to delete those drafts, and I don't have any regrets, in fact nothing that you can find anywhere else was lost.
+This led me to delete those drafts, and I don't have any regrets, in fact nothing of value was lost.
 
 ## Negativity
 
@@ -33,6 +33,6 @@ In general my only social interactions beside the mentioned are some occasional 
 
 Given that I don't like the web so much, the best thing I could do in 2024 was to get away from it and focus on other things, I started to take Calisthenics more seriously which had the best outcome possible, this year to my surprise, I can do some Calisthenics tricks, like handstands, muscle-up, L-sit, and my physique is great, the amount of benefits to my body have been amazing and training has become a highlight of the day where I feel great instead of being a hurdle, in fact I'm training so much that I have to take periods of healing, which is a good problem to have and I'm reducing with more knowledge about the topic.
 
-Because of the content I found on the Internet is not interesting I moved more to reading books, and more importantly, now I allowed myself to abandon books that I don't find interesting which was killing my will to read, this boosted my other hobbies with amazing books like [Overcoming Gravity](https://stevenlow.org/overcoming-gravity/), never have I read a more well-written book about sports being a topic I never thought it could be interesting in reading, I'm reading more of what amuses me instead of feeling I need to learn something new, focusing on Sci-Fi instead of non-fiction.
+Because of the content I found on the Internet is not interesting I moved more to reading books, and more importantly, now I allowed myself to abandon books that I don't find interesting which was killing my will to read, this boosted my other hobbies with amazing books like [Overcoming Gravity](https://stevenlow.org/overcoming-gravity/), never have I read a more well-written book about sports, a topic I never thought it could be interested in reading, I'm reading more of what amuses me without feeling guilty about learning something new, focusing on Sci-Fi instead of non-fiction.
 
 For 2025 I hope to write more about my hobbies and less about the web, focus on what's positive and what I enjoy, and hopefully you enjoy it too.
