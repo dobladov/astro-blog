@@ -31,6 +31,10 @@ import Project from '#astro/components/Project.astro';
 	
 	<PageTitle title='Projects' />
 	<div class="projects">
+		<Project title='GeoMask' links={{source: 'https://github.com/dobladov/geomask'}} logo='geomask' >
+			<p>Browser extension to mask your geolocation by setting a custom location.</p>
+			<p>This extension overrides the browser's geolocation API, useful for testing location based applications or to protect your privacy.</p>
+		</Project>
 		<Project title='Youtube2anki' links={{source: 'https://github.com/dobladov/youtube2Anki'}} logo='youtube2Anki' >
 			<p>Web Extension to convert YouTube transcripts to Anki cards.</p>
 			<p>This extension allows to download the transcript of a YouTube video to a CSV that can be imported into Anki or directly send the cards to Anki using <a href="https://ankiweb.net/shared/info/2055492159">AnkiConnect</a>, allowing to use the original audio/video of the current sentence and without having to download the original media.</p>
