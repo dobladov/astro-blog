@@ -2,6 +2,7 @@
 title: "Moving to alternative apps"
 pubDate: 2025-12-19
 description: "A list of alternative apps I moved for both desktop and mobile and my experience with them"
+draft: true
 ---
 
 For a while now, I have been replacing most of my phone software from [Play Store](https://play.google.com/store/) apps to [F-Droid](https://f-droid.org/en/packages/com.amaze.filemanager/) open source apps, my first thought was that I should compromise some nice features but as it turned out most of the open source apps greatly improve the experience.

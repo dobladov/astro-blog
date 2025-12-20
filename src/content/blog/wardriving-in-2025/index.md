@@ -3,6 +3,7 @@ title: "Wardriving in 2025"
 description: "A look into the current state of Wi-Fi security and a wonky portable setup."
 pubDate: 2025-12-17
 tags: ["wardriving", "WiFi", "security", "WPS", "WPA", "WEP", "raspberry pi", "kali", "alpine"]
+draft: true
 ---
 It’s 2025 and routers are somehow secure now, are they really? Well if you have a half decent router it’s most likely safe enough, still there are some settings that can give you some peace of mind.
 
