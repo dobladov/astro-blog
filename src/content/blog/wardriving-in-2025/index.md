@@ -1,9 +1,9 @@
 ---
 title: "Wardriving in 2025"
 description: "A look into the current state of Wi-Fi security and a wonky portable setup."
-pubDate: 2025-12-17
+pubDate: 2026-01-06
 tags: ["wardriving", "WiFi", "security", "WPS", "WPA", "WEP", "raspberry pi", "kali", "alpine"]
-draft: true
+draft: false
 ---
 It’s 2025 and routers are somehow secure now, are they really? Well if you have a half decent router it’s most likely safe enough, still there are some settings that can give you some peace of mind.
 
@@ -42,7 +42,7 @@ From here I got curious, and I asked myself if it was possible to do this WPS at
 
 The compromise is to use a phone connected thorough SSH to a [Raspberry Pi](https://www.raspberrypi.com/products/raspberry-pi-3-model-b/) powered by a power-bank, with it, I have a mobile setup capable of doing anything I need.
 
-[Add a picture of the monstrosity]
+![Raspberry Pi with Wi-Fi and powerbank](./rpi-wifi.jpg)
 
 We need 2 Wi-Fi cards on the Raspberry Pi, one to connect to the phone and a second one in [monitor mode](https://en.wikipedia.org/wiki/Promiscuous_mode) to do the actual packet capturing.
 
@@ -88,7 +88,7 @@ sudo ./wifite --wps --wps-only # to attack those access points
 
 And after a very short try we get the password, this was a very old router that I got for free, as it was configured.
 
-![wifite.jpg](./wifite-results.png)
+![Wifite results](./wifite-results.png)
 
 I’m quite pleased with this setup, it’s discrete (on a backpack) and portable, full Linux and boots fast.
 
