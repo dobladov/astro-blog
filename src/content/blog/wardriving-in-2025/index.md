@@ -73,7 +73,7 @@ ssh root@10.43.163.249
 
 Alpine can be configured and permanently installed with `setup-alpine`, and some of the necessary tools added with the package manager, [pixiewps](https://pkgs.alpinelinux.org/package/edge/testing/x86/pixiewps) and [aircrack-ng](https://pkgs.alpinelinux.org/package/edge/community/x86_64/aircrack-ng).
 
-[Package installation on Alpine, (pixiwps, airdump)]
+<!-- [Package installation on Alpine, (pixiwps, airdump)] -->
 
 To make it easy to list and attack the available [SSID](https://en.wikipedia.org/wiki/Service_set_(802.11_network))s, [wifite](https://github.com/derv82/wifite2) can be downloaded.
 
