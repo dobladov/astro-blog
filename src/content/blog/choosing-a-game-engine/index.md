@@ -14,7 +14,7 @@ With the recent [controversy about Unity](https://news.ycombinator.com/item?id=3
 
 ## Problems with canvas and not using a framework
 
-My last game required hundreds of elements on the the screen moving and colliding with each other. canvas is very limited in this sense, and while it works, the performance is not the best. I also have to handle quirks like different density screens and other visual glitches.
+My last game required hundreds of elements on the screen moving and colliding with each other. canvas is very limited in this sense, and while it works, the performance is not the best. I also have to handle quirks like different density screens and other visual glitches.
 
 I need to port the game to something faster, like [WebGL](https://en.wikipedia.org/wiki/WebGL). The problem is that WebGL by itself is a very low-level API, and I don't want to write a game engine from scratch (neither I'm smart enough to do so)
 

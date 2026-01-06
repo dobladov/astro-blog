@@ -57,4 +57,4 @@ I feel this change was a success, new code can be iterated easily without having
 
 Right now the only concern I have about the extension is _manifest v3_ which is not supported in Firefox yet, but this is a story for another post.
 
-I have to say that I'm glad about the feedback people gave, this refactor was motivated because changes on Youtube made it fail and people reported issues with a lot of support, not only that, but I've seen articles written in Vietnamese, Japanese and German in how to use the extension and how they find it useful, it really makes me want to keep contributing free, anti-traking open-source code.
+I have to say that I'm glad about the feedback people gave, this refactor was motivated because changes on Youtube made it fail and people reported issues with a lot of support, not only that, but I've seen articles written in Vietnamese, Japanese and German in how to use the extension and how they find it useful, it really makes me want to keep contributing free, anti-tracking open-source code.

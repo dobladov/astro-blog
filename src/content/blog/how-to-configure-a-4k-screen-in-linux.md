@@ -66,7 +66,7 @@ xrandr --addmode HDMI-2 3840x2160
 
 Now the new resolution should be available in the Display settings.
 
-Don't forget to set font DPI and screen scale to you taste.
+Don't forget to set font DPI and screen scale to your taste.
 
 ## Useful information
 

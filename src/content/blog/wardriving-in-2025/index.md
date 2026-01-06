@@ -50,7 +50,7 @@ At this point I got a bunch of complication because I don’t have a proper setu
 
 I opted to use [Alpine Linux](https://www.alpinelinux.org/), a much more slim distribution, that fits on the SD card, with the advantage that boots way faster.
 
-I didn’t have any UBS keyboard a simple way to overcome this is to pre-configure the WIFI during flashing, there are different ways, like creating a file, I recommend using [Raspberry Pi Imager](https://www.raspberrypi.com/software/) which has a nice UI to add settings and also has Apline as an option.
+I didn't have any USB keyboard a simple way to overcome this is to pre-configure the WIFI during flashing, there are different ways, like creating a file, I recommend using [Raspberry Pi Imager](https://www.raspberrypi.com/software/) which has a nice UI to add settings and also has Alpine as an option.
 
 One flashed, we can create an access-point on the phone, that the Raspberry Pi will connect after booting.
 

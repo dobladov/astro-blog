@@ -73,7 +73,7 @@ Adding `devNotes*` is especially useful as it helps me to write notes about a pr
 
 ```bash
 nano .gitignore_global
-git config --global core.excludesfile ~/.gitignore_globa
+git config --global core.excludesfile ~/.gitignore_global
 ```
 
 ```ts

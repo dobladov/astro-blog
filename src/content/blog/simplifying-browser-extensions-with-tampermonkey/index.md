@@ -22,7 +22,7 @@ Overall, I'm very disappointed with the developer experience of web extensions. 
 
 ## Why Tampermonkey
 
-[Tapermonkey](https://www.tampermonkey.net/) allows you to execute scripts and styles on any site, exactly what a custom extension does, but it has some advantages:
+[Tampermonkey](https://www.tampermonkey.net/) allows you to execute scripts and styles on any site, exactly what a custom extension does, but it has some advantages:
 
 The development is much easier; it requires less boilerplate, and it's effortless to debug due to not having multiple contexts handling many of the tedious permissions for you.
 
