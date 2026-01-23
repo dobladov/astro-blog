@@ -2,7 +2,7 @@
 title: Upgrade Your Actions
 pubDate: 2026-01-23
 description: How to stay up to date with your GitHub Actions and reduce unnecessary dependencies in your workflows.
-tags: [github, actions, devops, automation, workflow, cli, maintenance]
+tags: [github, actions, devops, automation, workflow, cli, maintenance, javascript, nodejs, gist]
 draft: false
 ---
 
