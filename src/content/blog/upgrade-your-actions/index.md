@@ -6,6 +6,8 @@ tags: [github, actions, devops, automation, workflow, cli, maintenance]
 draft: false
 ---
 
+## Discovering outdated Actions
+
 Some care about updating their dependencies, many neglect the dependencies in their workflows, that's why I decided to vibe/make this tool.
 
 It provides a simple way to know what needs to be upgraded in your GitHub actions, when executed, it shows a list of all the third party actions that can be upgraded and to review the changes.
