@@ -1,9 +1,10 @@
 ---
 interface Props {
   posts: Post[];
+  base?: string;
 }
 
-const { posts } = Astro.props;
+const { posts, base = "/blog" } = Astro.props;
 
 const years = Object.entries(posts)
   .sort(([yearA], [yearB]) => yearB - yearA)
@@ -61,10 +62,6 @@ const numbered = years.map(({ year, posts }) => ({
 
   .post {
     border-top: 1px solid var(--border);
-    animation-name: slideIn;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    animation-duration: 0.6s;
-    animation-fill-mode: backwards;
   }
 
   .list li:last-child {
@@ -165,19 +162,6 @@ const numbered = years.map(({ year, posts }) => ({
       display: none;
     }
   }
-
-  @media not (prefers-reduced-motion) {
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(1.5rem);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  }
 </style>
 
 <div class="index">
@@ -186,14 +170,9 @@ const numbered = years.map(({ year, posts }) => ({
       <section class="yearBlock">
         <h2 class="year">{year}</h2>
         <ul class="list">
-          {posts.map(({ post, num }, j) => (
-            <li
-              class="post"
-              style={{
-                animationDelay: `${Math.min(j * 0.07, 0.6)}s`,
-              }}
-            >
-              <a class="rowLink" href={`/blog/${post.id}/`}>
+          {posts.map(({ post, num }) => (
+            <li class="post">
+              <a class="rowLink" href={`${base}/${post.id}/`}>
                 <span class="num">{num}</span>
                 <span class="postText">
                   <span class="title">{post.data.title}</span>
