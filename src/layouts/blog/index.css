@@ -124,8 +124,8 @@ aside a {
   text-decoration: none;
   background: none;
   transition: color 0.2s ease-out;
-  line-height: 1;
-  padding-bottom: 0.65rem;
+  line-height: 1.4;
+  padding-bottom: 0.4rem;
   color: var(--text);
 }
 
