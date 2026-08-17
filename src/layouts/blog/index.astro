@@ -7,7 +7,7 @@ import Main from '#astro/layouts/main/index.astro';
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title,
-    id,
+    filePath,
     description,
     pubDate,
     updatedDate,
@@ -112,7 +112,7 @@ import Separator from '#astro/components/Separator.astro';
                     }
     
                     <div class="centered">
-                        <a class="correctLink" target="_blank" href={`https://github.com/dobladov/astro-blog/edit/main/src/content/blog/${id}`}>Did I make a mistake? Please consider sending a pull request</a>
+                        <a class="correctLink" target="_blank" href={`https://github.com/dobladov/astro-blog/edit/main/${filePath}`}>Did I make a mistake? Please consider sending a pull request</a>
                     </div>
 
                     <script type="application/ld+json" set:html={

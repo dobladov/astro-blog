@@ -33,7 +33,7 @@ export async function GET(context) {
       items: posts
         .filter((post) => !post.data.draft)
         .map((post) => {
-          const url = `${SITE_URL}/blog/${post.slug}/`;
+          const url = `${SITE_URL}/blog/${post.id}/`;
           return {
             id: url,
             title: post.data.title,

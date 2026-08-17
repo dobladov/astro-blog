@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config'
+import { unified } from '@astrojs/markdown-remark'
 import mdx from '@astrojs/mdx'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -12,20 +13,22 @@ import icon from "astro-icon";
 // https://astro.build/config
 export default defineConfig({
   markdown: {
-    rehypePlugins: [
-      remarkReadingTime,
-      rehypeSlug,
-      [rehypeAutolinkHeadings,
-        { behavior: 'append' }
-      ],
-      [
-        rehypeExternalLinks,
-        {
-          rel: ['nofollow'],
-          target: ['_blank']
-        }
+    processor: unified({
+      rehypePlugins: [
+        remarkReadingTime,
+        rehypeSlug,
+        [rehypeAutolinkHeadings,
+          { behavior: 'append' }
+        ],
+        [
+          rehypeExternalLinks,
+          {
+            rel: ['nofollow'],
+            target: ['_blank']
+          }
+        ]
       ]
-    ]
+    })
   },
   site: 'https://dobla.do',
   integrations: [icon(), mdx(), sitemap()]
