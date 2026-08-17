@@ -11,25 +11,42 @@ import Project from '#astro/components/Project.astro';
 	<style>
 		.projects {
 			display: grid;
-			gap: 4rem;
-			padding-bottom: 2rem;
+			gap: 1px;
+			background-color: var(--border);
+			border: 1px solid var(--border);
+			max-width: var(--container);
+			margin: 0 auto;
+		}
+
+		.experiments {
+			max-width: var(--container);
+			margin: 0 auto;
+			border: 1px solid var(--border);
+			border-top: none;
+		}
+
+		.disclaimer {
+			max-width: var(--container);
+			margin: -1.5rem auto 2.5rem;
+			font-family: var(--fontMono);
+			font-size: 0.8rem;
+			line-height: 1.6;
+			border-left: 2px solid var(--link);
+			padding-left: 1rem;
 		}
 
 		@media screen and (min-width: 468px) {
 			.projects {
-				max-width: 80rem;
-				margin: 0 auto;
 				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-			}
-			
-			.experiments {
-				margin: 0 auto;
-				max-width: 80rem;
 			}
 		}
 	</style>
-	
-	<PageTitle title='Projects' />
+
+	<PageTitle index='Personal' kicker='— Showcase' title='Projects' />
+	<p class="disclaimer">
+		These projects span my whole career, from my first steps in programming to the present.
+		They are not representative of my current skills — I keep them here for sentimental and historical reasons.
+	</p>
 	<div class="projects">
 		<Project title='GeoMask' links={{source: 'https://github.com/dobladov/geomask'}} logo='geomask' >
 			<p>Browser extension to mask your geolocation by setting a custom location.</p>

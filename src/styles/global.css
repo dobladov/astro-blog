@@ -1,20 +1,24 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+  Design system — dark editorial / Swiss.
+  Big tight display type, monospace micro-labels, hairline borders,
+  one accent color. Every page composes from these tokens.
+*/
 
 :root {
-  /* --background: #e9e9e9;
-	--accent: rgb(46, 46, 50);
-	--text: rgb(94 94 94); */
-  --background: rgb(22, 22, 22);
-  --accent: rgb(250, 250, 250);
-  --text: rgb(161, 161, 170);
+  --background: #0e0e0c;
+  --accent: #f4f2ed;
+  --text: #9b998f;
   --link: rgb(255, 99, 71);
-  --paddingSides: 1.5rem;
-  --transparentBackground: rgb(22, 22, 22, 0.4);
-  --border: rgb(41, 42, 49);
+  --border: rgba(244, 242, 237, 0.16);
+  --borderSoft: rgba(244, 242, 237, 0.07);
+  --transparentBackground: rgba(14, 14, 12, 0.7);
+  --paddingSides: clamp(1.25rem, 4vw, 4rem);
+  --navHeight: 4.5rem;
+  --container: 90rem;
+  --fontDisplay: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica,
+    Inter, Arial, sans-serif;
+  --fontMono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas,
+    "Liberation Mono", monospace;
 }
 
 html {
@@ -28,7 +32,7 @@ html {
 }
 
 body {
-  font-family: "Trebuchet MS", sans-serif;
+  font-family: var(--fontDisplay);
   margin: 0;
   padding: 0;
   text-align: left;
@@ -36,6 +40,7 @@ body {
   overflow-wrap: break-word;
   color: var(--text);
   line-height: 1.7;
+  font-size: 1.0625rem;
 
   background-color: var(--background);
   display: flex;
@@ -43,24 +48,21 @@ body {
   min-height: 100vh;
 }
 
+/* Grain overlay — subtle film texture over everything */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 ::selection {
-  color: var(--accent);
-  background: rgb(255, 99, 71, 0.8);
+  color: var(--background);
+  background: var(--link);
 }
-
-/* @media (prefers-color-scheme: dark) {
-	body:not([data-theme]) {	
-		--background: #18181b;
-		--accent: white;
-		--text: rgb(161, 161, 170);
-	}
-}
-
-body[data-theme="dark"] {
-	--background: #18181b;
-	--accent: white;
-	--text: rgb(161, 161, 170);
-} */
 
 h1,
 h2,
@@ -69,8 +71,10 @@ h4,
 h5,
 h6 {
   margin: 0 0 0.5rem 0;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--accent);
+  letter-spacing: -0.02em;
+  font-weight: 600;
 }
 
 h1 {
@@ -78,19 +82,38 @@ h1 {
 }
 
 h2 {
-  font-size: 2.441em;
+  font-size: 1.9em;
 }
 
 h3 {
-  font-size: 1.953em;
+  font-size: 1.5em;
 }
 
 h4 {
-  font-size: 1.563em;
+  font-size: 1.25em;
 }
 
 h5 {
-  font-size: 1.25em;
+  font-size: 1.1em;
+}
+
+/* Shared display / label utilities — the two typographic voices of the site */
+.displayTitle {
+  font-family: var(--fontDisplay);
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+.monoLabel {
+  font-family: var(--fontMono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text);
 }
 
 strong,
@@ -102,10 +125,15 @@ b {
 a {
   color: var(--accent);
   position: relative;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  text-underline-offset: 4px;
   background: linear-gradient(0deg, var(--link), var(--link)) no-repeat right
     bottom / 0 var(--bg-h);
-  transition: background-size 350ms;
+  transition:
+    background-size 350ms,
+    text-decoration-color 350ms;
   --bg-h: 100%;
   padding-bottom: 2px;
   --bg-h: 2px;
@@ -114,6 +142,7 @@ a {
 a:hover {
   background-size: 100% var(--bg-h);
   background-position-x: left;
+  text-decoration-color: transparent;
 }
 
 p {
@@ -137,50 +166,45 @@ table {
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 
 code {
+  font-family: var(--fontMono);
   padding: 2px 5px;
   border-radius: 2px;
   color: #9ecbff;
-  border: 1px solid #9ecbff;
-  background: #24292f;
+  border: 1px solid rgba(158, 203, 255, 0.35);
+  background: #16191d;
+  font-size: 0.9em;
 }
 
 pre {
   padding: 1.5em;
-  border-radius: 8px;
+  border-radius: 2px;
+  border: 1px solid var(--borderSoft);
 }
 
 pre > code {
   all: unset;
+  font-family: var(--fontMono);
 }
 
 blockquote {
-  border-left: 4px solid var(--accent);
+  border-left: 2px solid var(--link);
   padding: 0 0 0 20px;
   margin: 0px;
   font-size: 1.333em;
+  color: var(--accent);
 }
 
 hr {
   border: none;
-  border-top: 1px solid rgb(229, 233, 240);
+  border-top: 1px solid var(--border);
 }
 
 .centered {
   text-align: center;
-}
-
-@media screen and (min-width: 468px) {
-  body {
-    --paddingSides: 4rem;
-  }
-
-  h1 {
-    font-size: 3.052em;
-  }
 }
 
 @media print {
@@ -192,6 +216,11 @@ hr {
   body {
     --background: white;
     --text: black;
-    --accent: charcoal;
+    --accent: black;
+    --border: rgba(0, 0, 0, 0.3);
+  }
+
+  body::after {
+    display: none;
   }
 }

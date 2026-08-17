@@ -1,118 +1,221 @@
 ---
-import Separator from "./Separator.astro";
 interface Props {
   posts: Post[];
 }
 
 const { posts } = Astro.props;
+
+const years = Object.entries(posts)
+  .sort(([yearA], [yearB]) => yearB - yearA)
+  .map(([year, yearPosts]) => ({
+    year,
+    posts: [...yearPosts].sort(
+      (postA, postB) => postB.data.pubDate - postA.data.pubDate,
+    ),
+  }));
+
+let counter = 0;
+const numbered = years.map(({ year, posts }) => ({
+  year,
+  posts: posts.map((post) => ({
+    post,
+    num: String(++counter).padStart(3, "0"),
+  })),
+}));
 ---
 
 <style>
-  .list {
-    padding-left: 0rem;
-    list-style-type: none;
+  .index {
+    max-width: var(--container);
     margin: 0 auto;
-    max-width: 64rem;
   }
 
-  .yearBlock {
-    padding-bottom: 1rem;
+  .year {
+    margin: 0;
+    padding: 0.75rem 0;
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    color: var(--text);
   }
 
-  .yearBlock h3 {
-    position: sticky;
-    top: 0;
-    text-align: right;
-    font-size: 1.4rem;
-    border-bottom: 2px dotted var(--border);
-    background-color: var(--transparentBackground);
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    z-index: 1;
-  }
-
-  .post {
-    position: relative;
-    padding-left: 0rem;
-    margin-top: 1.5rem;
-    gap: 1rem;
-    animation-name: slideIn;
-    animation-timing-function: ease-in-out;
-  }
-
-  @media screen and (min-width: 468px) {
-    .post {
-      display: flex;
-      padding-left: 2rem;
+  /* Sticky only where the header is guaranteed to be a single row,
+     otherwise a wrapped (taller) header covers the pinned year */
+  @media screen and (min-width: 641px) {
+    .year {
+      position: sticky;
+      top: var(--navHeight);
+      z-index: 1;
+      background: var(--transparentBackground);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
     }
   }
 
-  .date {
-    color: gray;
-    min-width: 3rem;
+  .list {
+    list-style: none;
+    margin: 0 0 3rem;
+    padding: 0;
+  }
+
+  .post {
+    border-top: 1px solid var(--border);
+    animation-name: slideIn;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-duration: 0.6s;
+    animation-fill-mode: backwards;
+  }
+
+  .list li:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rowLink {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto 2.5rem;
+    align-items: baseline;
+    gap: 0.25rem 1.5rem;
+    padding: 1.5rem 0;
+    background: none;
+    text-decoration: none;
+    transition: background-color 250ms ease;
+  }
+
+  .rowLink:hover {
+    background-color: var(--borderSoft);
+  }
+
+  .num {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    transition: color 250ms ease;
+  }
+
+  .rowLink:hover .num {
+    color: var(--link);
   }
 
   .postText {
-    flex: 1;
-    text-align: left;
+    display: block;
   }
+
   .title {
-    font-size: 1.2rem;
-    display: inline-block;
+    display: block;
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--accent);
+  }
+
+  .description {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .date {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .arrow {
+    justify-self: end;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-0.5rem);
+    transition:
+      opacity 250ms ease,
+      transform 250ms ease;
+  }
+
+  .rowLink:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media screen and (max-width: 640px) {
+    .rowLink {
+      grid-template-columns: 1fr auto;
+      padding: 1.25rem 0;
+    }
+
+    .num {
+      grid-row: 1;
+    }
+
+    .date {
+      grid-row: 1;
+      justify-self: end;
+    }
+
+    .postText {
+      grid-column: 1 / -1;
+    }
+
+    .arrow {
+      display: none;
+    }
   }
 
   @media not (prefers-reduced-motion) {
     @keyframes slideIn {
       from {
-        bottom: -2rem;
         opacity: 0;
+        transform: translateY(1.5rem);
       }
       to {
-        bottom: 0;
         opacity: 1;
+        transform: translateY(0);
       }
     }
   }
 </style>
 
-{
-  Object.entries(posts)
-    .sort(([yearA], [yearB]) => yearB - yearA)
-    .map(([year, yearPosts], i) => (
-      <ul class="list">
-        <li class="yearBlock">
-          <h3>{year}</h3>
-          {yearPosts
-            .sort((postA, postB) => postB.data.pubDate - postA.data.pubDate)
-            .map((post, j) => {
-              return (
-                <div
-                  class="post"
-                  style={{
-                    animationDuration: `${(i + 1 + j) * 0.2}s`,
-                  }}
+<div class="index">
+  {
+    numbered.map(({ year, posts }) => (
+      <section class="yearBlock">
+        <h2 class="year">{year}</h2>
+        <ul class="list">
+          {posts.map(({ post, num }, j) => (
+            <li
+              class="post"
+              style={{
+                animationDelay: `${Math.min(j * 0.07, 0.6)}s`,
+              }}
+            >
+              <a class="rowLink" href={`/blog/${post.id}/`}>
+                <span class="num">{num}</span>
+                <span class="postText">
+                  <span class="title">{post.data.title}</span>
+                  <span class="description">{post.data.description}</span>
+                </span>
+                <time
+                  class="date"
+                  datetime={post.data.pubDate.toISOString()}
                 >
-                  <div class="postText">
-                    <h4>
-                      <a class="title" href={`/blog/${post.id}/`}>
-                        {post.data.title}
-                      </a>
-                    </h4>
-                    <div>{post.data.description}</div>
-                  </div>
-                  <time class="date" datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString("en-us", {
-                      month: "short",
-                    })}
-                    <Separator />
-                    {post.data.pubDate.toLocaleDateString("en-us", {
-                      day: "2-digit",
-                    })}
-                  </time>
-                </div>
-              );
-            })}
-        </li>
-      </ul>
+                  {post.data.pubDate.toLocaleDateString("en-us", {
+                    month: "short",
+                    day: "2-digit",
+                  })}
+                </time>
+                <span class="arrow" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     ))
-}
+  }
+</div>

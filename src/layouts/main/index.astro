@@ -2,7 +2,6 @@
 import BaseHead from '#astro/components/BaseHead.astro';
 import Header from '#astro/components/Header.astro';
 import Footer from '#astro/components/Footer.astro';
-import Pattern from '#astro/components/Pattern.astro';
 
 type Props = {
     title: string;
@@ -22,11 +21,6 @@ const { title, description } = Astro.props;
 
     <script>
         document.body.removeAttribute('data-js');
-        
-        // const theme = localStorage.getItem('theme');
-        // if (theme) {
-        //     document.body.setAttribute('data-theme', theme);
-        // }
     </script>
 
     <style>
@@ -39,13 +33,13 @@ const { title, description } = Astro.props;
         }
 
         section {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 5rem;
             padding-left: var(--paddingSides);
             padding-right: var(--paddingSides);
         }
     </style>
-    
+
     <body data-js="false">
         <slot name="before-all"/>
         <Header />
@@ -55,6 +49,5 @@ const { title, description } = Astro.props;
             </section>
         </main>
         <Footer/>
-        <Pattern bottom />
     </body>
 </html>

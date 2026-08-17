@@ -1,4 +1,4 @@
----
+  ---
 import Main from "#astro/layouts/main/index.astro";
 import PageTitle from "#astro/components/PageTitle.astro";
 import Orb from "#astro/components/Orb.astro";
@@ -7,18 +7,24 @@ import { SITE_AUTHOR } from "#astro/consts";
 
 <style>
   .intro {
-    font-size: 1.5em;
+    max-width: var(--container);
+    margin: 0 auto;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    line-height: 1.5;
+  }
+
+  .intro p {
+    max-width: 38em;
+    color: var(--accent);
+  }
+
+  .intro p:last-of-type {
+    margin-top: 3rem;
   }
 
   @media screen and (min-width: 768px) {
     .intro {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      padding-left: 2rem;
       padding-right: 20rem;
-      max-width: 64rem;
-      margin: 0 auto;
     }
   }
 
@@ -52,29 +58,26 @@ import { SITE_AUTHOR } from "#astro/consts";
 </style>
 
 <Main title="About" description="A little bit about myself and my work.">
-  <PageTitle title="About me" />
+  <PageTitle
+    index="About Me"
+    kicker="— Introduction"
+    title="Daniel Doblado"
+  />
   <div class="intro">
     <p class="p1">
-      My name is Daniel, originally from Spain 🇪🇸 and currently based in Berlin
-      🇩🇪, I am a staff engineer working at <a
+      Originally from Spain 🇪🇸 and currently based in Berlin
+      🇩🇪, I am a <a target="_blank" href="https://staffeng.com/guides/what-do-staff-engineers-actually-do/">Staff Engineer</a> working at <a
         target="_blank"
-        href="https://zattoo.com">Zattoo</a
-      >.
+        href="https://zattoo.com">Zattoo</a> with passion for tinkering, software and anything that involves understanding processes.
     </p>
     <p class="p2">
-      This is my digital notebook for thoughts on code, life, and the process of building things.
+      This is my digital notebook for thoughts on code, life, and the process of building anything around me.
     </p>
     <p class="p2">
       From time to time, I <a
         target="_blank"
         href="https://github.com/dobladov/">develop</a
-      > personal <a href="/projects">projects</a> or <a href="/blog">write</a>
-       about them.
-    </p>
-    <p class="p3">
-      Say Hi! <a href="mailto:danieldoblado@gmail.com"
-        >danieldoblado@gmail.com</a
-      >
+      > personal <a href="/projects">projects</a> or <a href="/blog">write</a>.
     </p>
   </div>
 

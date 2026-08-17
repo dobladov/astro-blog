@@ -13,6 +13,6 @@ const posts = getPostsPerYear(allPosts);
 	title='Blog'
 	description='A collection of articles and tutorials on web development and design.'
 >
-	<PageTitle title='Articles' />
+	<PageTitle index='Writing' kicker={`— ${allPosts.filter((post) => !post.data.draft).length} articles`} title='Articles' />
 	<BlogList posts={posts} />
 </Main>

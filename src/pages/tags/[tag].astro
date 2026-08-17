@@ -32,6 +32,6 @@ const { tag } = Astro.params;
     title={`Tag "${tag}"`}
     description=`List of articles with tag ${tag}`
 >
-    <PageTitle title={`Articles with tag "${tag}" [${total}]`} />
+    <PageTitle index='03' kicker={`Tag — ${total} ${total === 1 ? 'article' : 'articles'}`} title={tag} />
     <BlogList posts={posts} />
 </Main>

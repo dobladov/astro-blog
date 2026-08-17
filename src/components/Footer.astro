@@ -1,34 +1,93 @@
 ---
-import Pattern from "./Pattern.astro";
+const year = new Date().getFullYear();
 ---
 
 <footer>
-	<a target="_blank" href="https://codepen.io/dobladov">CodePen</a>
-	<a target="_blank" href="mailto:danieldoblado@gmail.com">E-Mail</a>
-	<a target="_blank" href="https://github.com/dobladov">GitHub</a>
-	<a target="_blank" href="https://stackoverflow.com/users/2498992/daniel-doblado">StackOverflow</a>
+	<div class="inner">
+		<p class="kicker monoLabel">Have a question, an idea, or a just want to talk?</p>
+		<a class="bigLink displayTitle" href="mailto:danieldoblado@gmail.com">
+			Say hi<span class="arrow" aria-hidden="true">&nbsp;→</span>
+		</a>
+
+		<div class="meta">
+			<div class="social monoLabel">
+				<a target="_blank" href="https://github.com/dobladov">GitHub&nbsp;↗</a>
+				<a target="_blank" href="https://codepen.io/dobladov">CodePen&nbsp;↗</a>
+				<a target="_blank" href="https://stackoverflow.com/users/2498992/daniel-doblado">StackOverflow&nbsp;↗</a>
+			</div>
+		</div>
+	</div>
 </footer>
 <style>
 	footer {
 		position: relative;
-		display: flex;
-		flex-wrap: wrap;
-		padding-left: var(--paddingSides);
-		padding-right: var(--paddingSides);
-		padding-bottom: 2rem;
-		display: flex;
-		justify-content: space-evenly;
-		align-items: center;
-		gap: 1em;
-		font-size: 1.3rem;
-		font-weight: 600;
-		text-shadow: 1px 1px 1px var(--background);
+		z-index: 1;
+		border-top: 1px solid var(--border);
+		padding: 4rem var(--paddingSides) 2.5rem;
 	}
 
-	@media screen and (min-width: 768px) {
-        footer {
-			justify-content: center;
-        }
+	.inner {
+		max-width: var(--container);
+		margin: 0 auto;
+	}
+
+	.kicker {
+		margin: 0 0 1rem;
+	}
+
+	.bigLink {
+		display: inline-block;
+		font-size: clamp(3rem, 9vw, 7rem);
+		background: none;
+		text-decoration: none;
+		padding-bottom: 0;
+		transition: color 250ms ease;
+	}
+
+	.bigLink .arrow {
+		display: inline-block;
+		transition: transform 250ms ease;
+	}
+
+	.bigLink:hover {
+		color: var(--link);
+	}
+
+	.bigLink:hover .arrow {
+		transform: translateX(0.15em);
+	}
+
+	.meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 1rem 2rem;
+		margin-top: 3.5rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid var(--borderSoft);
+	}
+
+	.social {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+	}
+
+	.social a {
+		color: var(--text);
+		background: none;
+		text-decoration: none;
+		padding-bottom: 0;
+		transition: color 200ms ease;
+	}
+
+	.social a:hover {
+		color: var(--accent);
+	}
+
+	.colophon {
+		margin: 0;
 	}
 
 	@media print {

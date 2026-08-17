@@ -3,12 +3,28 @@ import PageTitle from '#astro/components/PageTitle.astro';
 import Main from '#astro/layouts/main/index.astro';
 ---
 
-<Main 
+<Main
     title="404 Not Found"
     description="Page not found"
 >
-    <PageTitle title="404 Not Found" />
-    
-    <p>You picked the wrong URL, fool!</p>
-    <p>AY, AY AY AY! Go back to <a href="/">home</a>, chill, chill!</p>    
+    <style>
+        .lost {
+            max-width: var(--container);
+            margin: 0 auto;
+            font-size: clamp(1.25rem, 2vw, 1.6rem);
+            line-height: 1.5;
+        }
+
+        .lost p {
+            max-width: 38em;
+            color: var(--accent);
+        }
+    </style>
+
+    <PageTitle index="404" kicker="Page not found" title="Nothing here" />
+
+    <div class="lost">
+        <p>You picked the wrong URL, fool!</p>
+        <p>AY, AY AY AY! Go back to <a href="/">home</a>, chill, chill!</p>
+    </div>
 </Main>

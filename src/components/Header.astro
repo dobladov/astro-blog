@@ -1,106 +1,110 @@
 ---
 import HeaderLink from '#astro/components/HeaderLink.astro';
 import { SITE_TITLE } from '#astro/consts';
-// import ThemeToggle from '#astro/components/ThemeToggle.astro';
 
 import { Icon } from 'astro-icon/components'
-import Pattern from './Pattern.astro';
 ---
 
 <style>
 	header {
+		position: sticky;
+		top: 0;
+		z-index: 10;
 		margin: 0;
 		padding: 0 var(--paddingSides);
-		padding-top: 2rem;
-		z-index: 1;
+		min-height: var(--navHeight);
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid var(--border);
+		background: var(--transparentBackground);
+		-webkit-backdrop-filter: blur(12px);
+		backdrop-filter: blur(12px);
 	}
 
-	h1 a  {
-		color: var(--accent);
-		text-decoration: none;
-	}
-	h1 {
-		margin: 0;
-		filter: url("#goovey");
-		font-size: 3em;
-		text-align: center;
-		font-weight: 100;
-	}
-	
 	nav {
+		flex: 1;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		flex-direction: column;
-		gap: 1.5rem;
-		align-items: stretch;
-		max-width: 110rem;
+		gap: 1rem 1.5rem;
+		flex-wrap: wrap;
+		max-width: var(--container);
 		margin: 0 auto;
+		padding: 0.75rem 0;
 	}
+
+	.wordmark {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: -0.02em;
+		font-size: 1.05rem;
+		color: var(--accent);
+		background: none;
+		text-decoration: none;
+		padding-bottom: 0;
+		white-space: nowrap;
+	}
+
+	.wordmark sup {
+		font-family: var(--fontMono);
+		font-size: 0.6em;
+		font-weight: 400;
+		color: var(--link);
+		margin-left: 0.35em;
+		letter-spacing: 0;
+	}
+
 	.internalLinks {
-		font-size: 1.3em;
+		font-family: var(--fontMono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		gap: .8rem;
+		gap: 1.75rem;
 	}
 
-	@media screen and (min-width: 768px) {
-		h1 {
-			font-size: 3em;
-		}
+	.internalLinks sup {
+		color: var(--link);
+		font-size: 0.7em;
+		margin-right: 0.4em;
+		letter-spacing: 0;
+	}
 
-		nav {
-			flex-direction: row;
-		}
-
+	@media screen and (max-width: 480px) {
 		.internalLinks {
-			flex-wrap: wrap;
-		}		
+			gap: 1.1rem;
+		}
 	}
 
-    svg {
-		width: 1rem;
-        fill: var(--text);
-    }
+	svg {
+		width: 0.85rem;
+		fill: currentColor;
+		display: block;
+	}
+
+	.rss {
+		position: relative;
+		top: 0.05rem;
+	}
 
 	@media print {
 		header {
 			display: none;
 		}
 	}
-
-	.rss {
-		position: relative;
-		top: .1rem;
-	}
 </style>
 
 <header>
 	<nav>
-		<h1>
-			<a href="/">{SITE_TITLE}</a>
-		</h1>
+		<a class="wordmark" href="/">{SITE_TITLE}</a>
 		<div class="internalLinks">
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/projects">Projects</HeaderLink>
-			<HeaderLink href="/tags">Tags</HeaderLink>
+			<HeaderLink href="/blog"><sup>01</sup>Blog</HeaderLink>
+			<HeaderLink href="/projects"><sup>02</sup>Projects</HeaderLink>
+			<HeaderLink href="/tags"><sup>03</sup>Tags</HeaderLink>
 			<HeaderLink class="rss" href="/rss.xml" title="RSS">
 				<Icon name='rss' />
 			</HeaderLink>
-			<!-- <ThemeToggle /> -->
 		</div>
 	</nav>
-	<svg style="width: 0; height: 0" xmlns="http://www.w3.org/2000/svg" version="1.1">
-		<defs>   
-		  <filter id="goovey">
-				  <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="1" result="warpper"/>
-				<feColorMatrix in="warpper" type="hueRotate">
-					  <animate attributeType="XML" attributeName="values" values="0;110;150;210;360" dur="6s" repeatCount="indefinite"/>
-				</feColorMatrix>
-				<feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="20" in="SourceGraphic"/>
-		  </filter>
-		</defs>
-	  </svg>
-	<Pattern />
 </header>

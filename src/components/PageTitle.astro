@@ -1,22 +1,67 @@
 ---
 interface Props {
     title: string;
+    kicker?: string;
+    index?: string;
 }
 
-const {title} = Astro.props;
+const { title, kicker, index } = Astro.props;
 ---
 
-<header>
-    <h2 class="pageTitle">{title}</h2>
+<header class="pageHeader">
+    {
+        (kicker || index) && (
+            <p class="kicker monoLabel">
+                {index && <span class="index">({index})</span>}
+                {kicker}
+            </p>
+        )
+    }
+    <h1 class="pageTitle displayTitle">{title}</h1>
 </header>
 <style>
+    .pageHeader {
+        max-width: var(--container);
+        margin: 0 auto 3.5rem;
+        padding-top: clamp(2rem, 6vh, 5rem);
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .kicker {
+        margin: 0 0 1.25rem;
+    }
+
+    .index {
+        color: var(--link);
+        margin-right: 0.75em;
+    }
+
     .pageTitle {
-        font-size: 1.6rem;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px var(--border) solid;
-        max-width: 100rem;
-        margin: 0 auto;
-        margin-bottom: 3rem;
+        margin: 0;
+        font-size: clamp(2.75rem, 9vw, 7.5rem);
+        overflow-wrap: anywhere;
+    }
+
+    @media not (prefers-reduced-motion) {
+        .kicker,
+        .pageTitle {
+            animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+
+        .pageTitle {
+            animation-delay: 0.08s;
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(1.5rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     }
 </style>

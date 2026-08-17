@@ -20,6 +20,8 @@ article p {
   transform: translateX(-50%);
   transition: top 0.3s ease-in-out;
   padding: 0 1rem;
+  z-index: 11;
+  background-color: var(--background);
 }
 
 .toArticle:focus {
@@ -28,17 +30,33 @@ article p {
 
 #title {
   text-align: left;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 2rem;
 }
 
 .date {
-  text-align: right;
-  font-style: italic;
+  font-family: var(--fontMono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+  margin-bottom: 3rem;
+  text-align: left;
 }
 
 .description {
-  font-size: 2rem;
-  line-height: 110%;
-  text-align: center;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: var(--accent);
+  margin-bottom: 3rem;
 }
 
 @keyframes adjust-progressbar {
@@ -56,17 +74,24 @@ aside::after {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0.25rem;
+  width: 3px;
   height: 100%;
-  background: var(--text);
-  border-radius: 0.25rem;
+  background: var(--border);
+  border-radius: 3px;
+}
+
+/* The fill only gets a height when the scroll timeline can drive it,
+   so unsupported browsers show just the track instead of a full bar. */
+aside::after {
+  height: 0;
+  background: var(--link);
 }
 
 @supports (animation-timeline: scroll(block root)) {
   aside::after {
-    background: var(--accent);
-    animation: adjust-progressbar;
+    animation: adjust-progressbar linear;
     animation-timeline: scroll(block root);
+    animation-duration: 1s; /* Firefox has no 'auto' duration */
     animation-duration: auto;
   }
 }
@@ -79,7 +104,7 @@ aside {
   max-width: 15rem;
   transform: translateY(-50%);
   max-height: 50vh;
-  padding-left: 1rem;
+  padding-left: 1.25rem;
   padding-right: 1rem;
 }
 
@@ -90,13 +115,17 @@ aside ul {
 }
 
 aside a {
+  font-family: var(--fontMono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   text-overflow: ellipsis;
   display: inline-block;
   text-decoration: none;
-  transition: transform 0.2s ease-out;
-  transform-origin: left;
+  background: none;
+  transition: color 0.2s ease-out;
   line-height: 1;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.65rem;
   color: var(--text);
 }
 
@@ -105,8 +134,7 @@ aside a.active {
 }
 
 aside a:hover {
-  transform: scale(1.1);
-  color: var(--accent);
+  color: var(--link);
 }
 
 pre {
@@ -128,7 +156,6 @@ pre {
     width: calc(100% + var(--space));
     position: relative;
     left: calc(var(--space) / -2);
-    font-size: 4rem;
   }
 }
 
@@ -140,11 +167,16 @@ pre {
 
 summary {
   cursor: pointer;
+  font-family: var(--fontMono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
 }
 
 .details {
-  font-family: "Courier New", monospace;
+  font-family: var(--fontMono);
   padding-top: 1rem;
+  border-top: 1px solid var(--border);
 }
 
 #metadata {
@@ -152,6 +184,7 @@ summary {
   flex-direction: column;
   justify-content: space-between;
   font-size: 0.8rem;
+  margin-top: 1rem;
 }
 
 .tags {
@@ -165,9 +198,16 @@ summary {
   gap: 1.5rem;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--text);
+  border-top: 1px solid var(--borderSoft);
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
+}
+
+.metaSection .title {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  align-self: center;
 }
 
 .centered {

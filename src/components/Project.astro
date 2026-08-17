@@ -15,62 +15,98 @@ const { title, links, logo } = Astro.props;
 
 <div class="project">
   <div class="header">
-    <Icon name={logo}/>
-    <h3>{title}</h3>
+    <Icon name={logo} />
+    <h3 class="title">{title}</h3>
   </div>
-  <slot />
 
-  <div class="links">
-    {
-      links && links.live && (
-        <a target="_blank" href={links.live}>
-          Live
-        </a>
-      )
-    }
-    {
-      links && links.source && (
-        <a target="_blank" href={links.source}>
-          Souce
-        </a>
-      )
-    }
+  <div class="body">
+    <slot />
   </div>
+
+  {
+    links && (
+      <div class="links">
+        {links.live && (
+          <a target="_blank" href={links.live}>
+            Live&nbsp;↗
+          </a>
+        )}
+        {links.source && (
+          <a target="_blank" href={links.source}>
+            Source&nbsp;↗
+          </a>
+        )}
+      </div>
+    )
+  }
 </div>
 <style>
-  svg {
-    min-width: 4rem;
-    max-width: 4rem;
+  .project {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+    padding: 2rem;
+    transition: background-color 250ms ease;
+  }
+
+  .project:hover {
+    background-color: #131311;
   }
 
   .header {
-    background-color: var(--transparentBackground);
-    position: sticky;
-    top: 0;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
     display: flex;
-    justify-content: left;
     align-items: center;
-    gap: 1.5rem;
-    font-size: . 8rem;
-    z-index: 1;
+    gap: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
-  a {
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 0.5rem 1rem;
-    text-decoration: none;
+  .title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
   }
 
   svg {
-    font-size: 4rem;
+    min-width: 2.75rem;
+    max-width: 2.75rem;
+    font-size: 2.75rem;
     fill: var(--accent);
+  }
+
+  .body {
+    flex: 1;
+    font-size: 0.95rem;
   }
 
   .links {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .links a {
+    font-family: var(--fontMono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    background: none;
+    text-decoration: none;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .links a:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--background);
   }
 </style>
