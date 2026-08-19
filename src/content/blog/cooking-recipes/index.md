@@ -2,7 +2,6 @@
 title: Cooking recipes
 pubDate: 2026-08-19
 description: Adding an easy way to showcase recipes in this site
-draft: true
 ---
 
 Inspired by Josh [Nesbitt's article](https://joshnesbitt.dev/thoughts/recipe-data-your-mind-can-make-sense-of), I decided to keep the [recipes](/recipes) that I have tried the same way as on [his site](https://joshnesbitt.cooking/). The [RecipeTables](https://recipetables.com/) format makes it so easy to understand the steps at a glance, and I love using generated charts similar to [mermaid.js](https://mermaid.js.org/), which I use often for work, so it's a good fit for my workflow.
