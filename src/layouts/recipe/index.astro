@@ -1,0 +1,311 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Main from '#astro/layouts/main/index.astro';
+import FormattedDate from '#astro/components/FormattedDate.astro';
+import Separator from '#astro/components/Separator.astro';
+import RecipeTable from '#astro/components/recipe/RecipeTable.astro';
+import IngredientText from '#astro/components/recipe/IngredientText.astro';
+import StepText from '#astro/components/recipe/StepText.astro';
+import { leaves, detectAllergens, detectDiet, formatMinutes } from '#astro/components/recipe/utils';
+import { SITE_AUTHOR, SITE_URL } from '#astro/consts';
+import './index.css';
+
+type Props = CollectionEntry<'recipes'>['data'] & {
+    slug: string;
+    filePath?: string;
+};
+
+const {
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    tags,
+    draft,
+    servings,
+    yields,
+    time,
+    prep,
+    table,
+    ingredients,
+    method,
+    notes,
+    sources,
+    diet,
+    allergens,
+    heroImage,
+    slug,
+    filePath,
+} = Astro.props;
+
+const flatIngredients = ingredients ?? (table ? leaves(table) : []);
+const detectedAllergens = [
+    ...new Set([...detectAllergens(flatIngredients), ...(allergens ?? [])]),
+];
+const dietLabel = diet ?? detectDiet(flatIngredients);
+
+const total =
+    time?.total ??
+    ((time?.prep ?? 0) + (time?.cook ?? 0) + (time?.rest ?? 0) || undefined);
+
+const normalizedSources = (sources ?? []).map((source) =>
+    typeof source === 'string'
+        ? { title: new URL(source).hostname.replace(/^www\./, ''), url: source }
+        : source,
+);
+
+const { href } = Astro.url;
+---
+
+<Main title={title} description={description}>
+    <article class="recipe" data-slug={slug} data-base-servings={servings}>
+        <header class="recipeHeader">
+            <p class="kicker monoLabel">
+                <span class="index">(Recipe)</span>
+                {draft && <span class="draftBadge">Draft</span>}
+                {total && <>{formatMinutes(total)}<Separator /></>}
+                <FormattedDate date={pubDate} />
+            </p>
+            <h1 class="recipeTitle displayTitle">{title}</h1>
+            <p class="description">{description}</p>
+
+            {(dietLabel || detectedAllergens.length > 0) && (
+                <p class="dietary monoLabel">
+                    {dietLabel && <span class="dietBadge">{dietLabel}</span>}
+                    {detectedAllergens.length > 0 && (
+                        <span class="allergens">
+                            Contains {detectedAllergens.join(' · ')}
+                        </span>
+                    )}
+                </p>
+            )}
+        </header>
+
+        <div class="controls">
+            {time && (
+                <div class="control times monoLabel">
+                    {time.prep && <span>Prep {formatMinutes(time.prep)}</span>}
+                    {time.cook && <span>Cook {formatMinutes(time.cook)}</span>}
+                    {time.rest && <span>Rest {formatMinutes(time.rest)}</span>}
+                    {total && <span class="totalTime">Total {formatMinutes(total)}</span>}
+                </div>
+            )}
+            <div class="control servings monoLabel">
+                <span id="servingsLabel">Servings</span>
+                <button type="button" data-step="-1" aria-label="Fewer servings">−</button>
+                <output aria-labelledby="servingsLabel">{servings}</output>
+                <button type="button" data-step="1" aria-label="More servings">+</button>
+                {yields && <span class="yields">({yields})</span>}
+            </div>
+            <div class="control units monoLabel" role="group" aria-label="Measurement units">
+                <button type="button" data-system="metric" aria-pressed="true">Metric</button>
+                <button type="button" data-system="us" aria-pressed="false">US</button>
+            </div>
+        </div>
+
+        {heroImage && <img class="hero" src={heroImage} alt={title} />}
+
+        {table && <RecipeTable table={table} prep={prep} />}
+
+        <div class="body">
+            <slot />
+        </div>
+
+        {!table && flatIngredients.length > 0 && (
+            <section class="section">
+                <h2 id="ingredients">Ingredients</h2>
+                <ul class="checklist">
+                    {flatIngredients.map((item) => (
+                        <li><IngredientText text={item} /></li>
+                    ))}
+                </ul>
+            </section>
+        )}
+
+        <section class="section">
+            <h2 id="method">Method</h2>
+            <ol class="method">
+                {method.map((step) => (
+                    <li><StepText text={step} /></li>
+                ))}
+            </ol>
+        </section>
+
+        {notes && notes.length > 0 && (
+            <section class="section">
+                <h2 id="notes">Notes</h2>
+                <ul class="notes">
+                    {notes.map((note) => (
+                        <li><StepText text={note} /></li>
+                    ))}
+                </ul>
+            </section>
+        )}
+
+        {normalizedSources.length > 0 && (
+            <section class="section">
+                <h2 id="sources">Sources</h2>
+                <ul class="sources">
+                    {normalizedSources.map((source) => (
+                        <li>
+                            <a href={source.url} target="_blank" rel="nofollow noopener">{source.title}</a>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        )}
+
+        <footer class="recipeFooter monoLabel">
+            {filePath && (
+                <a href={`https://github.com/dobladov/astro-blog/edit/main/${filePath}`}>
+                    Did I make a mistake? Please consider sending a pull request
+                </a>
+            )}
+        </footer>
+
+        <script type="application/ld+json" set:html={
+            JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Recipe",
+                name: title,
+                description,
+                url: href,
+                author: {
+                    "@type": "Person",
+                    name: SITE_AUTHOR,
+                    url: SITE_URL,
+                },
+                datePublished: pubDate,
+                ...(updatedDate && { dateModified: updatedDate }),
+                recipeYield: yields ?? `${servings} servings`,
+                ...(total && { totalTime: `PT${total}M` }),
+                ...(time?.prep && { prepTime: `PT${time.prep}M` }),
+                ...(time?.cook && { cookTime: `PT${time.cook}M` }),
+                recipeIngredient: flatIngredients,
+                recipeInstructions: [...(prep ?? []), ...method].map((step) => ({
+                    "@type": "HowToStep",
+                    text: step,
+                })),
+                ...(tags && { keywords: tags.join(', ') }),
+                ...(heroImage && { image: new URL(heroImage, Astro.site).href }),
+                ...(dietLabel === 'vegan' && { suitableForDiet: 'https://schema.org/VeganDiet' }),
+                ...(dietLabel === 'vegetarian' && { suitableForDiet: 'https://schema.org/VegetarianDiet' }),
+            })
+        }></script>
+    </article>
+</Main>
+
+<script>
+    import { convert, formatAmount, displayUnit } from '#astro/components/recipe/units';
+    import type { System } from '#astro/components/recipe/units';
+
+    const recipe = document.querySelector<HTMLElement>('.recipe');
+
+    if (recipe) {
+        const base = Number(recipe.dataset.baseServings || '1');
+        const storeKey = `recipe:${recipe.dataset.slug}`;
+
+        interface State {
+            servings: number;
+            system: System;
+            checked: number[];
+            done: number[];
+            prepped: number[];
+        }
+
+        const state: State = { servings: base, system: 'metric', checked: [], done: [], prepped: [] };
+
+        try {
+            const saved = JSON.parse(localStorage.getItem(storeKey) ?? 'null');
+            if (saved) Object.assign(state, saved);
+        } catch {
+            // corrupted state — start fresh
+        }
+
+        const save = () => localStorage.setItem(storeKey, JSON.stringify(state));
+
+        const output = recipe.querySelector<HTMLElement>('.servings output');
+        const ingredientCells = [...recipe.querySelectorAll<HTMLTableCellElement>('.recipeTable td.ingredient')];
+        const actionCells = [...recipe.querySelectorAll<HTMLTableCellElement>('.recipeTable td.action')];
+        const prepCells = [...recipe.querySelectorAll<HTMLTableCellElement>('.recipeTable td.prep')];
+
+        const syncCell = (cell: HTMLTableCellElement, list: number[]) => {
+            const on = list.includes(Number(cell.dataset.index));
+            cell.classList.toggle('isChecked', on);
+            cell.setAttribute('aria-checked', String(on));
+        };
+
+        const makeCheckable = (cell: HTMLTableCellElement, key: 'checked' | 'done' | 'prepped') => {
+            cell.setAttribute('role', 'checkbox');
+            cell.tabIndex = 0;
+            const index = Number(cell.dataset.index);
+            const toggle = () => {
+                state[key] = state[key].includes(index)
+                    ? state[key].filter((i) => i !== index)
+                    : [...state[key], index];
+                save();
+                update();
+            };
+            cell.addEventListener('click', toggle);
+            cell.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggle();
+                }
+            });
+        };
+
+        const update = () => {
+            const factor = state.servings / base;
+
+            recipe.querySelectorAll<HTMLElement>('.amount').forEach((el) => {
+                const scaled = Number(el.dataset.amount) * factor;
+                const unit = el.dataset.unit || null;
+                const converted = convert(scaled, unit, state.system);
+                el.textContent =
+                    formatAmount(converted.amount, converted.unit) +
+                    (converted.unit ? ` ${displayUnit(converted.unit, converted.amount)}` : '');
+            });
+
+            recipe.querySelectorAll<HTMLElement>('.temp').forEach((el) => {
+                const celsius = Number(el.dataset.c);
+                el.textContent =
+                    state.system === 'us'
+                        ? `${Math.round((celsius * 9 / 5 + 32) / 5) * 5} °F`
+                        : `${celsius} °C`;
+            });
+
+            if (output) output.textContent = String(state.servings);
+
+            recipe.querySelectorAll<HTMLButtonElement>('[data-system]').forEach((button) => {
+                button.setAttribute('aria-pressed', String(button.dataset.system === state.system));
+            });
+
+            ingredientCells.forEach((cell) => syncCell(cell, state.checked));
+            actionCells.forEach((cell) => syncCell(cell, state.done));
+            prepCells.forEach((cell) => syncCell(cell, state.prepped));
+        };
+
+        recipe.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((button) => {
+            button.addEventListener('click', () => {
+                state.servings = Math.max(1, state.servings + Number(button.dataset.step));
+                save();
+                update();
+            });
+        });
+
+        recipe.querySelectorAll<HTMLButtonElement>('[data-system]').forEach((button) => {
+            button.addEventListener('click', () => {
+                state.system = button.dataset.system as System;
+                save();
+                update();
+            });
+        });
+
+        ingredientCells.forEach((cell) => makeCheckable(cell, 'checked'));
+        actionCells.forEach((cell) => makeCheckable(cell, 'done'));
+        prepCells.forEach((cell) => makeCheckable(cell, 'prepped'));
+
+        update();
+    }
+</script>

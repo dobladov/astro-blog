@@ -1,0 +1,23 @@
+---
+import { parseIngredient } from './utils';
+import { formatAmount, displayUnit } from './units';
+
+interface Props {
+    text: string;
+}
+
+const { text } = Astro.props;
+const { amount, unit, rest } = parseIngredient(text);
+---
+
+{
+    amount !== null ? (
+        <>
+            <span class="amount" data-amount={amount} data-unit={unit ?? ''}>
+                {formatAmount(amount, unit)}{unit && ` ${displayUnit(unit, amount)}`}
+            </span>{' '}{rest}
+        </>
+    ) : (
+        text
+    )
+}

@@ -1,0 +1,34 @@
+---
+import Main from '#astro/layouts/main/index.astro';
+import { getCollection } from 'astro:content';
+import PageTitle from '#astro/components/PageTitle.astro';
+import BlogList from '#astro/components/BlogList.astro';
+import { getPostsPerYear } from '#astro/components/utils';
+
+const allRecipes = await getCollection('recipes');
+const recipes = getPostsPerYear(allRecipes);
+const count = allRecipes.filter((recipe) => !recipe.data.draft).length;
+---
+
+<Main
+	title='Recipes'
+	description='Cooking recipes'
+>
+	<style>
+		.disclaimer {
+			max-width: var(--container);
+			margin: -1.5rem auto 2.5rem;
+			font-family: var(--fontMono);
+			font-size: 0.8rem;
+			line-height: 1.6;
+			border-left: 2px solid var(--link);
+			padding-left: 1rem;
+		}
+	</style>
+
+	<PageTitle index='Cooking' kicker={`— ${count} ${count === 1 ? 'recipe' : 'recipes'}`} title='Recipes' />
+	<p class="disclaimer">
+		A personal index of reliable, tried-and-tested dishes I turn to again and again, for quick reference
+	</p>
+	<BlogList posts={recipes} base='/recipes' />
+</Main>

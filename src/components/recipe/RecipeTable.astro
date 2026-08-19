@@ -1,0 +1,87 @@
+---
+// Renders the recipe tree as a table in the style of
+// https://recipetables.com — ingredients on the left flow into actions,
+// each column combining everything behind it. The layout script makes the
+// cells checkable; `data-index` ties each cell to its persisted state.
+import type { RecipeAction, TableNode } from './utils';
+import { isAction } from './utils';
+import IngredientText from './IngredientText.astro';
+import StepText from './StepText.astro';
+
+interface Props {
+    table: RecipeAction;
+    prep?: string[] | undefined;
+}
+
+const { table, prep = [] } = Astro.props;
+
+interface Cell {
+    kind: 'ingredient' | 'action';
+    text: string;
+    rowspan: number;
+    colspan: number;
+    index: number;
+}
+
+const colOf = (node: TableNode): number =>
+    isAction(node) ? 1 + Math.max(...node.from.map(colOf)) : 0;
+
+const leafCount = (node: TableNode): number =>
+    isAction(node) ? node.from.reduce((sum, child) => sum + leafCount(child), 0) : 1;
+
+const totalCols = colOf(table) + 1;
+const rows: Cell[][] = [];
+let leafIndex = 0;
+let actionIndex = 0;
+
+// Each ingredient (leaf) starts a row; an action cell spans the rows of all
+// ingredients beneath it and stretches to where its parent begins.
+// Ingredient indices follow reading order, matching `leaves(table)`.
+const walk = (node: TableNode, parentCol: number): void => {
+    if (!isAction(node)) {
+        rows.push([{ kind: 'ingredient', text: node, rowspan: 1, colspan: parentCol, index: leafIndex++ }]);
+        return;
+    }
+    const col = colOf(node);
+    const startRow = rows.length;
+    node.from.forEach((child) => walk(child, col));
+    rows[startRow]?.push({
+        kind: 'action',
+        text: node.action,
+        rowspan: leafCount(node),
+        colspan: parentCol - col,
+        index: actionIndex++,
+    });
+};
+
+walk(table, totalCols);
+---
+
+<div class="tableWrap">
+    <table class="recipeTable">
+        <tbody>
+            {prep.map((step, index) => (
+                <tr>
+                    <td class="prep" data-index={index} colspan={totalCols}>
+                        <span class="prepLabel">prep</span>
+                        <StepText text={step} />
+                    </td>
+                </tr>
+            ))}
+            {rows.map((cells) => (
+                <tr>
+                    {cells.map((cell) => (
+                        <td
+                            class={cell.kind}
+                            data-index={cell.index}
+                            rowspan={cell.rowspan > 1 ? cell.rowspan : undefined}
+                            colspan={cell.colspan > 1 ? cell.colspan : undefined}
+                        >
+                            {cell.kind === 'ingredient' ? <IngredientText text={cell.text} /> : cell.text}
+                        </td>
+                    ))}
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>

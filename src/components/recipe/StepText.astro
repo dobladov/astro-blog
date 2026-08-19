@@ -1,0 +1,23 @@
+---
+// Renders a method/note line, wrapping temperatures ("180 °C") so the
+// client-side unit toggle can switch them to Fahrenheit. The single outer
+// span keeps the line as one grid/flex item (.method li is a grid).
+
+interface Props {
+    text: string;
+}
+
+const { text } = Astro.props;
+const parts = text.split(/(\d+(?:\.\d+)?\s*°\s*C\b)/);
+---
+
+<span>{
+    parts.map((part) => {
+        const temp = part.match(/^(\d+(?:\.\d+)?)\s*°\s*C\b$/);
+        return temp ? (
+            <span class="temp" data-c={temp[1]}>{temp[1]} °C</span>
+        ) : (
+            part
+        );
+    })
+}</span>

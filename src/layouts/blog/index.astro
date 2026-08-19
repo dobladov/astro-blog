@@ -4,7 +4,9 @@ import FormattedDate from '#astro/components/FormattedDate.astro';
 // import Share from '#astro/components/Share.astro';
 import Main from '#astro/layouts/main/index.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+    filePath?: string | undefined;
+};
 
 const { title,
     filePath,
