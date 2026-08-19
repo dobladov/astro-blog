@@ -106,6 +106,16 @@
   color: var(--link);
 }
 
+.controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.controls button:disabled:hover {
+  border-color: var(--border);
+  color: var(--accent);
+}
+
 .servings output {
   color: var(--link);
   min-width: 2ch;
@@ -124,7 +134,8 @@
 
 /* Hide the interactive bits when JS is unavailable */
 body[data-js='false'] .servings,
-body[data-js='false'] .units {
+body[data-js='false'] .units,
+body[data-js='false'] .reset {
   display: none;
 }
 
@@ -327,7 +338,8 @@ body[data-js='false'] .units {
 
 @media print {
   .controls .servings,
-  .controls .units {
+  .controls .units,
+  .controls .reset {
     display: none;
   }
 

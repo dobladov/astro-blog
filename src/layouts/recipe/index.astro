@@ -101,6 +101,11 @@ const { href } = Astro.url;
                 <button type="button" data-system="metric" aria-pressed="true">Metric</button>
                 <button type="button" data-system="us" aria-pressed="false">US</button>
             </div>
+            {table && (
+                <div class="control reset monoLabel">
+                    <button type="button" data-reset disabled>Clear checks</button>
+                </div>
+            )}
         </div>
 
         {heroImage && <img class="hero" src={heroImage} alt={title} />}
@@ -224,6 +229,7 @@ const { href } = Astro.url;
         const save = () => localStorage.setItem(storeKey, JSON.stringify(state));
 
         const output = recipe.querySelector<HTMLElement>('.servings output');
+        const resetButton = recipe.querySelector<HTMLButtonElement>('[data-reset]');
         const ingredientCells = [...recipe.querySelectorAll<HTMLTableCellElement>('.recipeTable td.ingredient')];
         const actionCells = [...recipe.querySelectorAll<HTMLTableCellElement>('.recipeTable td.action')];
         const prepCells = [...recipe.querySelectorAll<HTMLTableCellElement>('.recipeTable td.prep')];
@@ -283,7 +289,20 @@ const { href } = Astro.url;
             ingredientCells.forEach((cell) => syncCell(cell, state.checked));
             actionCells.forEach((cell) => syncCell(cell, state.done));
             prepCells.forEach((cell) => syncCell(cell, state.prepped));
+
+            if (resetButton) {
+                resetButton.disabled =
+                    state.checked.length + state.done.length + state.prepped.length === 0;
+            }
         };
+
+        resetButton?.addEventListener('click', () => {
+            state.checked = [];
+            state.done = [];
+            state.prepped = [];
+            save();
+            update();
+        });
 
         recipe.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((button) => {
             button.addEventListener('click', () => {
