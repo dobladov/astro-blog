@@ -107,10 +107,6 @@ const { href } = Astro.url;
 
         {table && <RecipeTable table={table} prep={prep} />}
 
-        <div class="body">
-            <slot />
-        </div>
-
         {!table && flatIngredients.length > 0 && (
             <section class="section">
                 <h2 id="ingredients">Ingredients</h2>
@@ -130,6 +126,9 @@ const { href } = Astro.url;
                 ))}
             </ol>
         </section>
+        <div class="body">
+            <slot />
+        </div>
 
         {notes && notes.length > 0 && (
             <section class="section">

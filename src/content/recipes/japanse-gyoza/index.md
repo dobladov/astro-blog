@@ -61,3 +61,5 @@ sources:
     url: https://youtu.be/2QpL8Nskc3I?si=NSuysowXlR3fXKex
 tags: [cooking]
 ---
+
+![gyoza](./gyoza.jpg)
