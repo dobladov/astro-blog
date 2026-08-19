@@ -12,24 +12,12 @@ prep:
 table:
   action: Simmer covered for about 1 hour over medium heat, shaking the pot occasionally.
   from:
-    - 400 g lentils
-    - 1.5 l hot water
-    - 2 potatoes, peeled and chopped
-    - 1 pinch salt, to taste
     - action: Stir and briefly sauté to release the oils.
       from:
-        - 200 g chorizo, chopped
         - action: Mix to combine and let the aromas release.
           from:
-            - 2 bay leaves
-            - 1 pinch cumin
-            - 2 tsp sweet paprika
-            - 8 tbsp fried tomato sauce
             - action: Sauté until the vegetables are soft and poached.
               from:
-                - 1 piece red bell pepper, chopped
-                - 1 piece green bell pepper, chopped
-                - 2 carrots, chopped
                 - action: Sauté for a couple of minutes over medium-high heat.
                   from:
                     - 3 tbsp extra virgin olive oil
@@ -37,6 +25,18 @@ table:
                     - 1 onion, chopped
                     - 1 piece leek, chopped
                     - 1 pinch salt
+                - 1 piece red bell pepper, chopped
+                - 1 piece green bell pepper, chopped
+                - 2 carrots, chopped
+            - 2 bay leaves
+            - 1 pinch cumin
+            - 2 tsp sweet paprika
+            - 8 tbsp fried tomato sauce
+        - 200 g chorizo, chopped
+    - 400 g lentils
+    - 1.5 l hot water
+    - 2 potatoes, peeled and chopped
+    - 1 pinch salt, to taste
 method: 
   - Heat the extra virgin olive oil in a pot over medium-high heat.
   - Add the minced garlic, chopped onion, chopped leek, and a pinch of salt, then sauté for a couple of minutes.
