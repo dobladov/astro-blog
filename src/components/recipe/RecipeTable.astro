@@ -21,6 +21,7 @@ interface Cell {
     rowspan: number;
     colspan: number;
     index: number;
+    depth?: number;
 }
 
 const colOf = (node: TableNode): number =>
@@ -51,6 +52,7 @@ const walk = (node: TableNode, parentCol: number): void => {
         rowspan: leafCount(node),
         colspan: parentCol - col,
         index: actionIndex++,
+        depth: col / (totalCols - 1),
     });
 };
 
@@ -76,6 +78,7 @@ walk(table, totalCols);
                             data-index={cell.index}
                             rowspan={cell.rowspan > 1 ? cell.rowspan : undefined}
                             colspan={cell.colspan > 1 ? cell.colspan : undefined}
+                            style={cell.depth !== undefined ? `--stepDepth: ${cell.depth.toFixed(3)}` : undefined}
                         >
                             {cell.kind === 'ingredient' ? <IngredientText text={cell.text} /> : cell.text}
                         </td>

@@ -180,6 +180,8 @@ body[data-js='false'] .reset {
   color: var(--accent);
   font-size: 0.95rem;
   min-width: 9rem;
+  /* --stepDepth (0–1, set inline) darkens steps left to right */
+  background: color-mix(in srgb, var(--accent) calc(var(--stepDepth, 0) * 14%), transparent);
 }
 
 /* Standalone prep steps — full-width rows at the top of the table */
@@ -207,7 +209,7 @@ body[data-js='false'] .reset {
 }
 
 .recipeTable td[role='checkbox']:hover {
-  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  background: color-mix(in srgb, var(--accent) calc(var(--stepDepth, 0) * 14% + 5%), transparent);
 }
 
 .recipeTable td.isChecked {
