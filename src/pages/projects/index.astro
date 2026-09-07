@@ -12,10 +12,20 @@ import Project from '#astro/components/Project.astro';
 		.projects {
 			display: grid;
 			gap: 1px;
-			background-color: var(--border);
 			border: 1px solid var(--border);
+			/* Cards draw their own right/bottom hairlines into the gap, so any
+			   empty cells in the last row keep the page background. The outer
+			   edge comes from this border; overflow clips the cards' copy of it. */
+			overflow: hidden;
 			max-width: var(--container);
 			margin: 0 auto;
+		}
+
+		.projects > :global(.project) {
+			border-right: 1px solid var(--border);
+			border-bottom: 1px solid var(--border);
+			margin-right: -1px;
+			margin-bottom: -1px;
 		}
 
 		.experiments {
